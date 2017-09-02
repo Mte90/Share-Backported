@@ -1,0 +1,78 @@
+html, body {
+  width: 290px;
+  height:72px;
+}
+* {
+	color: #484848;
+}
+body {
+	padding: 0;
+	margin: 0;
+	background: transparent;
+	border: none;
+	overflow: hidden;
+	text-align: center;
+}
+#share-directory {
+	width: auto;
+}
+#share-directory-grid {
+	display: block;
+	width: 320px;
+}
+iframe {
+	width:290px;
+	height:300px;
+	overflow:auto;
+	text-align:center;
+}
+button {
+	width: 68px;
+	height: 68px;
+	margin: 2px;
+	border-radius: 3px;
+	border: 1px solid transparent;
+	cursor: pointer;
+	transition: background 250ms,
+		border-color 250ms;
+	background: transparent;
+}
+button:hover {
+	background: hsla(210,4%,10%,.08) linear-gradient(hsla(0,0%,100%,.3), hsla(0,0%,100%,.1)) padding-box;
+	border-color: hsla(0,0%,0%,.2);
+	box-shadow: 0 1px 0 hsla(0,0%,100%,.5),
+		0 1px 0 hsla(0,0%,100%,.5) inset;
+}
+button:active {
+	background: hsla(0,0%,0%,.02) linear-gradient(hsla(0,0%,0%,.12), transparent) border-box;
+	border-color: hsla(0,0%,0%,.3);
+	box-shadow: 0 1px 0 hsla(0,0%,100%,.5),
+		0 1px 0 hsla(0,0%,0%,.05) inset,
+		0 1px 1px hsla(0,0%,0%,.2) inset;
+}
+button img {
+	max-height: 48px;
+	max-width: 48px;
+	margin: auto;
+}
+
+.col {
+	float: left;
+	position: relative;
+	text-align: center;
+}
+
+.clearfix:after {
+	clear: both;
+}
+.clearfix:before, .clearfix:after {
+	display: table;
+	content: " ";
+}
+.viewmore {
+	width: 100%;
+	text-align: center;
+	text-decoration: none;
+	font-size: .8em;
+	color: blue;
+}

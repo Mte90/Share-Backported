@@ -1,0 +1,23 @@
+{
+
+  "description": "Share Backported",
+  "manifest_version": 2,
+  "name": "share-backported",
+  "version": "1.0",
+
+  "browser_action": {
+    "browser_style": true,
+    "default_icon":
+            {
+              "16": "icon.svg",
+              "24": "icon.svg",
+              "48": "icon.svg",
+              "96": "icon.svg"
+            },
+    "default_title": "Share",
+    "default_popup": "modal/modal.html"
+  },
+  "permissions": [
+    "tabs"
+  ]
+}
