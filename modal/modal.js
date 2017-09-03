@@ -7,9 +7,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	  var share = this.getAttribute('data-share');
 	  browser.tabs.query({'active': true, 'windowId': browser.windows.WINDOW_ID_CURRENT},
 			  function (tabs) {
-				share = share.replace('{url}',tabs[0].url);
-				share = share.replace('{text}',tabs[0].title);
-				window.open(share, 'share-backported', "resizable,scrollbars=yes,width=700,height=350,");
+				share = share.replace('{url}', tabs[0].url);
+				share = share.replace('{text}', tabs[0].title);
+				if (window.open(share, 'share-backported', "resizable,scrollbars=yes,width=700,height=350") === null) {
+				  browser.tabs.create({url: share});
+				}
 			  }
 	  );
 	}, false);
