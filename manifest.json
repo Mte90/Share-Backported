@@ -3,7 +3,7 @@
   "description": "Share Backported",
   "manifest_version": 2,
   "name": "share-backported",
-  "version": "1.0",
+  "version": "1.0.1",
 
   "browser_action": {
     "browser_style": true,
