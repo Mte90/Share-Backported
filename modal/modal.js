@@ -8,13 +8,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	  browser.tabs.query({'active': true, 'windowId': browser.windows.WINDOW_ID_CURRENT},
 			  function (tabs) {
 				share = share.replace('{url}', tabs[0].url);
-				share = share.replace('{text}', tabs[0].title);
+				var title = tabs[0].title.replace('|', '');
+				share = share.replace('{text}', title);
 				if (window.open(share, 'share-backported', "resizable,scrollbars=yes,width=700,height=350") === null) {
 				  browser.windows.create({
 					url: share,
-					width:700,
-					height:350,
-					type: "popup",
+					width: 700,
+					height: 350,
+					type: "popup"
 				  });
 				}
 			  }
