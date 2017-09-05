@@ -10,7 +10,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				share = share.replace('{url}', tabs[0].url);
 				share = share.replace('{text}', tabs[0].title);
 				if (window.open(share, 'share-backported', "resizable,scrollbars=yes,width=700,height=350") === null) {
-				  browser.tabs.create({url: share});
+				  browser.windows.create({
+					url: share,
+					width:700,
+					height:350,
+					type: "popup",
+				  });
 				}
 			  }
 	  );
