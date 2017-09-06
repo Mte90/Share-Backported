@@ -23,7 +23,7 @@
     "theme_icons": [
       {
         "dark": "icon.svg",
-        "light": "icon-light.png",
+        "light": "icon-light.svg",
         "size": 16
       }
     ],
@@ -31,13 +31,12 @@
     "default_popup": "modal/modal.html"
   },
   "page_action": {
-    "default_icon":
-            {
-              "16": "icon.svg",
-              "24": "icon.svg",
-              "48": "icon.svg",
-              "96": "icon.svg"
-            },
+    "default_icon": {
+      "16": "icon.svg",
+      "24": "icon.svg",
+      "48": "icon.svg",
+      "96": "icon.svg"
+    },
     "default_title": "Share",
     "default_popup": "modal/modal.html",
     "browser_style": true
