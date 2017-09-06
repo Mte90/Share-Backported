@@ -30,17 +30,6 @@
     "default_title": "Share",
     "default_popup": "modal/modal.html"
   },
-  "page_action": {
-    "default_icon": {
-      "16": "icon.svg",
-      "24": "icon.svg",
-      "48": "icon.svg",
-      "96": "icon.svg"
-    },
-    "default_title": "Share",
-    "default_popup": "modal/modal.html",
-    "browser_style": true
-  },
   "permissions": [
     "tabs"
   ]
