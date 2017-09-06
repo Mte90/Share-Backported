@@ -19,12 +19,16 @@ document.addEventListener('DOMContentLoaded', () => {
 						url.searchParams.set('url', tabs[0].url)
 					} else if (url.searchParams.has('canonicalUrl')) {
 						url.searchParams.set('canonicalUrl', tabs[0].url);
+					} else if (url.searchParams.has('body')) {
+						url.searchParams.set('body', tabs[0].url)
 					}
 
 					if (url.searchParams.has('text')) {
-						url.searchParams.set('text', tabs[0].title.replace('|', ''));
+						url.searchParams.set('text', tabs[0].title);
 					} else if (url.searchParams.has('title')) {
-						url.searchParams.set('title', tabs[0].title.replace('|', ''));
+						url.searchParams.set('title', tabs[0].title);
+					} else if (url.searchParams.has('su')) {
+						url.searchParams.set('su', tabs[0].title);
 					}
 
 					if (window.open(url, 'share-backported', config) === null) {
