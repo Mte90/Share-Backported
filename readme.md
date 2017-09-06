@@ -5,3 +5,8 @@ This extension reimplements the feature using the same icon, which opens a modal
 This extension reimplement the feature with the same previous icon with the various social icons that open a modal or a tab for Facebook, Twitter, Google+, Linkedin, Reddit, Tumblr and Telegram social networks.
 
 ![](screenshot.png)
+
+## Authors
+
+* [Daniele Scasciafratte](https://github.com/Mte90/) - Creator and Maintaner
+* [Chris Zuber](https://github.com/shgysk8zer0) - Contributor

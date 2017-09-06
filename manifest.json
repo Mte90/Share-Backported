@@ -31,6 +31,6 @@
     "default_popup": "modal/modal.html"
   },
   "permissions": [
-    "tabs"
+    "activeTab"
   ]
 }
