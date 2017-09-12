@@ -30,7 +30,12 @@
     "default_title": "Share",
     "default_popup": "modal/modal.html"
   },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
   "permissions": [
-    "activeTab"
+    "tabs"
   ]
 }
