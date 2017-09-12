@@ -36,6 +36,7 @@ button {
 	transition: background 250ms,
 		border-color 250ms;
 	background: transparent;
+	padding-top:2px;
 }
 button:hover {
 	background: hsla(210,4%,10%,.08) linear-gradient(hsla(0,0%,100%,.3), hsla(0,0%,100%,.1)) padding-box;
