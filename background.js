@@ -1,4 +1,5 @@
 var sb_id, sb_prev_url;
+// Create the window and save the tab id
 browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.type === 'share-backid') {
 	browser.windows.create(request.data).then(function (tab) {
@@ -8,7 +9,7 @@ browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 	});
   }
 });
-
+// Autoclose the iwndow when the url change
 browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   if (sb_id === tab.windowId) {
 	if (sb_prev_url.indexOf('https://www.linkedin.com/shareArticle') >= 0 || sb_prev_url.indexOf('https://plus.google.com/share') >= 0 || sb_prev_url.indexOf('https://reddit.com/') >= 0) {
@@ -26,4 +27,14 @@ browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 	  }
 	});
   }
+});
+// Add pageaction
+browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+  browser.pageAction.setIcon({tabId: tab.id, path: "icon.svg"});
+  browser.pageAction.setTitle({tabId: tab.id, title: 'Share'});
+  browser.pageAction.show(tab.id);
+  browser.pageAction.setPopup({
+	tabId,
+	popup: "/modal/modal.html"
+  });
 });
