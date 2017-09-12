@@ -11,6 +11,9 @@ browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
 browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   if (sb_id === tab.windowId) {
+	if (sb_prev_url.indexOf('https://www.linkedin.com/shareArticle') >= 0 || sb_prev_url.indexOf('https://plus.google.com/share') >= 0 || sb_prev_url.indexOf('https://reddit.com/') >= 0) {
+	  browser.tabs.insertCSS(tabId, {code: "body { overflow: auto !important; }"});
+	}
 	browser.tabs.get(tabId, function (tabinfo) {
 	  if (sb_prev_url !== tabinfo.url) {
 		var close = false;

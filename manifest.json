@@ -36,6 +36,9 @@
     ]
   },
   "permissions": [
-    "tabs"
+    "tabs",
+    "https://www.linkedin.com/*",
+    "https://plus.google.com/*",
+    "https://reddit.com/*"
   ]
 }
