@@ -30,11 +30,13 @@ browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 });
 // Add pageaction
 browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-  browser.pageAction.setIcon({tabId: tab.id, path: "icon.svg"});
-  browser.pageAction.setTitle({tabId: tab.id, title: 'Share'});
-  browser.pageAction.show(tab.id);
-  browser.pageAction.setPopup({
-	tabId,
-	popup: "/modal/modal.html"
-  });
+  if(tab.url.indexOf('about:') !== 0 && tab.url.indexOf('moz-extension:') !== 0) {
+	browser.pageAction.setIcon({tabId: tab.id, path: "icon.svg"});
+	browser.pageAction.setTitle({tabId: tab.id, title: 'Share'});
+	browser.pageAction.show(tab.id);
+	browser.pageAction.setPopup({
+	  tabId,
+	  popup: "/modal/modal.html"
+	});
+  }
 });
