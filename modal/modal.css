@@ -2,6 +2,12 @@ html, body {
 	width: 290px;
 	height:216px;
 }
+.lines-2 {
+	height: 144px;
+}
+.lines-1 {
+	height: 72px;
+}
 * {
 	color: #484848;
 }
@@ -19,12 +25,6 @@ body {
 #share-directory-grid {
 	display: block;
 	width: 320px;
-}
-iframe {
-	width:290px;
-	height:300px;
-	overflow:auto;
-	text-align:center;
 }
 button {
 	width: 68px;
