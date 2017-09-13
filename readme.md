@@ -10,3 +10,4 @@ This extension reimplement the feature with the same previous icon with the vari
 
 * [Daniele Scasciafratte](https://github.com/Mte90/) - Creator and Maintaner
 * [Chris Zuber](https://github.com/shgysk8zer0) - Contributor
+* [Arnaud Jacquemin](https://github.com/arnaud-jacquemin) - Contributor
