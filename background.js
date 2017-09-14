@@ -30,9 +30,9 @@ browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 });
 // Add pageaction
 browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-  var getting = browser.storage.local.get(item);
+  var getting = browser.storage.local.get('pageaction');
   getting.then(function (result) {
-	if (typeof result.pagection !== 'undefined' && result.pagection === false) {
+	if (typeof result.pagection === 'undefined') {
 	  if (tab.url.indexOf('about:') !== 0 && tab.url.indexOf('moz-extension:') !== 0) {
 		browser.pageAction.setIcon({tabId: tab.id, path: "icon.svg"});
 		browser.pageAction.setTitle({tabId: tab.id, title: 'Share'});
