@@ -54,12 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		  );
 		}, false);
 	  }
+	  
 	  if (index === (buttons.length -1)) {
 		// Set the height of the modal
-		if (shares < 4) {
+		if (shares <= 4) {
 		  document.querySelector("html").classList.add("lines-1");
 		  document.querySelector("body").classList.add("lines-1");
-		} else if (shares < 8) {
+		} else if (shares <= 8) {
 		  document.querySelector("html").classList.add("lines-2");
 		  document.querySelector("body").classList.add("lines-2");
 		}
