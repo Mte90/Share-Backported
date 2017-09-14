@@ -9,12 +9,13 @@ function saveOptions(e) {
 	reddit: document.querySelector("#reddit").checked,
 	telegram: document.querySelector("#telegram").checked,
 	gmail: document.querySelector("#gmail").checked,
-	diaspora: document.querySelector("#diaspora").checked
+	diaspora: document.querySelector("#diaspora").checked,
+	pageaction: document.querySelector("#pageaction").checked
   });
 }
 
 function restoreOptions() {
-  var shares = ['facebook', 'twitter', 'google', 'linkedin', 'tumblr', 'reddit', 'telegram', 'gmail', 'diaspora'];
+  var shares = ['facebook', 'twitter', 'google', 'linkedin', 'tumblr', 'reddit', 'telegram', 'gmail', 'diaspora', 'pageaction'];
   shares.forEach(function (item) {
 	var getting = browser.storage.local.get(item);
 	getting.then(function (result) {
