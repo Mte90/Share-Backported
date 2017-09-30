@@ -1,3 +1,5 @@
+/* global browser, URL */
+
 document.addEventListener('DOMContentLoaded', () => {
   const width = 700
   const height = 340

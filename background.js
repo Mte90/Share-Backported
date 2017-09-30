@@ -1,3 +1,5 @@
+/* global browser */
+
 var sb_id, sb_prev_url
 // Create the window and save the tab id
 browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {

@@ -1,3 +1,5 @@
+/* global browser */
+
 function saveOptions (e) {
   e.preventDefault()
   browser.storage.local.set({
