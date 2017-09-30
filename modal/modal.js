@@ -3,7 +3,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const width = 700
   const height = 340
-  const config = `resizable,scrollbars=yes,width=${width},height=${height}`
   const buttons = document.querySelectorAll('.share')
 
   var shares = 0
