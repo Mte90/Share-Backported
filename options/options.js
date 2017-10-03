@@ -1,7 +1,7 @@
 /* global browser */
 
 function saveOptions (e) {
-  e.preventDefault()
+  e.preventDefault();
   browser.storage.local.set({
     facebook: document.querySelector('#facebook').checked,
     twitter: document.querySelector('#twitter').checked,
@@ -13,20 +13,20 @@ function saveOptions (e) {
     gmail: document.querySelector('#gmail').checked,
     diaspora: document.querySelector('#diaspora').checked,
     pageaction: document.querySelector('#pageaction').checked
-  })
+  });
 }
 
 function restoreOptions () {
-  var shares = ['facebook', 'twitter', 'google', 'linkedin', 'tumblr', 'reddit', 'telegram', 'gmail', 'diaspora', 'pageaction']
+  var shares = ['facebook', 'twitter', 'google', 'linkedin', 'tumblr', 'reddit', 'telegram', 'gmail', 'diaspora', 'pageaction'];
   shares.forEach(function (item) {
-    var getting = browser.storage.local.get(item)
+    var getting = browser.storage.local.get(item);
     getting.then(function (result) {
-      document.querySelector('#' + item).checked = result[Object.keys(result)[0]]
+      document.querySelector('#' + item).checked = result[Object.keys(result)[0]];
     }, function (error) {
-      console.log(`Error: ${error}`)
-    })
-  })
+      console.log(`Error: ${error}`);
+    });
+  });
 }
 
-document.addEventListener('DOMContentLoaded', restoreOptions)
-document.querySelector('form').addEventListener('submit', saveOptions)
+document.addEventListener('DOMContentLoaded', restoreOptions);
+document.querySelector('form').addEventListener('submit', saveOptions);
