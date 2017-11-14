@@ -11,7 +11,7 @@ browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 	});
   }
 });
-// Autoclose the iwndow when the url change
+// Autoclose the window when the url change
 browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   if (sbId === tab.windowId) {
 	if (sbPrevUrl.indexOf('https://www.linkedin.com/shareArticle') >= 0 || sbPrevUrl.indexOf('https://plus.google.com/share') >= 0 || sbPrevUrl.indexOf('https://reddit.com/') >= 0) {
