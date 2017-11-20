@@ -6,6 +6,10 @@ This extension reimplement the feature with the same previous icon with the vari
 
 ![](screenshot.png)
 
+### Options
+#### Disable Pageaction
+Add or remove the share action on the address bar.
+
 ## Authors
 
 * [Daniele Scasciafratte](https://github.com/Mte90/) - Creator and Maintaner
