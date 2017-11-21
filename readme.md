@@ -6,6 +6,9 @@ This extension reimplement the feature with the same previous icon with the vari
 
 ![](screenshot.png)
 
+#### Services
+Tick the checkboxes corresponding to the share services you want to use
+
 ## Authors
 
 * [Daniele Scasciafratte](https://github.com/Mte90/) - Creator and Maintaner
