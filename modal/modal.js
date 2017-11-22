@@ -11,56 +11,62 @@ document.addEventListener('DOMContentLoaded', () => {
 	var item = button.getAttribute('id');
 	var getting = browser.storage.local.get(item);
 	getting.then(function (result) {
-	  if (result[Object.keys(result)[0]]) {
+	  if (result[Object.keys(result)[0]] && document.querySelector('#' + item + ':not(.customurl)') !== null) {
 		document.querySelector('#' + item).remove();
-	  } else {
-		shares++;
-		// Add click event
-		button.addEventListener('click', function (event) {
-		  event.preventDefault();
-		  const url = new URL(this.dataset.share);
-		  browser.tabs.query({
-			active: true,
-			windowId: browser.windows.WINDOW_ID_CURRENT
-		  },
-				  tabs => {
-					if (url.searchParams.has('u')) {
-					  url.searchParams.set('u', tabs[0].url);
-					} else if (url.searchParams.has('url')) {
-					  url.searchParams.set('url', tabs[0].url);
-					} else if (url.searchParams.has('canonicalUrl')) {
-					  url.searchParams.set('canonicalUrl', tabs[0].url);
-					} else if (url.searchParams.has('body')) {
-					  url.searchParams.set('body', tabs[0].url);
-					}
-
-					if (url.searchParams.has('text')) {
-					  url.searchParams.set('text', tabs[0].title);
-					} else if (url.searchParams.has('title')) {
-					  url.searchParams.set('title', tabs[0].title);
-					} else if (url.searchParams.has('su')) {
-					  url.searchParams.set('su', tabs[0].title);
-					}
-					
-					var newurl = url.toString();
-					if (url.toString().indexOf('diaspora') > 0) {
-					  newurl = url.toString();
-					  newurl = newurl.replace(/\+/gi, ' ');
-					}
-
-					browser.runtime.sendMessage({
-					  type: 'share-backid',
-					  data: {
-						url: newurl,
-						width,
-						height,
-						type: 'popup'
-					  }
-					});
-				  }
-		  );
-		}, false);
+		return;
 	  }
+	  // Simple trick to check custom share that doesn't have a boolean value
+	  if (result[Object.keys(result)[0]].length > 6) {
+		document.querySelector('#' + item + '.customurl').dataset.share = result[Object.keys(result)[0]];
+	  }
+	  // Share action
+	  shares++;
+	  // Add click event
+	  button.addEventListener('click', function (event) {
+		event.preventDefault();
+		const url = new URL(this.dataset.share);
+		browser.tabs.query({
+		  active: true,
+		  windowId: browser.windows.WINDOW_ID_CURRENT
+		},
+				tabs => {
+				  if (url.searchParams.has('u')) {
+					url.searchParams.set('u', tabs[0].url);
+				  } else if (url.searchParams.has('url')) {
+					url.searchParams.set('url', tabs[0].url);
+				  } else if (url.searchParams.has('canonicalUrl')) {
+					url.searchParams.set('canonicalUrl', tabs[0].url);
+				  } else if (url.searchParams.has('body')) {
+					url.searchParams.set('body', tabs[0].url);
+				  }
+
+				  if (url.searchParams.has('text')) {
+					url.searchParams.set('text', tabs[0].title);
+				  } else if (url.searchParams.has('title')) {
+					url.searchParams.set('title', tabs[0].title);
+				  } else if (url.searchParams.has('su')) {
+					url.searchParams.set('su', tabs[0].title);
+				  }
+
+				  var newurl = url.toString();
+				  if (url.toString().indexOf('diaspora') > 0) {
+					newurl = url.toString();
+					newurl = newurl.replace(/\+/gi, ' ');
+				  }
+
+				  browser.runtime.sendMessage({
+					type: 'share-backid',
+					data: {
+					  url: newurl,
+					  width,
+					  height,
+					  type: 'popup'
+					}
+				  });
+				}
+		);
+	  }, false);
+
 
 	  if (index === (buttons.length - 1)) {
 		// Set the height of the modal
