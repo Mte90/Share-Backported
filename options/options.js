@@ -12,12 +12,13 @@ function saveOptions (e) {
     telegram: document.querySelector('#telegram').checked,
     gmail: document.querySelector('#gmail').checked,
     diaspora: document.querySelector('#diaspora').checked,
+    vkontakte: document.querySelector('#vkontakte').checked,
     pageaction: document.querySelector('#pageaction').checked
   });
 }
 
 function restoreOptions () {
-  var shares = ['facebook', 'twitter', 'google', 'linkedin', 'tumblr', 'reddit', 'telegram', 'gmail', 'diaspora', 'pageaction'];
+  var shares = ['facebook', 'twitter', 'google', 'linkedin', 'tumblr', 'reddit', 'telegram', 'gmail', 'diaspora', 'vkontakte', 'pageaction'];
   shares.forEach(function (item) {
     var getting = browser.storage.local.get(item);
     getting.then(function (result) {
