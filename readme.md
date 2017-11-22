@@ -6,8 +6,13 @@ This extension reimplement the feature with the same previous icon with the vari
 
 ![](screenshot.png)
 
+### Options
+
 #### Services
 Tick the checkboxes corresponding to the share services you want to use
+
+#### Disable Pageaction
+Add or remove the share action on the address bar.
 
 ## Authors
 
