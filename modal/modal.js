@@ -43,6 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
 					url.searchParams.set('canonicalUrl', tabs[0].url);
 				  } else if (url.searchParams.has('body')) {
 					url.searchParams.set('body', tabs[0].url);
+				  } else if (url.searchParams.has('post')) {
+					url.searchParams.set('post', tabs[0].url);
 				  }
 
 				  if (url.searchParams.has('text')) {
@@ -51,13 +53,15 @@ document.addEventListener('DOMContentLoaded', () => {
 					url.searchParams.set('title', tabs[0].title);
 				  } else if (url.searchParams.has('su')) {
 					url.searchParams.set('su', tabs[0].title);
-				  }
+				  } 
 
 				  var newurl = url.toString();
 				  if (url.toString().indexOf('diaspora') > 0) {
 					newurl = url.toString();
 					newurl = newurl.replace(/\+/gi, ' ');
 				  }
+				  newurl = newurl.replace(/\&/gi, '&amp;');
+				  console.log(newurl)
 
 				  browser.runtime.sendMessage({
 					type: 'share-backid',
