@@ -16,8 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		return;
 	  }
 	  // Simple trick to check custom share that doesn't have a boolean value
-	  if (result[Object.keys(result)[0]].length > 6) {
+	  if (result[Object.keys(result)[0]] !== undefined && result[Object.keys(result)[0]].length > 6) {
 		document.querySelector('#' + item + '.customurl').dataset.share = result[Object.keys(result)[0]];
+	  } else {
+		if (document.querySelector('#' + item + '.customurl') !== null) {
+		  document.querySelector('#' + item + '.customurl').remove();
+		  return;
+		}
 	  }
 	  // Share action
 	  shares++;
