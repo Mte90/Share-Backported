@@ -3,7 +3,7 @@
   "description": "Firefox Nightly 57 will remove the share feature because it was using a non official Social API.",
   "manifest_version": 2,
   "name": "Share Backported",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "icons":
           {
             "16": "icon.svg",
