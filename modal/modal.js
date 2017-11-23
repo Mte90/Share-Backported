@@ -61,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
 					newurl = newurl.replace(/\+/gi, ' ');
 				  }
 				  newurl = newurl.replace(/\&/gi, '&amp;');
-				  console.log(newurl)
 
 				  browser.runtime.sendMessage({
 					type: 'share-backid',
