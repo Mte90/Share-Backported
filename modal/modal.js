@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	getting.then(function (result) {
 	  if (result[Object.keys(result)[0]] && document.querySelector('#' + item + ':not(.customurl)') !== null) {
 		document.querySelector('#' + item).remove();
+		resize_modal();
 		return;
 	  }
 	  // Simple trick to check custom share that doesn't have a boolean value
@@ -21,11 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	  } else {
 		if (document.querySelector('#' + item + '.customurl') !== null) {
 		  document.querySelector('#' + item + '.customurl').remove();
+		  resize_modal();
 		  return;
 		}
 	  }
-	  // Share action
-	  shares++;
 	  // Add click event
 	  button.addEventListener('click', function (event) {
 		event.preventDefault();
@@ -53,14 +53,13 @@ document.addEventListener('DOMContentLoaded', () => {
 					url.searchParams.set('title', tabs[0].title);
 				  } else if (url.searchParams.has('su')) {
 					url.searchParams.set('su', tabs[0].title);
-				  } 
+				  }
 
 				  var newurl = url.toString();
 				  if (url.toString().indexOf('diaspora') > 0) {
 					newurl = url.toString();
 					newurl = newurl.replace(/\+/gi, ' ');
 				  }
-				  newurl = newurl.replace(/\&/gi, '&amp;');
 
 				  browser.runtime.sendMessage({
 					type: 'share-backid',
@@ -74,20 +73,21 @@ document.addEventListener('DOMContentLoaded', () => {
 				}
 		);
 	  }, false);
-
-
-	  if (index === (buttons.length - 1)) {
-		// Set the height of the modal
-		if (shares <= 4) {
-		  document.querySelector('html').classList.add('lines-1');
-		  document.querySelector('body').classList.add('lines-1');
-		} else if (shares <= 8) {
-		  document.querySelector('html').classList.add('lines-2');
-		  document.querySelector('body').classList.add('lines-2');
-		}
-	  }
 	}, function (error) {
 	  console.log(`Error: ${error}`);
 	});
+	resize_modal();
   });
 });
+
+function resize_modal() {
+	var shares = document.querySelectorAll('.share').length;
+	// Set the height of the modal
+	if (shares <= 4) {
+	  document.querySelector('html').classList.add('lines-1');
+	  document.querySelector('body').classList.add('lines-1');
+	} else if (shares <= 8) {
+	  document.querySelector('html').classList.add('lines-2');
+	  document.querySelector('body').classList.add('lines-2');
+	}
+}
