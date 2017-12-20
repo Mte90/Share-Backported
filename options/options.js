@@ -13,6 +13,7 @@ function saveOptions(e) {
 	gmail: document.querySelector('#gmail').checked,
 	diaspora: document.querySelector('#diaspora').checked,
 	vkontakte: document.querySelector('#vkontakte').checked,
+	yahoo: document.querySelector('#yahoo').checked,
 	shaarli: document.querySelector('#shaarli').value,
 	pageaction: document.querySelector('#pageaction').checked
   });
