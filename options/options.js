@@ -14,6 +14,7 @@ function saveOptions(e) {
 	diaspora: document.querySelector('#diaspora').checked,
 	vkontakte: document.querySelector('#vkontakte').checked,
 	yahoo: document.querySelector('#yahoo').checked,
+	pinboard: document.querySelector('#pinboard').checked,
 	shaarli: document.querySelector('#shaarli').value,
 	pageaction: document.querySelector('#pageaction').checked
   });

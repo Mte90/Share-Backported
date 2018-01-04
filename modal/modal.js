@@ -53,6 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
 					url.searchParams.set('title', tabs[0].title);
 				  } else if (url.searchParams.has('su')) {
 					url.searchParams.set('su', tabs[0].title);
+				  }else if (url.searchParams.has('description')) {
+					url.searchParams.set('description', tabs[0].title);
 				  }
 
 				  var newurl = url.toString();
@@ -89,5 +91,8 @@ function resize_modal() {
 	} else if (shares <= 8) {
 	  document.querySelector('html').classList.add('lines-2');
 	  document.querySelector('body').classList.add('lines-2');
+	} else if (shares <= 12) {
+	  document.querySelector('html').classList.add('lines-3');
+	  document.querySelector('body').classList.add('lines-3');
 	}
 }

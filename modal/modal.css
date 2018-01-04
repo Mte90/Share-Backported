@@ -2,6 +2,9 @@ html, body {
 	width: 290px;
 	height:216px;
 }
+.lines-3 {
+	height: 216px;
+}
 .lines-2 {
 	height: 144px;
 }
