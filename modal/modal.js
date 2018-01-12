@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					url.searchParams.set('su', tabs[0].title);
 				  }else if (url.searchParams.has('description')) {
 					url.searchParams.set('description', tabs[0].title);
-				  }else if (url.searchParams.has('subject)) {
+				  }else if (url.searchParams.has('subject')) {
 					url.searchParams.set('subject', tabs[0].title);
 				  }
 
