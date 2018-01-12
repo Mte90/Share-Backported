@@ -15,14 +15,14 @@ function saveOptions(e) {
 	vkontakte: document.querySelector('#vkontakte').checked,
 	yahoo: document.querySelector('#yahoo').checked,
 	pinboard: document.querySelector('#pinboard').checked,
-  outlook: document.querySelector('#outlook').checked,
+    outlook: document.querySelector('#outlook').checked,
 	shaarli: document.querySelector('#shaarli').value,
 	pageaction: document.querySelector('#pageaction').checked
   });
 }
 
 function restoreOptions() {
-  var shares = ['facebook', 'twitter', 'google', 'linkedin', 'tumblr', 'reddit', 'telegram', 'gmail', 'diaspora', 'vkontakte', 'pageaction'];
+  var shares = ['facebook', 'twitter', 'google', 'linkedin', 'tumblr', 'reddit', 'telegram', 'gmail', 'diaspora', 'vkontakte', 'yahoo','pinboard', 'outlook', 'pageaction'];
   shares.forEach(function (item) {
 	var getting = browser.storage.local.get(item);
 	getting.then(function (result) {

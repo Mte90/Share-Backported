@@ -1,4 +1,4 @@
-/* global browser, URL */
+/* global browser, URL, document */
 
 document.addEventListener('DOMContentLoaded', () => {
   const width = 700;
