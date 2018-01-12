@@ -1,6 +1,9 @@
 html, body {
 	width: 290px;
-	height:216px;
+	height:288px;
+}
+.lines-4 {
+	height: 288px;
 }
 .lines-3 {
 	height: 216px;
