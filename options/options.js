@@ -21,7 +21,7 @@ function restoreOptions() {
     getting = browser.storage.local.get(item);
     getting.then(function(result) {
       value = result[Object.keys(result)[0]];
-      if (Number.isInteger(value)) {
+      if (Number.isInteger(parseInt(value))) {
         document.querySelector('#' + item).value = value;
       } else {
         document.querySelector('#' + item).checked = value;

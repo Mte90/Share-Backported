@@ -1,8 +1,8 @@
 /* global browser, URL, document, console */
 
 document.addEventListener('DOMContentLoaded', () => {
-  const width = 700;
-  const height = 340;
+  var width = 700;
+  var height = 340;
   const buttons = document.querySelectorAll('.share');
 
   Array.from(buttons).forEach(function(button, index) {
@@ -64,6 +64,13 @@ document.addEventListener('DOMContentLoaded', () => {
               newurl = newurl.replace(/\+/gi, ' ');
             }
 
+            browser.storage.local.get(this.id + "-width").then(function(value) {
+              width = value;
+            });
+            browser.storage.local.get(this.id + "-height").then(function(value) {
+              height = value;
+            });
+
             browser.runtime.sendMessage({
               type: 'share-backid',
               data: {
@@ -98,5 +105,4 @@ function resize_modal() {
   }
   document.querySelector('html').classList.add('lines-' + row);
   document.querySelector('body').classList.add('lines-' + row);
-
 }
