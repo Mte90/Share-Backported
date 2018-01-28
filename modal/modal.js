@@ -1,5 +1,34 @@
 /* global browser, URL, document, console */
 
+function resize_modal() {
+  var shares = document.querySelectorAll('.share').length;
+  var row = 0;
+  // Set the height of the modal
+  if (shares <= 4) {
+    row = 1;
+  } else if (shares <= 8) {
+    row = 2;
+  } else if (shares <= 12) {
+    row = 3;
+  } else if (shares <= 16) {
+    row = 4;
+  }
+  document.querySelector('html').classList.add('lines-' + row);
+  document.querySelector('body').classList.add('lines-' + row);
+}
+
+function open_popup(newurl, width, height) {
+  browser.runtime.sendMessage({
+    type: 'share-backid',
+    data: {
+      url: newurl,
+      width,
+      height,
+      type: 'popup'
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   var width = 700;
   var height = 340;
@@ -79,32 +108,3 @@ document.addEventListener('DOMContentLoaded', () => {
     resize_modal();
   });
 });
-
-function resize_modal() {
-  var shares = document.querySelectorAll('.share').length;
-  var row = 0;
-  // Set the height of the modal
-  if (shares <= 4) {
-    row = 1;
-  } else if (shares <= 8) {
-    row = 2;
-  } else if (shares <= 12) {
-    row = 3;
-  } else if (shares <= 16) {
-    row = 4;
-  }
-  document.querySelector('html').classList.add('lines-' + row);
-  document.querySelector('body').classList.add('lines-' + row);
-}
-
-function open_popup(newurl, width, height) {
-  browser.runtime.sendMessage({
-    type: 'share-backid',
-    data: {
-      url: newurl,
-      width,
-      height,
-      type: 'popup'
-    }
-  });
-}
