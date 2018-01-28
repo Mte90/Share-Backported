@@ -1,39 +1,311 @@
 <!DOCTYPE html>
-
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
-  </head>
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            left: 0;
+            top: 0;
+            font-size: 100%;
+        }
 
-  <body>
+        /* ROOT FONT STYLES */
 
+        * {
+            line-height: 1.5;
+        }
+
+        /* TYPOGRAPHY */
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 1px;
+        }
+
+        p {
+            font-size: 1.125rem;
+            font-weight: 200;
+            line-height: 1.8;
+        }
+
+        /* POSITIONING */
+
+        .left {
+            text-align: left;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        .center {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ==== GRID SYSTEM ==== */
+
+        .container {
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .row {
+            position: relative;
+            width: 100%;
+        }
+
+        .row [class^="col"] {
+            float: left;
+            margin: 0.2rem 2%;
+            min-height: 0.125rem;
+        }
+
+        .col-1 {
+            width: 4.33%;
+        }
+
+        .col-2 {
+            width: 12.66%;
+        }
+
+        .col-3 {
+            width: 21%;
+        }
+
+        .col-4 {
+            width: 29.33%;
+        }
+
+        .col-5 {
+            width: 37.66%;
+        }
+
+        .col-6 {
+            width: 46%;
+        }
+
+        .col-7 {
+            width: 54.33%;
+        }
+
+        .col-8 {
+            width: 62.66%;
+        }
+
+        .col-9 {
+            width: 71%;
+        }
+
+        .col-10 {
+            width: 79.33%;
+        }
+
+        .col-11 {
+            width: 87.66%;
+        }
+
+        .col-12 {
+            width: 96%;
+        }
+
+        .row::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+    <title>Settings</title>
+</head>
+
+<body>
     <form>
-		<h1>Hide Shares</h1>
-        <label><input type="checkbox" id="facebook" >Facebook</label><br>
-        <label><input type="checkbox" id="twitter" >Twitter</label><br>
-        <label><input type="checkbox" id="google" >Google+</label><br>
-        <label><input type="checkbox" id="linkedin" >Linkedin</label><br>
-        <label><input type="checkbox" id="tumblr" >Tumblr</label><br>
-        <label><input type="checkbox" id="reddit" >Reddit</label><br>
-        <label><input type="checkbox" id="telegram" >Telegram</label><br>
-        <label><input type="checkbox" id="gmail" >GMail</label><br>
-        <label><input type="checkbox" id="diaspora" >Diaspora</label><br>
-        <label><input type="checkbox" id="vkontakte" >VKontakte</label><br>
-        <label><input type="checkbox" id="yahoo" >Yahoo Mail</label><br>
-	<label><input type="checkbox" id="pinboard" >Pinboard.in</label><br>
-	<label><input type="checkbox" id="outlook" >Outlook</label><br><br>
-		
-		<h1>Custom Shares</h1>
-		Follow the placeholder and change only instance_url.<br><br>
-        <label>Shaarli: https://instance_url?post&title<br> <input type="url" id="shaarli" style="width:400px" placeholder="https://instance_url?post&title"></label><br><br>
-		
-		<h1>Disable PageAction</h1>
-        <label><input type="checkbox" id="pageaction" >Yes</label><br><br>
-        <br><button type="submit">Save</button>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="center">Hide Shares</h1>
+                    <h4 class="center">Do you want help the extension? Suggest on GitHub the right size for every service!</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label><input type="checkbox" id="facebook">Facebook</label>
+                </div>
+                <div class="col-4">
+                    <label><input type="number" id="facebook-width" value="700">&nbsp;Width</label>
+                </div>
+                <div class="col-4">
+                    <label><input type="number" id="facebook-heigth" value="350">&nbsp;Height</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label><input type="checkbox" id="twitter">Twitter</label>
+                </div>
+                <div class="col-4">
+                    <label><input type="number" id="twitter-width" value="700">&nbsp;Width</label>
+                </div>
+                <div class="col-4">
+                    <label><input type="number" id="twitter-heigth" value="350">&nbsp;Height</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label><input type="checkbox" id="google">Google+</label></div>
+                <div class="col-4">
+                    <label><input type="number" id="google-width" value="700">&nbsp;Width</label>
+                </div>
+                <div class="col-4">
+                    <label><input type="number" id="google-heigth" value="350">&nbsp;Height</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label><input type="checkbox" id="linkedin">Linkedin</label>
+                </div>
+                <div class="col-4">
+                    <label><input type="number" id="linkedin-width" value="700">&nbsp;Width</label>
+                </div>
+                <div class="col-4">
+                    <label><input type="number" id="linkedin-heigth" value="350">&nbsp;Height</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label><input type="checkbox" id="tumblr">Tumblr</label>
+                </div>
+                <div class="col-4">
+                    <label><input type="number" id="tumblr-width" value="700">&nbsp;Width</label>
+                </div>
+                <div class="col-4">
+                    <label><input type="number" id="tumblr-heigth" value="350">&nbsp;Height</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label><input type="checkbox" id="reddit">Reddit</label>
+                </div>
+                <div class="col-4">
+                    <label><input type="number" id="reddit-width" value="700">&nbsp;Width</label>
+                </div>
+                <div class="col-4">
+                    <label><input type="number" id="reddit-heigth" value="350">&nbsp;Height</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label><input type="checkbox" id="telegram">Telegram</label>
+                </div>
+                <div class="col-4">
+                    <label><input type="number" id="telegram-width" value="700">&nbsp;Width</label>
+                </div>
+                <div class="col-4">
+                    <label><input type="number" id="telegram-heigth" value="350">&nbsp;Height</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label><input type="checkbox" id="gmail">GMail</label>
+                </div>
+                <div class="col-4">
+                    <label><input type="number" id="gmail-width" value="700">&nbsp;Width</label>
+                </div>
+                <div class="col-4">
+                    <label><input type="number" id="gmail-heigth" value="350">&nbsp;Height</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label><input type="checkbox" id="diaspora">Diaspora</label>
+                </div>
+                <div class="col-4">
+                    <label><input type="number" id="diaspora-width" value="700">&nbsp;Width</label>
+                </div>
+                <div class="col-4">
+                    <label><input type="number" id="diaspora-heigth" value="350">&nbsp;Height</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label><input type="checkbox" id="vkontakte">VKontakte</label>
+                </div>
+                <div class="col-4">
+                    <label><input type="number" id="vkontakte-width" value="700">&nbsp;Width</label>
+                </div>
+                <div class="col-4">
+                    <label><input type="number" id="vkontakte-heigth" value="350">&nbsp;Height</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label><input type="checkbox" id="yahoo">Yahoo Mail</label>
+                </div>
+                <div class="col-4">
+                    <label><input type="number" id="yahoo-width" value="700">&nbsp;Width</label>
+                </div>
+                <div class="col-4">
+                    <label><input type="number" id="yahoo-heigth" value="350">&nbsp;Height</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label><input type="checkbox" id="pinboard">Pinboard.in</label>
+                </div>
+                <div class="col-4">
+                    <label><input type="number" id="pinboard-width" value="700">&nbsp;Width</label>
+                </div>
+                <div class="col-4">
+                    <label><input type="number" id="pinboard-heigth" value="350">&nbsp;Height</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label><input type="checkbox" id="outlook" >Outlook</label>
+                </div>
+                <div class="col-4">
+                    <label><input type="number" id="outlook-width" value="700">&nbsp;Width</label>
+                </div>
+                <div class="col-4">
+                    <label><input type="number" id="outlook-heigth" value="350">&nbsp;Height</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="center">Custom Shares</h1>
+                    <p>Follow the placeholder and change only instance_url.<br>
+                        <label>Shaarli: https://instance_url?post&title<br> <input type="url" id="shaarli" style="width:400px" placeholder="https://instance_url?post&title"></label>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="center">Disable PageAction</h1>
+                    <label><input type="checkbox" id="pageaction" >Yes</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <hr>
+                    <button type="submit">Save</button>
+                </div>
+            </div>
+        </div>
     </form>
 
     <script src="options.js"></script>
 
-  </body>
+</body>
 
 </html>
