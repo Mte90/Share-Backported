@@ -64,24 +64,14 @@ document.addEventListener('DOMContentLoaded', () => {
               newurl = newurl.replace(/\+/gi, ' ');
             }
 
-            browser.storage.local.get(this.id + "-width").then(function(value) {
-              width = value;
+            browser.storage.local.get([this.id + "-width", this.id + "-height"]).then(function(items) {
+              width = parseInt(items[item + "-width"]);
+              height = parseInt(items[item + "-height"]);
+              open_popup(newurl, width, height);
+            }, function(error) {
+              open_popup(newurl, width, height);
             });
-            browser.storage.local.get(this.id + "-height").then(function(value) {
-              height = value;
-            });
-
-            browser.runtime.sendMessage({
-              type: 'share-backid',
-              data: {
-                url: newurl,
-                width,
-                height,
-                type: 'popup'
-              }
-            });
-          }
-        );
+          });
       }, false);
     }, function(error) {
       console.log(`Error: ${error}`);
@@ -105,4 +95,16 @@ function resize_modal() {
   }
   document.querySelector('html').classList.add('lines-' + row);
   document.querySelector('body').classList.add('lines-' + row);
+}
+
+function open_popup(newurl, width, height) {
+  browser.runtime.sendMessage({
+    type: 'share-backid',
+    data: {
+      url: newurl,
+      width,
+      height,
+      type: 'popup'
+    }
+  });
 }
