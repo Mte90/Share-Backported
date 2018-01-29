@@ -18,6 +18,12 @@ function resize_modal() {
 }
 
 function open_popup(newurl, width, height) {
+  if(isNaN(width)) {
+      width = 700;
+  }
+  if(isNaN(height)) {
+      height = 340;
+  }
   browser.runtime.sendMessage({
     type: 'share-backid',
     data: {
