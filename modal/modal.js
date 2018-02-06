@@ -4,25 +4,17 @@ function resize_modal() {
   var shares = document.querySelectorAll('.share').length;
   var row = 0;
   // Set the height of the modal
-  if (shares <= 4) {
-    row = 1;
-  } else if (shares <= 8) {
-    row = 2;
-  } else if (shares <= 12) {
-    row = 3;
-  } else if (shares <= 16) {
-    row = 4;
-  }
+  row = Math.ceil(shares / 4);
   document.querySelector('html').classList.add('lines-' + row);
   document.querySelector('body').classList.add('lines-' + row);
 }
 
 function open_popup(newurl, width, height) {
-  if(isNaN(width)) {
-      width = 700;
+  if (isNaN(width)) {
+    width = 700;
   }
-  if(isNaN(height)) {
-      height = 340;
+  if (isNaN(height)) {
+    height = 340;
   }
   browser.runtime.sendMessage({
     type: 'share-backid',
@@ -51,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
       // Simple trick to check custom share that doesn't have a boolean value
-      if (result[Object.keys(result)[0]] !== undefined && result[Object.keys(result)[0]].length > 6) {
+      if (result[Object.keys(result)[0]] !== "undefined" && result[Object.keys(result)[0]].length > 6) {
         document.querySelector('#' + item + '.customurl').dataset.share = result[Object.keys(result)[0]];
       } else {
         if (document.querySelector('#' + item + '.customurl') !== null) {
