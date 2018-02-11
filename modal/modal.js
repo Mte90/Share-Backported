@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
       // Simple trick to check custom share that doesn't have a boolean value
-      if (result[Object.keys(result)[0]] !== "undefined" && result[Object.keys(result)[0]].length > 6) {
+      if (typeof result[Object.keys(result)[0]] !== "undefined" && result[Object.keys(result)[0]].length > 6) {
         document.querySelector('#' + item + '.customurl').dataset.share = result[Object.keys(result)[0]];
       } else {
         if (document.querySelector('#' + item + '.customurl') !== null) {
@@ -57,9 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
         const url = new URL(this.dataset.share);
         browser.tabs.query({
-            active: true,
-            windowId: browser.windows.WINDOW_ID_CURRENT
-          },
+          active: true,
+          windowId: browser.windows.WINDOW_ID_CURRENT
+        },
           tabs => {
             if (url.searchParams.has('u')) {
               url.searchParams.set('u', tabs[0].url);
