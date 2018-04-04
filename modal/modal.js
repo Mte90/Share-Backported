@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (url.searchParams.has('post')) {
               url.searchParams.set('post', tabs[0].url);
             }
-
+			
             if (url.searchParams.has('text')) {
               url.searchParams.set('text', tabs[0].title);
             } else if (url.searchParams.has('title')) {
@@ -86,11 +86,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             var newurl = url.toString();
-            if (url.toString().indexOf('diaspora') > 0) {
+            if (item === 'diaspora') {
               newurl = url.toString();
               newurl = newurl.replace(/\+/gi, ' ');
             }
-
+			
+			if (item === 'mastodon') {
+			  url.searchParams.set('text', tabs[0].title + ' ' + tabs[0].url);
+			}
+			
             browser.storage.local.get([this.id + "-width", this.id + "-height"]).then(function(items) {
               width = parseInt(items[item + "-width"]);
               height = parseInt(items[item + "-height"]);
