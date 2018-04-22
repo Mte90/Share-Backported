@@ -27,6 +27,54 @@ function open_popup(newurl, width, height) {
   });
 }
 
+function open_container_tab(newurl, cookieStoreId) {
+  browser.runtime.sendMessage({
+    type: 'share-backid-container',
+    data: {
+      url: newurl,
+      cookieStoreId
+    }
+  })
+}
+
+function checkFacebookContainerExtension() {
+  const extensionId = '@contain-facebook';
+  const facebookContainerName = 'Facebook';
+  return new Promise(function(resolve) {
+    browser.management.get(extensionId).then(addon => {
+      if (!addon.enabled) {
+        resolve(null);
+      }
+      return browser.contextualIdentities.query({name: facebookContainerName});
+    }).then(contexts => {
+      if (contexts.length > 0) {
+        resolve(contexts[0].cookieStoreId);
+      } else {
+        resolve(null);
+      }
+    }).catch(e => {
+      resolve(null);
+    });
+  });
+}
+
+function checkContainerAssignment(url) {
+  const extensionId = '@testpilot-containers';
+  return new Promise(resolve => {
+    browser.management.get(extensionId).then(addon => {
+      if (!addon.enabled) {
+        resolve(null);
+      }
+      return browser.runtime.sendMessage(extensionId, {
+        method: "getAssignment",
+        url
+      });
+    }).then(resolve).catch(e => {
+      resolve(null);
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   var width = 700;
   var height = 340;
@@ -72,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (url.searchParams.has('post')) {
               url.searchParams.set('post', tabs[0].url);
             }
-			
+
             if (url.searchParams.has('text')) {
               url.searchParams.set('text', tabs[0].title);
             } else if (url.searchParams.has('title')) {
@@ -90,17 +138,28 @@ document.addEventListener('DOMContentLoaded', () => {
               newurl = url.toString();
               newurl = newurl.replace(/\+/gi, ' ');
             }
-			
-			if (item === 'mastodon') {
-			  url.searchParams.set('text', tabs[0].title + ' ' + tabs[0].url);
-			}
-			
-            browser.storage.local.get([this.id + "-width", this.id + "-height"]).then(function(items) {
-              width = parseInt(items[item + "-width"]);
-              height = parseInt(items[item + "-height"]);
-              open_popup(newurl, width, height);
-            }, function(error) {
-              open_popup(newurl, width, height);
+
+            if (item === 'mastodon') {
+              url.searchParams.set('text', tabs[0].title + ' ' + tabs[0].url);
+            }
+
+            Promise.all([
+              checkContainerAssignment(newurl), checkFacebookContainerExtension()
+            ]).then(([assignment, facebookCookieStoreId]) => {
+              if (assignment) {
+                const cookieStoreId = 'firefox-container-' + assignment.userContextId;
+                open_container_tab(newurl, cookieStoreId);
+              } else if (item === 'facebook' && facebookCookieStoreId !== null) {
+                open_container_tab(newurl, facebookCookieStoreId);
+              } else {
+                browser.storage.local.get([this.id + "-width", this.id + "-height"]).then(function(items) {
+                  width = parseInt(items[item + "-width"]);
+                  height = parseInt(items[item + "-height"]);
+                  open_popup(newurl, width, height);
+                }, function(error) {
+                  open_popup(newurl, width, height);
+                });
+              }
             });
           });
       }, false);

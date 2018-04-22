@@ -41,6 +41,9 @@
     "permissions": [
         "tabs",
         "storage",
+        "cookies",
+        "management",
+        "contextualIdentities",
         "https://www.linkedin.com/*",
         "https://plus.google.com/*",
         "https://reddit.com/*"
