@@ -9,7 +9,8 @@ This extension reimplement the feature with the same previous icon with the supp
 ### Options
 
 #### Services
-Tick the checkboxes corresponding to the share services you want to use
+Tick the checkboxes corresponding to the share services you want to use and change also the size
+if you want.
 
 #### Disable Pageaction
 Add or remove the share action on the address bar.

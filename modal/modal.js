@@ -1,5 +1,6 @@
 /* global browser, URL, document, console */
 
+/* Autoresize the modal based on rows */
 function resize_modal() {
   var shares = document.querySelectorAll('.share').length;
   var row = 0;
@@ -9,6 +10,7 @@ function resize_modal() {
   document.querySelector('body').classList.add('lines-' + row);
 }
 
+/* Open popup with sizes */
 function open_popup(newurl, width, height) {
   if (isNaN(width)) {
     width = 700;
@@ -27,6 +29,7 @@ function open_popup(newurl, width, height) {
   });
 }
 
+/* DO you want to open the url in a container? */
 function open_container_tab(newurl, cookieStoreId) {
   browser.runtime.sendMessage({
     type: 'share-backid-container',
@@ -37,6 +40,7 @@ function open_container_tab(newurl, cookieStoreId) {
   })
 }
 
+/* Support for Facebook Container extension */
 function checkFacebookContainerExtension() {
   const extensionId = '@contain-facebook';
   const facebookContainerName = 'Facebook';
@@ -58,6 +62,7 @@ function checkFacebookContainerExtension() {
   });
 }
 
+/* Support for Container feature of Firefox */
 function checkContainerAssignment(url) {
   const extensionId = '@testpilot-containers';
   return new Promise(resolve => {
@@ -75,6 +80,7 @@ function checkContainerAssignment(url) {
   });
 }
 
+/* Add events on the share window tothe various button */
 document.addEventListener('DOMContentLoaded', () => {
   var width = 700;
   var height = 340;
