@@ -9,6 +9,12 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       sbPrevUrl = request.data.url;
       return tab.id;
     });
+  } else if (request.type === 'share-backid-container') {
+    browser.tabs.create(request.data).then(function(tab) {
+      sbId = tab.id;
+      sbPrevUrl = request.data.url;
+      return tab.id;
+    });
   }
 });
 // Autoclose the window when the url change
