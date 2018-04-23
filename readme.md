@@ -21,3 +21,4 @@ Add or remove the share action on the address bar.
 * [Arnaud Jacquemin](https://github.com/arnaud-jacquemin) - Contributor
 * [Indrashish Ghosh](https://github.com/ghosh) - Contributor
 * [Sergey Ivanov](https://github.com/ufocoder) - Contributor
+* [Arrizal Amin](https://github.com/arrizalamin) - Contributor

@@ -1,9 +1,9 @@
 {
 
-    "description": "Firefox Nightly 57 will remove the share feature because it was using a non official Social API.",
+    "description": "This extension reimplement the share feature with Container support and over 14+ social networks",
     "manifest_version": 2,
     "name": "Share Backported",
-    "version": "1.1.5",
+    "version": "1.2.0",
     "icons": {
         "16": "icon.svg",
         "24": "icon.svg",
