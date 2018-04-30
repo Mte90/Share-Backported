@@ -146,7 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (item === 'mastodon') {
-              url.searchParams.set('text', tabs[0].title + ' ' + tabs[0].url);
+              url.searchParams.set('text', tabs[0].title + ' - ' + tabs[0].url);
+			  newurl = url.toString();
             }
 
             Promise.all([
