@@ -22,7 +22,9 @@ function restoreOptions() {
     getting.then(function(result) {
       value = result[Object.keys(result)[0]];
       if (Number.isInteger(parseInt(value)) || document.querySelector('#' + item).type === 'url') {
-        document.querySelector('#' + item).value = value;
+		if(value !== undefined) {
+		  document.querySelector('#' + item).value = value;
+		}
       } else {
         document.querySelector('#' + item).checked = value;
       }
