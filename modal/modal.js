@@ -22,8 +22,8 @@ function open_popup(newurl, width, height) {
     type: 'share-backid',
     data: {
       url: newurl,
-      width,
-      height,
+      width: width,
+      height: height,
       type: 'popup'
     }
   });
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (item === 'mastodon') {
               url.searchParams.set('text', tabs[0].title + ' - ' + tabs[0].url);
-			  newurl = url.toString();
+              newurl = url.toString();
             }
 
             Promise.all([
