@@ -1,4 +1,6 @@
 # Share Backported
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMte90%2FShare-Backported.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FMte90%2FShare-Backported?ref=badge_shield)
+
 
 Firefox Nightly 57 [removed](https://bugzilla.mozilla.org/show_bug.cgi?id=1388902) the share feature because it was using a non official API.
 
@@ -23,3 +25,7 @@ Add or remove the share action on the address bar.
 * [Indrashish Ghosh](https://github.com/ghosh) - Contributor
 * [Sergey Ivanov](https://github.com/ufocoder) - Contributor
 * [Arrizal Amin](https://github.com/arrizalamin) - Contributor
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMte90%2FShare-Backported.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FMte90%2FShare-Backported?ref=badge_large)
