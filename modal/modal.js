@@ -109,7 +109,13 @@ document.addEventListener('DOMContentLoaded', () => {
       // Add click event
       button.addEventListener('click', function(event) {
         event.preventDefault();
-        const url = new URL(this.dataset.share);
+        
+        var urlshare = this.dataset.share;
+        if (item === 'wayback') {
+            urlshare = 'https://web.archive.org/save/';
+        }
+        
+        const url = new URL(urlshare);
         browser.tabs.query({
           active: true,
           windowId: browser.windows.WINDOW_ID_CURRENT
@@ -148,6 +154,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (item === 'mastodon') {
               url.searchParams.set('text', tabs[0].title + ' - ' + tabs[0].url);
               newurl = url.toString();
+            }
+            
+            if (item === 'wayback') {
+                newurl = url.toString() + tabs[0].url;
             }
 
             Promise.all([
