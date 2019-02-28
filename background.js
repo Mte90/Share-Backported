@@ -28,12 +28,8 @@ browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
       }
     }
     browser.tabs.get(tabId, function(tabinfo) {
-      if (sbPrevUrl !== tabinfo.url) {
-        var close = false;
-        if (tabinfo.url.indexOf('dialog/close_window') > 0 || tabinfo.url.indexOf('latest_status_id=') > 0 || tabinfo.url === 'https://plus.google.com/') {
-          close = true;
-        }
-        if (close === true) {
+      if (sbPrevUrl !== tabinfo.url && tabinfo.url !== 'about:blank') {
+        if (tabinfo.url.indexOf('dialog/close_window') > 0 || tabinfo.url.indexOf('latest_status_id=') > 0 || tabinfo.url === 'https://plus.google.com/') {     
           browser.tabs.remove(tabId);
         }
       }
