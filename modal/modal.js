@@ -121,16 +121,17 @@ document.addEventListener('DOMContentLoaded', () => {
           windowId: browser.windows.WINDOW_ID_CURRENT
         },
           tabs => {
+            var url_encoded = encodeURI(tabs[0].url);
             if (url.searchParams.has('u')) {
-              url.searchParams.set('u', tabs[0].url);
+              url.searchParams.set('u', url_encoded);
             } else if (url.searchParams.has('url')) {
-              url.searchParams.set('url', tabs[0].url);
+              url.searchParams.set('url', url_encoded);
             } else if (url.searchParams.has('canonicalUrl')) {
-              url.searchParams.set('canonicalUrl', tabs[0].url);
+              url.searchParams.set('canonicalUrl', url_encoded);
             } else if (url.searchParams.has('body')) {
-              url.searchParams.set('body', tabs[0].url);
+              url.searchParams.set('body', url_encoded);
             } else if (url.searchParams.has('post')) {
-              url.searchParams.set('post', tabs[0].url);
+              url.searchParams.set('post', url_encoded);
             }
 
             if (url.searchParams.has('text')) {
@@ -152,12 +153,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (item === 'mastodon') {
-              url.searchParams.set('text', tabs[0].title + ' - ' + tabs[0].url);
+              url.searchParams.set('text', tabs[0].title + ' - ' + url_encoded);
               newurl = url.toString();
             }
-            
+
             if (item === 'wayback') {
-                newurl = url.toString() + tabs[0].url;
+              newurl = url.toString() + url_encoded;
             }
 
             Promise.all([
