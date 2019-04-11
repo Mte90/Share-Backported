@@ -3,7 +3,7 @@
     "description": "This extension reimplement the share feature with Container support and over 14+ social networks",
     "manifest_version": 2,
     "name": "Share Backported",
-    "version": "1.2.7",
+    "version": "1.2.8",
     "icons": {
         "16": "icon.svg",
         "24": "icon.svg",
@@ -57,7 +57,6 @@
         "management",
         "contextualIdentities",
         "https://www.linkedin.com/*",
-        "https://plus.google.com/*",
         "https://reddit.com/*"
     ]
 }

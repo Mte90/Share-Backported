@@ -21,7 +21,7 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
   if (sbId === tab.windowId) {
     if (sbPrevUrl !== undefined) {
-      if (sbPrevUrl.indexOf('https://www.linkedin.com/shareArticle') >= 0 || sbPrevUrl.indexOf('https://plus.google.com/share') >= 0 || sbPrevUrl.indexOf('https://reddit.com/') || sbPrevUrl.indexOf('shaarli') >= 0) {
+      if (sbPrevUrl.indexOf('https://www.linkedin.com/shareArticle') >= 0 || sbPrevUrl.indexOf('https://reddit.com/') || sbPrevUrl.indexOf('shaarli') >= 0) {
         browser.tabs.insertCSS(tabId, {
           code: 'body { overflow: auto !important; }'
         });
@@ -29,7 +29,7 @@ browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     }
     browser.tabs.get(tabId, function(tabinfo) {
       if (sbPrevUrl !== tabinfo.url && tabinfo.url !== 'about:blank') {
-        if (tabinfo.url.indexOf('dialog/close_window') > 0 || tabinfo.url.indexOf('latest_status_id=') > 0 || tabinfo.url === 'https://plus.google.com/') {     
+        if (tabinfo.url.indexOf('dialog/close_window') > 0 || tabinfo.url.indexOf('latest_status_id=') > 0) {     
           browser.tabs.remove(tabId);
         }
       }
