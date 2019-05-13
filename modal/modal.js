@@ -126,6 +126,8 @@ document.addEventListener('DOMContentLoaded', () => {
               url.searchParams.set('u', url_encoded);
             } else if (url.searchParams.has('url')) {
               url.searchParams.set('url', url_encoded);
+            } else if (url.searchParams.has('link')) {
+              url.searchParams.set('link', url_encoded);
             } else if (url.searchParams.has('canonicalUrl')) {
               url.searchParams.set('canonicalUrl', url_encoded);
             } else if (url.searchParams.has('body')) {
@@ -162,23 +164,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             Promise.all([
-              checkContainerAssignment(newurl), checkFacebookContainerExtension()
-            ]).then(([assignment, facebookCookieStoreId]) => {
-              if (assignment) {
-                const cookieStoreId = 'firefox-container-' + assignment.userContextId;
-                open_container_tab(newurl, cookieStoreId);
-              } else if (item === 'facebook' && facebookCookieStoreId !== null) {
-                open_container_tab(newurl, facebookCookieStoreId);
-              } else {
-                browser.storage.local.get([this.id + "-width", this.id + "-height"]).then(function(items) {
-                  width = parseInt(items[item + "-width"]);
-                  height = parseInt(items[item + "-height"]);
-                  open_popup(newurl, width, height);
-                }, function(error) {
-                  open_popup(newurl, width, height);
-                });
-              }
-            });
+            checkContainerAssignment(newurl), checkFacebookContainerExtension()
+          ]).then(([assignment, facebookCookieStoreId]) => {
+            if (assignment) {
+              const cookieStoreId = 'firefox-container-' + assignment.userContextId;
+              open_container_tab(newurl, cookieStoreId);
+            } else if (item === 'facebook' && facebookCookieStoreId !== null) {
+              open_container_tab(newurl, facebookCookieStoreId);
+            } else {
+              browser.storage.local.get([this.id + "-width", this.id + "-height"]).then(function(items) {
+                width = parseInt(items[item + "-width"]);
+                height = parseInt(items[item + "-height"]);
+                open_popup(newurl, width, height);
+              }, function(error) {
+                open_popup(newurl, width, height);
+              });
+            }
+          });
           });
       }, false);
     }, function(error) {
