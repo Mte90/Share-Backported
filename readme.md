@@ -4,7 +4,7 @@
 
 Firefox Nightly 57 [removed](https://bugzilla.mozilla.org/show_bug.cgi?id=1388902) the share feature because it was using a non official API.
 
-This extension reimplement the feature with the same previous icon with the support for Facebook, Twitter, Linkedin, Reddit, Tumblr, Gmail, Diaspora, Telegram, VKontakte, Outlook, Pinboard, Yahoo, Weibo, Shaarli, Mastodon, MeWe, Skype, Internet Wayback Machine social networks.
+This extension reimplement the feature with the same previous icon with the support for Facebook, Twitter, Linkedin, Reddit, Tumblr, Gmail, Diaspora, Telegram, VKontakte, Outlook, Pinboard, Yahoo, Weibo, Shaarli, Mastodon, MeWe, Skype, Whatsapp, Internet Wayback Machine social networks.
 
 ![](screenshot.png)
 
