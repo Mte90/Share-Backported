@@ -37,7 +37,7 @@ function open_container_tab(newurl, cookieStoreId) {
       url: newurl,
       cookieStoreId
     }
-  })
+  });
 }
 
 /* Support for Facebook Container extension */
@@ -109,12 +109,12 @@ document.addEventListener('DOMContentLoaded', () => {
       // Add click event
       button.addEventListener('click', function(event) {
         event.preventDefault();
-        
+
         var urlshare = this.dataset.share;
         if (item === 'wayback') {
-            urlshare = 'https://web.archive.org/save/';
+          urlshare = 'https://web.archive.org/save/';
         }
-        
+
         const url = new URL(urlshare);
         browser.tabs.query({
           active: true,
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
               newurl = newurl.replace(/\+/gi, ' ');
             }
 
-            if (item === 'mastodon') {
+            if (item === 'mastodon' || item === 'whatsapp') {
               url.searchParams.set('text', tabs[0].title + ' - ' + url_encoded);
               newurl = url.toString();
             }
@@ -164,23 +164,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             Promise.all([
-            checkContainerAssignment(newurl), checkFacebookContainerExtension()
-          ]).then(([assignment, facebookCookieStoreId]) => {
-            if (assignment) {
-              const cookieStoreId = 'firefox-container-' + assignment.userContextId;
-              open_container_tab(newurl, cookieStoreId);
-            } else if (item === 'facebook' && facebookCookieStoreId !== null) {
-              open_container_tab(newurl, facebookCookieStoreId);
-            } else {
-              browser.storage.local.get([this.id + "-width", this.id + "-height"]).then(function(items) {
-                width = parseInt(items[item + "-width"]);
-                height = parseInt(items[item + "-height"]);
-                open_popup(newurl, width, height);
-              }, function(error) {
-                open_popup(newurl, width, height);
-              });
-            }
-          });
+              checkContainerAssignment(newurl), checkFacebookContainerExtension()
+            ]).then(([assignment, facebookCookieStoreId]) => {
+              if (assignment) {
+                const cookieStoreId = 'firefox-container-' + assignment.userContextId;
+                open_container_tab(newurl, cookieStoreId);
+              } else if (item === 'facebook' && facebookCookieStoreId !== null) {
+                open_container_tab(newurl, facebookCookieStoreId);
+              } else {
+                browser.storage.local.get([this.id + "-width", this.id + "-height"]).then(function(items) {
+                  width = parseInt(items[item + "-width"]);
+                  height = parseInt(items[item + "-height"]);
+                  open_popup(newurl, width, height);
+                }, function(error) {
+                  open_popup(newurl, width, height);
+                });
+              }
+            });
           });
       }, false);
     }, function(error) {

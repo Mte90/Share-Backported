@@ -1,91 +1,96 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Share backported</title>
-		<meta charset="utf-8" />
-		<link rel="stylesheet" href="modal.css"/>
-		<script src="modal.js"></script>
-	</head>
-	<body>
-		<div id="share-directory">
-			<div id="share-directory-grid" class="clearfix">
+        <head>
+                <title>Share backported</title>
+                <meta charset="utf-8" />
+                <link rel="stylesheet" href="modal.css"/>
+                <script src="modal.js"></script>
+        </head>
+        <body>
+                <div id="share-directory">
+                        <div id="share-directory-grid" class="clearfix">
 
-				<button class="col share clearfix" id="facebook" data-share="https://www.facebook.com/sharer.php?u">
-					<img src="icons/facebook.svg"/>
-				</button>
+                                <button class="col share clearfix" id="facebook" data-share="https://www.facebook.com/sharer.php?u">
+                                        <img src="icons/facebook.svg"/>
+                                </button>
 
-				<button class="col share clearfix" id="twitter" data-share="https://twitter.com/share?url&amp;text">
-					<img src="icons/twitter.svg"/>
-				</button>
+                                <button class="col share clearfix" id="twitter" data-share="https://twitter.com/share?url&amp;text">
+                                        <img src="icons/twitter.svg"/>
+                                </button>
 
-				<button class="col share clearfix" id="linkedin" data-share="https://www.linkedin.com/shareArticle?mini=true&amp;url">
-					<img src="icons/linkedin.svg" />
-				</button>
+                                <button class="col share clearfix" id="linkedin" data-share="https://www.linkedin.com/shareArticle?mini=true&amp;url">
+                                        <img src="icons/linkedin.svg" />
+                                </button>
 
-				<button class="col share clearfix" id="tumblr" data-share="https://www.tumblr.com/widgets/share/tool?canonicalUrl&amp;title">
-					<img src="icons/tumblr.svg" />
-				</button>
+                                <button class="col share clearfix" id="tumblr" data-share="https://www.tumblr.com/widgets/share/tool?canonicalUrl&amp;title">
+                                        <img src="icons/tumblr.svg" />
+                                </button>
 
-				<button class="col share clearfix" id="reddit" data-share="https://reddit.com/submit?url&amp;title">
-					<img src="icons/reddit.svg" />
-				</button>
+                                <button class="col share clearfix" id="reddit" data-share="https://reddit.com/submit?url&amp;title">
+                                        <img src="icons/reddit.svg" />
+                                </button>
 
-				<button class="col share clearfix" id="telegram" data-share="https://telegram.me/share/url?url&amp;text">
-					<img src="icons/telegram.svg" />
-				</button>
+                                <button class="col share clearfix" id="telegram" data-share="https://telegram.me/share/url?url&amp;text">
+                                        <img src="icons/telegram.svg" />
+                                </button>
 
-				<button class="col share clearfix" id="gmail" data-share="https://mail.google.com/mail/?ui=2&amp;view=cm&amp;fs=1&amp;tf=1&amp;su&amp;body">
-					<img src="icons/gmail.svg" />
-				</button>
+                                <button class="col share clearfix" id="gmail" data-share="https://mail.google.com/mail/?ui=2&amp;view=cm&amp;fs=1&amp;tf=1&amp;su&amp;body">
+                                        <img src="icons/gmail.svg" />
+                                </button>
 
-				<button class="col share clearfix" id="diaspora" data-share="https://share.diasporafoundation.org/?url&amp;title">
-					<img src="icons/diaspora.svg" />
-				</button>
+                                <button class="col share clearfix" id="diaspora" data-share="https://share.diasporafoundation.org/?url&amp;title">
+                                        <img src="icons/diaspora.svg" />
+                                </button>
 
-				<button class="col share clearfix" id="vkontakte" data-share="http://vk.com/share.php?url">
-					<img src="icons/vkontakte.svg" />
-				</button>
+                                <button class="col share clearfix" id="vkontakte" data-share="http://vk.com/share.php?url">
+                                        <img src="icons/vkontakte.svg" />
+                                </button>
 
-				<button class="col share clearfix" id="yahoo" data-share="http://compose.mail.yahoo.com/?body">
-					<img src="icons/yahoo.svg" />
-				</button>
+                                <button class="col share clearfix" id="yahoo" data-share="http://compose.mail.yahoo.com/?body">
+                                        <img src="icons/yahoo.svg" />
+                                </button>
 
-				<button class="col share clearfix" id="pinboard"
+                                <button class="col share clearfix" id="pinboard"
                                     data-share="https://pinboard.in/add?showtags=yes&amp;url&amp;title">
-					<img src="icons/pinboard.png" />
-				</button>
+                                        <img src="icons/pinboard.png" />
+                                </button>
 
                                 <button class="col share clearfix" id="mewe" data-share="http://mewe.com/share?link">
-					<img src="icons/mewe.png" />
-				</button>
+                                        <img src="icons/mewe.png" />
+                                </button>
 
-				<button class="col share clearfix" id="outlook"
-				    data-share="https://outlook.live.com/owa/?path=/mail/action/compose&body&subject">
-					<img src="icons/outlook.png" />
-				</button>
+                                <button class="col share clearfix" id="outlook"
+                                    data-share="https://outlook.live.com/owa/?path=/mail/action/compose&body&subject">
+                                        <img src="icons/outlook.png" />
+                                </button>
 
-				<button class="col share clearfix" id="weibo"
-				    data-share="https://service.weibo.com/share/share.php?url&title">
-					<img src="icons/weibo.svg" />
-				</button>
+                                <button class="col share clearfix" id="weibo"
+                                    data-share="https://service.weibo.com/share/share.php?url&title">
+                                        <img src="icons/weibo.svg" />
+                                </button>
 
-				<button class="col share clearfix" id="skype"
-				    data-share="https://web.skype.com/share?url">
-					<img src="icons/skype.svg" />
-				</button>
+                                <button class="col share clearfix" id="skype"
+                                    data-share="https://web.skype.com/share?url">
+                                        <img src="icons/skype.svg" />
+                                </button>
 
-				<button class="col share clearfix" id="wayback" data-share="">
-					<img src="icons/wayback.svg" />
-				</button>
+                                <button class="col share clearfix" id="whatsapp"
+                                    data-share="https://wa.me/?text">
+                                        <img src="icons/whatsapp.svg" />
+                                </button>
 
-				<button class="col share clearfix customurl" id="shaarli" data-share="">
-					<img src="icons/shaarli.png" />
-				</button>
+                                <button class="col share clearfix" id="wayback" data-share="">
+                                        <img src="icons/wayback.svg" />
+                                </button>
 
-				<button class="col share clearfix customurl" id="mastodon" data-share="">
-					<img src="icons/mastodon.svg" />
-				</button>
-			</div>
-		</div>
-	</body>
+                                <button class="col share clearfix customurl" id="shaarli" data-share="">
+                                        <img src="icons/shaarli.png" />
+                                </button>
+
+                                <button class="col share clearfix customurl" id="mastodon" data-share="">
+                                        <img src="icons/mastodon.svg" />
+                                </button>
+                        </div>
+                </div>
+        </body>
 </html>
