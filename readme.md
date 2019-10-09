@@ -4,18 +4,20 @@
 
 Firefox Nightly 57 [removed](https://bugzilla.mozilla.org/show_bug.cgi?id=1388902) the share feature because it was using a non official API.
 
-This extension reimplement the feature with the same previous icon with the support for Facebook, Twitter, Linkedin, Reddit, Tumblr, Gmail, Diaspora, Telegram, VKontakte, Outlook, Pinboard, Yahoo, Weibo, Shaarli, Mastodon, MeWe, Skype, Whatsapp, Internet Wayback Machine social networks.
+This extension reimplement the feature with the same previous icon with the support for Facebook, Twitter, LinkedIn, Reddit, Tumblr, GMail, Diaspora, Telegram, VKontakte, Outlook, Pinboard, Yahoo! Mail, Weibo, Shaarli, Mastodon, MeWe, Skype, WhatsApp, Pinterest, Instapaper, Evernote, Scoop.it, Google Translate (Auto>EN), Internet Wayback Machine social networks.
 
-![](screenshot.png)
+<img src="screenshot.png" style="zoom:50%;" />
 
 ### Options
 
 #### Services
-Tick the checkboxes corresponding to the share services you want to use and change also the size
-if you want.
+You can hide some services/icons just put a check in the relevant field in the “Services” section.
 
-#### Disable Pageaction
-Add or remove the share action on the address bar.
+In the same section, you can also change width and height of the share window (for every service), so the windows opened when you click on the relevant icon.
+                    
+
+#### PageAction
+You can hide the <i>PageAction</i> icon (so the shortcut shown in the address bar) - just put a check in the field contained in the “PageAction” section.
 
 ## Authors
 
