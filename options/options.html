@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <style>
@@ -129,7 +128,6 @@
     </style>
     <title>Settings</title>
 </head>
-
 <body>
     <form>
         <div class="container">
@@ -143,268 +141,340 @@
                     </h4>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-4">
+            <div class="row" data-order="01">
+                <div class="col-3">
                     <label><input type="checkbox" id="facebook">Facebook</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="facebook-width" value="575">&nbsp;Width</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="facebook-height" value="800">&nbsp;Height</label>
                 </div>
+                <div class="col-3">
+                    <label><input type="number" id="facebook-priority" value="1" min="1" step="1">Position</label>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-4">
+            <div class="row" data-order="02">
+                <div class="col-3">
                     <label><input type="checkbox" id="twitter">Twitter</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="twitter-width" value="700">&nbsp;Width</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="twitter-height" value="300">&nbsp;Height</label>
                 </div>
+                <div class="col-3">
+                    <label><input type="number" id="twitter-priority" value="2" min="1" step="1">Position</label>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-4">
+            <div class="row" data-order="03">
+                <div class="col-3">
                     <label><input type="checkbox" id="linkedin">LinkedIn</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="linkedin-width" value="700">&nbsp;Width</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="linkedin-height" value="500">&nbsp;Height</label>
                 </div>
+                <div class="col-3">
+                    <label><input type="number" id="linkedin-priority" value="3" min="1" step="1">Position</label>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-4">
+            <div class="row" data-order="04">
+                <div class="col-3">
                     <label><input type="checkbox" id="tumblr">Tumblr</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="tumblr-width" value="600">&nbsp;Width</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="tumblr-height" value="400">&nbsp;Height</label>
                 </div>
+                <div class="col-3">
+                    <label><input type="number" id="tumblr-priority" value="4" min="1" step="1">Position</label>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-4">
+            <div class="row" data-order="05">
+                <div class="col-3">
                     <label><input type="checkbox" id="reddit">Reddit</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="reddit-width" value="950">&nbsp;Width</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="reddit-height" value="915">&nbsp;Height</label>
                 </div>
+                <div class="col-3">
+                    <label><input type="number" id="reddit-priority" value="5" min="1" step="1">Position</label>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-4">
+            <div class="row" data-order="06">
+                <div class="col-3">
                     <label><input type="checkbox" id="telegram">Telegram</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="telegram-width" value="600">&nbsp;Width</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="telegram-height" value="400">&nbsp;Height</label>
                 </div>
+                <div class="col-3">
+                    <label><input type="number" id="telegram-priority" value="6" min="1" step="1">Position</label>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-4">
+            <div class="row" data-order="07">
+                <div class="col-3">
                     <label><input type="checkbox" id="gmail">GMail</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="gmail-width" value="700">&nbsp;Width</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="gmail-height" value="340">&nbsp;Height</label>
                 </div>
+                <div class="col-3">
+                    <label><input type="number" id="gmail-priority" value="7" min="1" step="1">Position</label>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-4">
+            <div class="row" data-order="08">
+                <div class="col-3">
                     <label><input type="checkbox" id="diaspora">Diaspora</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="diaspora-width" value="700">&nbsp;Width</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="diaspora-height" value="340">&nbsp;Height</label>
                 </div>
+                <div class="col-3">
+                    <label><input type="number" id="diaspora-priority" value="8" min="1" step="1">Position</label>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-4">
+            <div class="row" data-order="09">
+                <div class="col-3">
                     <label><input type="checkbox" id="vkontakte">VKontakte</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="vkontakte-width" value="700">&nbsp;Width</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="vkontakte-height" value="340">&nbsp;Height</label>
                 </div>
+                <div class="col-3">
+                    <label><input type="number" id="vkontakte-priority" value="9" min="1" step="1">Position</label>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-4">
+            <div class="row" data-order="10">
+                <div class="col-3">
                     <label><input type="checkbox" id="yahoo">Yahoo! Mail</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="yahoo-width" value="700">&nbsp;Width</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="yahoo-height" value="340">&nbsp;Height</label>
                 </div>
+                <div class="col-3">
+                    <label><input type="number" id="yahoo-priority" value="10" min="1" step="1">Position</label>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-4">
+            <div class="row" data-order="11">
+                <div class="col-3">
                     <label><input type="checkbox" id="pinboard">Pinboard.in</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="pinboard-width" value="700">&nbsp;Width</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="pinboard-height" value="340">&nbsp;Height</label>
                 </div>
+                <div class="col-3">
+                    <label><input type="number" id="pinboard-priority" value="11" min="1" step="1">Position</label>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-4">
+            <div class="row" data-order="12">
+                <div class="col-3">
                     <label><input type="checkbox" id="mewe">MeWe</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="mewe-width" value="700">&nbsp;Width</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="mewe-height" value="340">&nbsp;Height</label>
                 </div>
+                <div class="col-3">
+                    <label><input type="number" id="mewe-priority" value="12" min="1" step="1">Position</label>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-4">
+            <div class="row" data-order="13">
+                <div class="col-3">
                     <label><input type="checkbox" id="outlook">Outlook</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="outlook-width" value="700">&nbsp;Width</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="outlook-height" value="340">&nbsp;Height</label>
                 </div>
+                <div class="col-3">
+                    <label><input type="number" id="outlook-priority" value="13" min="1" step="1">Position</label>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-4">
+            <div class="row" data-order="14">
+                <div class="col-3">
                     <label><input type="checkbox" id="weibo">Weibo</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="weibo-width" value="700">&nbsp;Width</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="weibo-height" value="340">&nbsp;Height</label>
                 </div>
+                <div class="col-3">
+                    <label><input type="number" id="weibo-priority" value="14" min="1" step="1">Position</label>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-4">
+            <div class="row" data-order="15">
+                <div class="col-3">
                     <label><input type="checkbox" id="skype">Skype</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="skype-width" value="700">&nbsp;Width</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="skype-height" value="340">&nbsp;Height</label>
                 </div>
+                <div class="col-3">
+                    <label><input type="number" id="skype-priority" value="15" min="1" step="1">Position</label>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-4">
+            <div class="row" data-order="16">
+                <div class="col-3">
                     <label><input type="checkbox" id="wayback">Wayback</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="wayback-width" value="700">&nbsp;Width</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="wayback-height" value="700">&nbsp;Height</label>
                 </div>
+                <div class="col-3">
+                    <label><input type="number" id="wayback-priority" value="16" min="1" step="1">Position</label>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-4">
+            <div class="row" data-order="17">
+                <div class="col-3">
                     <label><input type="checkbox" id="whatsapp">WhatsApp</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="whatsapp-width" value="700">&nbsp;Width</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="whatsapp-height" value="700">&nbsp;Height</label>
                 </div>
+                <div class="col-3">
+                    <label><input type="number" id="whatsapp-priority" value="17" min="1" step="1">Position</label>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-4">
+            <div class="row" data-order="18">
+                <div class="col-3">
                     <label><input type="checkbox" id="pinterest">Pinterest</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="pinterest-width" value="700">&nbsp;Width</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="pinterest-height" value="700">&nbsp;Height</label>
                 </div>
+                <div class="col-3">
+                    <label><input type="number" id="pinterest-priority" value="18" min="1" step="1">Position</label>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-4">
+            <div class="row" data-order="19">
+                <div class="col-3">
                     <label><input type="checkbox" id="evernote">Evernote</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="evernote-width" value="700">&nbsp;Width</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="evernote-height" value="700">&nbsp;Height</label>
                 </div>
+                <div class="col-3">
+                    <label><input type="number" id="evernote-priority" value="19" min="1" step="1">Position</label>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-4">
+            <div class="row" data-order="20">
+                <div class="col-3">
                     <label><input type="checkbox" id="instapaper">Instapaper</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="instapaper-width" value="700">&nbsp;Width</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="instapaper-height" value="700">&nbsp;Height</label>
                 </div>
+                <div class="col-3">
+                    <label><input type="number" id="instapaper-priority" value="20" min="1" step="1">Position</label>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-4">
+            <div class="row" data-order="21">
+                <div class="col-3">
                     <label><input type="checkbox" id="scoopit">Scoop.it</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="scoopit-width" value="700">&nbsp;Width</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="scoopit-height" value="700">&nbsp;Height</label>
                 </div>
+                <div class="col-3">
+                    <label><input type="number" id="scoopit-priority" value="21" min="1" step="1">Position</label>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-4">
+            <div class="row" data-order="22">
+                <div class="col-3">
                     <label><input type="checkbox" id="googletranslate">Google Translante (Auto>EN)</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="googletranslate-width" value="700">&nbsp;Width</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="googletranslate-height" value="700">&nbsp;Height</label>
                 </div>
+                <div class="col-3">
+                    <label><input type="number" id="googletranslate-priority" value="22" min="1" step="1">Position</label>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-4">
+            <div class="row" data-order="23">
+                <div class="col-3">
                     <label>Shaarli</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="shaarli-width" value="700">&nbsp;Width</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="shaarli-height" value="340">&nbsp;Height</label>
                 </div>
+                <div class="col-3">
+                    <label><input type="number" id="shaarli-priority" value="23" min="1" step="1">Position</label>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-4">
+            <div class="row" data-order="24">
+                <div class="col-3">
                     <label>Mastodon</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="mastodon-width" value="700">&nbsp;Width</label>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label><input type="number" id="mastodon-height" value="340">&nbsp;Height</label>
+                </div>
+                <div class="col-3">
+                    <label><input type="number" id="mastodon-priority" value="24" min="1" step="1">Position</label>
                 </div>
             </div>
             <div class="row">
@@ -412,7 +482,7 @@
                     <h1 class="center">Custom Shares</h1>
                     <p>Follow the placeholder and change only instance_url.<br>
                         <label>Shaarli: https://instance_url?post&title<br> <input type="url" id="shaarli" style="width:400px" placeholder="https://instance_url?post&title"></label><br>
-						<label>Mastodon: https://instance_url/share?text<br> <input type="url" id="mastodon" style="width:400px" placeholder="https://instance_url?post&title"></label>
+                        <label>Mastodon: https://instance_url/share?text<br> <input type="url" id="mastodon" style="width:400px" placeholder="https://instance_url?post&title"></label>
                     </p>
                 </div>
             </div>
@@ -431,9 +501,6 @@
             </div>
         </div>
     </form>
-
     <script src="options.js"></script>
-
 </body>
-
 </html>
