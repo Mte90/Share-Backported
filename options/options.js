@@ -22,16 +22,13 @@ function restoreOptions() {
     getting.then(function(result) {
       value = result[Object.keys(result)[0]];
       var isInt = Number.isInteger(parseInt(value, 10));
-      // Why not using the argument of forEach here instead of querying the DOM?
-      var isUrl = document.querySelector('#' + item).type === 'url';
+      var isUrl = el.type === 'url';
       if (isInt || isUrl) {
         if(value !== undefined) {
-          // Why not using the argument of forEach here instead of querying the DOM?
-          document.querySelector('#' + item).value = value;
+          el.value = value;
         }
       } else {
-        // Why not using the argument of forEach here instead of querying the DOM?
-        document.querySelector('#' + item).checked = value;
+        el.checked = value;
       }
     }, function(error) {
       console.log(`Error: ${error}`);
@@ -49,72 +46,45 @@ function onChange(event) {
 }
 
 function getChange(changedShareOption) {
-  var targetShareOption = changedShareOption.parentElement.parentElement.parentElement;;
-  var oldPosition = parseInt(targetShareOption.dataset.order, 10)
+  var targetShareOption = changedShareOption.parentElement.parentElement.parentElement;
   var newPosition = parseInt(changedShareOption.value, 10);
 
   return {
     el: targetShareOption,
-    from: oldPosition,
     to: newPosition
   };
 }
 
 function updateDOM (change) {
-  var orderMap = getShareOptions();
-  move(change, orderMap);
-  updateState(change, orderMap);
+  move(change);
+  updateState(change);
 }
 
-function getShareOptions() {
-  var orderMap = {};
-  var allShareOptions = document.querySelectorAll('[data-order]');
-  orderMap.length = allShareOptions.length;
-  allShareOptions.forEach(function(option) {
-    var position = parseInt(option.dataset.order, 10);
-    orderMap[position] = option;
-  });
-  return orderMap;
-}
-
-function move (change, orderMap) {
+function move (change) {
   var refNode, parentNode;
 
-  if (change.to >= orderMap.length) {
+  if (change.to >= change.el.parentElement.children.length) {
     // Move to end
-    refNode = orderMap[orderMap.length];
-    parentNode = refNode.parentElement;
-    parentNode.insertBefore(null, change.el);
+    parentNode = change.el.parentElement;
+    parentNode.insertBefore(change.el, null);
   } else {
-    refNode = orderMap[change.to];
+    refNode = change.el
+      .parentElement  // Shared parent
+      .querySelector([`[id$="priority"][value="${change.to}"]`])
+      .parentElement.parentElement.parentElement // Up to .row
+      .nextElementSibling;  // Next .row
+
     parentNode = refNode.parentElement;
-    parentNode.insertBefore(refNode, change.el);
+    parentNode.insertBefore(change.el, refNode);
   }
 }
 
-function updateState (change, orderMap) {
-  Object.keys(orderMap)
-    .filter(function (order) {
-      var position = parseInt(order, 10);
-      return position <= change.to;
-    })
-    .forEach(function (order) {
-      var position = parseInt(order, 10);
-      if (position !== change.from) {
-	var newValue = position - 1;
-        var el = orderMap[order];
-        var priority = el.querySelector('[id$=priority]');
-        priority.setAttribute('value', newValue);
-        priority.value = newValue;
-      }
-    });
-
-  // Cast NodeList to Array
-  var allShareOptions = [].slice(document.querySelectorAll('[data-order]'));
-  allShareOptions.forEach(function (el) {
-    var newValue = el.querySelector('[id$=priority]').value;
-    // Padding with leading zero
-    el.dataset.order = ("0" + newValue).substr(-2);
+function updateState (change) {
+  var allShareOptions = document.querySelectorAll('[id$="priority"]');
+  allShareOptions.forEach(function(option, index) {
+    var newValue = index + 1;  // Arrays start with 0
+    option.setAttribute('value', newValue);
+    option.value = newValue;
   });
 }
 
