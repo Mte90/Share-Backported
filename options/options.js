@@ -61,22 +61,34 @@ function updateDOM (change) {
 }
 
 function move (change) {
-  var refNode, parentNode;
+  var refNode, nextSibling, row;
 
-  if (change.to >= change.el.parentElement.children.length) {
-    // Move to end
-    parentNode = change.el.parentElement;
-    parentNode.insertBefore(change.el, null);
+  var parentNode = change.el.parentElement;
+  var rows = Array.from(parentNode.children);
+
+  if (change.to <= 0) {
+    // Do nothing. Alternatively, move to first position?
+    return;
+  } else if (change.to >= rows.length) {
+    // Move to end, but keep in mind other form elements!
+    var numberOfOptions = parentNode.querySelectorAll('[id$="priority"]').length;
+
+    nextSibling = parentNode.querySelector([`[id$="priority"][value="${numberOfOptions}"]`]);
+    row = nextSibling.parentElement.parentElement.parentElement; // Up to .row, i.e. same level as change.el
+    refNode = row.nextElementSibling;
   } else {
-    refNode = change.el
-      .parentElement  // Shared parent
-      .querySelector([`[id$="priority"][value="${change.to}"]`])
-      .parentElement.parentElement.parentElement // Up to .row
-      .nextElementSibling;  // Next .row
+    nextSibling = parentNode.querySelector([`[id$="priority"][value="${change.to}"]`]);
+    row = nextSibling.parentElement.parentElement.parentElement; // Up to .row, i.e. same level as change.el
 
-    parentNode = refNode.parentElement;
-    parentNode.insertBefore(change.el, refNode);
+    var indexTargetOption  = rows.findIndex(function(el) { return el === row; });
+    var indexChangedOption = rows.findIndex(function(el) { return el === change.el; });
+
+    // indexTargetOption > indexChangedOption => downwards
+    // indexTargetOption < indexChangedOption => upwards
+    refNode = indexTargetOption > indexChangedOption ? row.nextElementSibling : row;
   }
+
+  parentNode.insertBefore(change.el, refNode);
 }
 
 function updateState (change) {
