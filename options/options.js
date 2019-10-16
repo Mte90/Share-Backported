@@ -1,4 +1,6 @@
 /* global browser, document, console */
+document.addEventListener('DOMContentLoaded', restoreOptions);
+document.querySelector('form').addEventListener('submit', saveOptions);
 
 function saveOptions(e) {
   e.preventDefault();
@@ -16,33 +18,76 @@ function saveOptions(e) {
 function restoreOptions() {
   var value = '';
   var getting = '';
-  document.querySelectorAll('input[id]').forEach(function(el) {
-    var item = el.id;
-    getting = browser.storage.local.get(item);
-    getting.then(function(result) {
-      value = result[Object.keys(result)[0]];
-      var isInt = Number.isInteger(parseInt(value, 10));
-      var isUrl = el.type === 'url';
-      if (isInt || isUrl) {
-        if(value !== undefined) {
-          el.value = value;
-        }
-      } else {
-        el.checked = value;
-      }
-    }, function(error) {
-      console.log(`Error: ${error}`);
-    });
 
-    if (item.endsWith('priority')) {
-      el.addEventListener('change', onChange);
-    }
+  var elements = Promise.all(
+    [].slice.call(document.querySelectorAll('input[id]')).map(function(el) {
+      var item = el.id;
+
+      if (item.endsWith('priority')) {
+        el.addEventListener('change', onChange);
+      }
+
+      getting = browser.storage.local.get(item);
+      return getting.then(function(result) {
+        value = result[Object.keys(result)[0]];
+        var isInt = Number.isInteger(parseInt(value, 10));
+        var isUrl = el.type === 'url';
+        if (isInt || isUrl) {
+          if(value !== undefined) {
+            el.value = value;
+	    el.setAttribute('value', value);
+          }
+        } else {
+          el.checked = value;
+        }
+	return Promise.resolve(el);
+      }, function(error) {
+        console.log(`Error: ${error}`);
+      });
+    })
+  );
+
+  // Wait until all values were updated with browser storage information
+  elements.then(function(elements) {
+    var priorities = elements.filter(function (el) {
+      return el.id.endsWith('priority');
+    })
+    onLoad(priorities);
   });
 }
 
+function onLoad(priorities) {
+  var shareOptionRows = priorities.map(function(node) {
+    // Move upwards until .row element
+    return node.parentElement.parentElement.parentElement;
+  });
+
+  // Sort reverse according to its priority
+  shareOptionRows = shareOptionRows.sort(function(a, b) {
+    var aNode = a.querySelector('[id$="priority"]');
+    var bNode = b.querySelector('[id$="priority"]');
+
+    var aPriority = parseInt(aNode.value, 10);
+    var bPriority = parseInt(bNode.value, 10);
+    var order = bPriority - aPriority;
+
+    if (order < 0) { return -1; }
+    if (order > 0) { return  1; }
+    return 0;
+  })
+
+  // Grab the first .row which is not related to priorities
+  var endOfList = shareOptionRows[0].nextElementSibling;
+  shareOptionRows.reduce(function(before, row) {
+    var parentNode = row.parentElement;
+    var refNode = before;
+    parentNode.insertBefore(row, refNode);
+    return row;
+  }, endOfList);
+}
+
 function onChange(event) {
-  var change = getChange(event.target);
-  updateDOM(change);
+  updateDOM(getChange(event.target));
 }
 
 function getChange(changedShareOption) {
@@ -55,12 +100,12 @@ function getChange(changedShareOption) {
   };
 }
 
-function updateDOM (change) {
+function updateDOM(change) {
   move(change);
-  updateState(change);
+  updateState();
 }
 
-function move (change) {
+function move(change) {
   var refNode, nextSibling, row;
 
   var parentNode = change.el.parentElement;
@@ -91,7 +136,7 @@ function move (change) {
   parentNode.insertBefore(change.el, refNode);
 }
 
-function updateState (change) {
+function updateState() {
   var allShareOptions = document.querySelectorAll('[id$="priority"]');
   allShareOptions.forEach(function(option, index) {
     var newValue = index + 1;  // Arrays start with 0
@@ -99,6 +144,3 @@ function updateState (change) {
     option.value = newValue;
   });
 }
-
-document.addEventListener('DOMContentLoaded', restoreOptions);
-document.querySelector('form').addEventListener('submit', saveOptions);
