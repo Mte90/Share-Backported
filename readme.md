@@ -13,8 +13,7 @@ This extension reimplement the feature with the same previous icon with the supp
 #### Services
 You can hide some services/icons just put a check in the relevant field in the “Services” section.
 
-In the same section, you can also change width and height of the share window (for every service), so the windows opened when you click on the relevant icon.
-                    
+In the same section, you can also change width and height of the share window (for every service), so the windows opened when you click on the relevant icon, and you can change the position/order of services too.
 
 #### PageAction
 You can hide the <i>PageAction</i> icon (so the shortcut shown in the address bar) - just put a check in the field contained in the “PageAction” section.
@@ -27,7 +26,7 @@ You can hide the <i>PageAction</i> icon (so the shortcut shown in the address ba
 * [Indrashish Ghosh](https://github.com/ghosh) - Contributor
 * [Sergey Ivanov](https://github.com/ufocoder) - Contributor
 * [Arrizal Amin](https://github.com/arrizalamin) - Contributor
-* [Saverio Morelli](https://github.com/SAV2299) - Contributor
+* [Saverio Morelli](https://github.com/Sav22999) - Contributor
 
 
 ## License
