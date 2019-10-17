@@ -95,108 +95,181 @@ function checkContainerAssignment(url) {
 document.addEventListener('DOMContentLoaded', () => {
   var width = 700;
   var height = 340;
-  const buttons = document.querySelectorAll('.share');
+  const buttons = Array.from(document.querySelectorAll('.share'));
 
-  Array.from(buttons).forEach(function(button, index) {
-    // Hide the share
-    var item = button.getAttribute('id');
-    var getting = browser.storage.local.get(item);
-    getting.then(function(result) {
-      if (result[Object.keys(result)[0]] && document.querySelector('#' + item + ':not(.customurl)') !== null) {
-        document.querySelector('#' + item).remove();
-        resize_modal();
-        return;
-      }
-      // Simple trick to check custom share that doesn't have a boolean value
-      if (typeof result[Object.keys(result)[0]] !== "undefined" && result[Object.keys(result)[0]].length > 6) {
-        document.querySelector('#' + item + '.customurl').dataset.share = result[Object.keys(result)[0]];
-      } else {
-        if (document.querySelector('#' + item + '.customurl') !== null) {
-          document.querySelector('#' + item + '.customurl').remove();
+  var promisedButtons = Promise.all(
+    buttons.map(function(button) {
+      var item = button.getAttribute('id');
+      var getting = browser.storage.local.get(item);
+      return getting
+        .then(function(result) {
+          var key = Object.keys(result)[0];
+
+          removeUncheckedButtons(result, key, item);
+          button.addEventListener('click', function(event) {
+            onClick(event, item);
+          }, false);
           resize_modal();
-          return;
-        }
-      }
-      // Add click event
-      button.addEventListener('click', function(event) {
-        event.preventDefault();
+          return button;
+        }, function(error) {
+          console.log(`Error: ${error}`);
+        });
+    })
+  )
 
-        var urlshare = this.dataset.share;
-        if (item === 'wayback') {
-          urlshare = 'https://web.archive.org/save/';
-        }
+  promisedButtons.then(function(buttons) {
+    var buttonsWithPriority = Promise.all(
+      buttons.map(function (button) {
+        var item = button.getAttribute('id');
+        var priorityKey = item + '-priority';
 
-        const url = new URL(urlshare);
-        browser.tabs.query({
-          active: true,
-          windowId: browser.windows.WINDOW_ID_CURRENT
-        },
-          tabs => {
-            var url_encoded = encodeURI(tabs[0].url);
-            if (url.searchParams.has('u')) {
-              url.searchParams.set('u', url_encoded);
-            } else if (url.searchParams.has('url')) {
-              url.searchParams.set('url', url_encoded);
-            } else if (url.searchParams.has('link')) {
-              url.searchParams.set('link', url_encoded);
-            } else if (url.searchParams.has('canonicalUrl')) {
-              url.searchParams.set('canonicalUrl', url_encoded);
-            } else if (url.searchParams.has('body')) {
-              url.searchParams.set('body', url_encoded);
-            } else if (url.searchParams.has('post')) {
-              url.searchParams.set('post', url_encoded);
-            }
+        return browser.storage.local
+          .get(priorityKey)
+          .then(function(result) {
+            var priority, shareButton;
 
-            if (url.searchParams.has('text')) {
-              url.searchParams.set('text', tabs[0].title);
-            } else if (url.searchParams.has('title')) {
-              url.searchParams.set('title', tabs[0].title);
-            } else if (url.searchParams.has('su')) {
-              url.searchParams.set('su', tabs[0].title);
-            } else if (url.searchParams.has('description')) {
-              url.searchParams.set('description', tabs[0].title);
-            } else if (url.searchParams.has('subject')) {
-              url.searchParams.set('subject', tabs[0].title);
-            }
-
-            var newurl = url.toString();
-            if (item === 'diaspora') {
-              newurl = url.toString();
-              newurl = newurl.replace(/\+/gi, ' ');
-            }
-
-            if (item === 'mastodon' || item === 'whatsapp') {
-              url.searchParams.set('text', tabs[0].title + ' - ' + url_encoded);
-              newurl = url.toString();
-            }
-
-            if (item === 'wayback') {
-              newurl = url.toString() + url_encoded;
-            }
-
-            Promise.all([
-              checkContainerAssignment(newurl), checkFacebookContainerExtension()
-            ]).then(([assignment, facebookCookieStoreId]) => {
-              if (assignment) {
-                const cookieStoreId = 'firefox-container-' + assignment.userContextId;
-                open_container_tab(newurl, cookieStoreId);
-              } else if (item === 'facebook' && facebookCookieStoreId !== null) {
-                open_container_tab(newurl, facebookCookieStoreId);
-              } else {
-                browser.storage.local.get([this.id + "-width", this.id + "-height"]).then(function(items) {
-                  width = parseInt(items[item + "-width"]);
-                  height = parseInt(items[item + "-height"]);
-                  open_popup(newurl, width, height);
-                }, function(error) {
-                  open_popup(newurl, width, height);
-                });
+            if (priorityKey in result) {
+              priority = parseInt(result[priorityKey], 10);
+              shareButton = document.getElementById(item);
+              if (shareButton) {
+                return {
+                  el: shareButton,
+                  priority: priority
+                };
               }
-            });
-          });
-      }, false);
-    }, function(error) {
-      console.log(`Error: ${error}`);
+            }
+            return {
+              el: null,
+              priority: priority
+            };
+        });
+      })
+    )
+
+    buttonsWithPriority.then(function(pairs) {
+      var grid = document.getElementById('share-directory-grid');
+      pairs
+        .filter(function(pair) {
+          // Filter for null
+          return Boolean(pair.el);
+        })
+        .sort(function(a, b) {
+          // Sort descending
+          var order = b.priority - a.priority;
+          if (order < 0) { return -1; }
+          if (order > 0) { return  1; }
+          return 0;
+        })
+        .reduce(function(before, current) {
+          grid.insertBefore(current.el, before.el);
+          return current;
+        });
     });
-    resize_modal();
   });
 });
+
+function removeUncheckedButtons(result, key, item) {
+  if (result[key] && document.querySelector('#' + item + ':not(.customurl)') !== null) {
+    document.querySelector('#' + item).remove();
+    resize_modal();
+    return;
+  }
+
+  // Simple trick to check custom share that doesn't have a boolean value
+  if (typeof result[key] !== "undefined" && result[key].length > 6) {
+    document.querySelector('#' + item + '.customurl').dataset.share = result[key];
+  } else {
+    if (document.querySelector('#' + item + '.customurl') !== null) {
+      document.querySelector('#' + item + '.customurl').remove();
+      resize_modal();
+      return;
+    }
+  }
+}
+
+function onClick(event, item) {
+  event.preventDefault();
+
+  var urlshare = this.dataset.share;
+  if (item === 'wayback') {
+    urlshare = 'https://web.archive.org/save/';
+  }
+
+  const url = new URL(urlshare);
+  browser.tabs.query(
+    { active: true, windowId: browser.windows.WINDOW_ID_CURRENT },
+    tabs => {
+      var newUrl;
+      var tab = tabs[0];
+      var tabTitle = tab.title;
+      var url_encoded = encodeURI(tab.url);
+
+      // TODO: Replace with switch-case;
+      if (url.searchParams.has('u')) {
+        url.searchParams.set('u', url_encoded);
+      } else if (url.searchParams.has('url')) {
+        url.searchParams.set('url', url_encoded);
+      } else if (url.searchParams.has('link')) {
+        url.searchParams.set('link', url_encoded);
+      } else if (url.searchParams.has('canonicalUrl')) {
+        url.searchParams.set('canonicalUrl', url_encoded);
+      } else if (url.searchParams.has('body')) {
+        url.searchParams.set('body', url_encoded);
+      } else if (url.searchParams.has('post')) {
+        url.searchParams.set('post', url_encoded);
+      }
+
+      // TODO: Replace with switch-case;
+      if (url.searchParams.has('text')) {
+        url.searchParams.set('text', tabTitle);
+      } else if (url.searchParams.has('title')) {
+        url.searchParams.set('title', tabTitle);
+      } else if (url.searchParams.has('su')) {
+        url.searchParams.set('su', tabTitle);
+      } else if (url.searchParams.has('description')) {
+        url.searchParams.set('description', tabTitle);
+      } else if (url.searchParams.has('subject')) {
+        url.searchParams.set('subject', tabTitle);
+      }
+
+      newUrl = url.toString();
+
+      if (item === 'diaspora') {
+        newUrl = url.toString();
+        newUrl = newUrl.replace(/\+/gi, ' ');
+      }
+
+      if (item === 'mastodon' || item === 'whatsapp') {
+        url.searchParams.set('text', tabTitle + ' - ' + url_encoded);
+        newUrl = url.toString();
+      }
+
+      if (item === 'wayback') {
+        newUrl = url.toString() + url_encoded;
+      }
+
+      Promise.all([
+        checkContainerAssignment(newUrl),
+        checkFacebookContainerExtension()
+      ])
+      .then(([assignment, facebookCookieStoreId]) => {
+        if (assignment) {
+          const cookieStoreId = 'firefox-container-' + assignment.userContextId;
+          open_container_tab(newUrl, cookieStoreId);
+        } else if (item === 'facebook' && facebookCookieStoreId !== null) {
+          open_container_tab(newUrl, facebookCookieStoreId);
+        } else {
+          browser.storage.local
+            .get([this.id + "-width", this.id + "-height"])
+            .then(function(items) {
+              width = parseInt(items[item + "-width"]);
+              height = parseInt(items[item + "-height"]);
+              open_popup(newUrl, width, height);
+            },
+            function(error) {
+              open_popup(newUrl, width, height);
+            });
+        }
+      });
+    });
+}
