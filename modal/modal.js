@@ -4,8 +4,19 @@
 function resize_modal() {
   var shares = document.querySelectorAll('.share').length;
   var row = 0;
+  var column = 4; // Set 4 (columns) default
+  if (shares < 4) column = shares; // If visible services are smaller than 4
+  if(shares == 0)
+  {
+    // If all of services are hidden, it shows a message
+    document.getElementsByTagName("body")[0].innerHTML="<span id='error_msg'>All services are hidden</span>";
+    column = 3;
+  }
+  var width_modal = column * 72;
+  document.getElementsByTagName("html")[0].style.width = width_modal+"px";
+  document.getElementsByTagName("body")[0].style.width = width_modal+"px";
   // Set the height of the modal
-  row = Math.ceil(shares / 4);
+  row = Math.ceil(shares / column);
   document.querySelector('html').classList.add('lines-' + row);
   document.querySelector('body').classList.add('lines-' + row);
 }
