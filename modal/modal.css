@@ -1,18 +1,21 @@
 html, body {
-	width: 288px;
-	height: 432px;
+	width: 304px;
+	height: 456px;
+}
+.lines-5 {
+	height: 380px;
 }
 .lines-4 {
-	height: 288px;
+	height: 304px;
 }
 .lines-3 {
-	height: 216px;
+	height: 228px;
 }
 .lines-2 {
-	height: 144px;
+	height: 152px;
 }
 .lines-1 {
-	height: 72px;
+	height: 76px;
 }
 * {
 	color: #484848;
@@ -35,28 +38,33 @@ body {
 button {
 	width: 68px;
 	height: 68px;
-	margin: 2px;
+	margin: 4px;
 	border-radius: 3px;
 	border: 1px solid transparent;
 	cursor: pointer;
-	transition: background 250ms,
-		border-color 250ms;
+	transition: 0s;
 	background: transparent;
 	padding-top:2px;
 }
 button:hover {
-	background: hsla(210,4%,10%,.08) linear-gradient(hsla(0,0%,100%,.3), hsla(0,0%,100%,.1)) padding-box;
-	border-color: hsla(0,0%,0%,.2);
-	box-shadow: 0 1px 0 hsla(0,0%,100%,.5),
-		0 1px 0 hsla(0,0%,100%,.5) inset;
+	background-color: #DDDEDF;
 }
 button:active {
-	background: hsla(0,0%,0%,.02) linear-gradient(hsla(0,0%,0%,.12), transparent) border-box;
-	border-color: hsla(0,0%,0%,.3);
-	box-shadow: 0 1px 0 hsla(0,0%,100%,.5),
-		0 1px 0 hsla(0,0%,0%,.05) inset,
-		0 1px 1px hsla(0,0%,0%,.2) inset;
+	width: 64px;
+	height: 64px;
+	margin: 6px;
+	background-color: #D2D2D3;
+	box-shadow: 0px 0px 0px 2px #0A84FF, 0px 0px 0px 5px #B1D6FC;
 }
+input[type=number] {
+	border-radius: 3px;
+	border: 1px solid #B5B5B5;
+	font-family: inherit;
+	padding: 3px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
 button img {
 	max-height: 48px;
 	max-width: 48px;

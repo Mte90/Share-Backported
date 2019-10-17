@@ -12,7 +12,7 @@ function resize_modal() {
     document.getElementsByTagName("body")[0].innerHTML="<span id='error_msg'>All services are hidden</span>";
     column = 3;
   }
-  var width_modal = column * 72;
+  var width_modal = column * 76;
   document.getElementsByTagName("html")[0].style.width = width_modal+"px";
   document.getElementsByTagName("body")[0].style.width = width_modal+"px";
   // Set the height of the modal

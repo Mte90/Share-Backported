@@ -30,6 +30,27 @@
         h6 {
             margin: 1px;
         }
+        h1
+        {
+            margin: 0 0 8px;
+            font-size: 24px;
+            font-weight: 300;
+            text-align: left;
+        }
+
+        h4
+        {
+            margin: 0px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        h5
+        {
+            font-size: 16px;
+            text-align: left;
+            font-weight: bold;
+        }
 
         p {
             font-size: 1.125rem;
@@ -126,9 +147,41 @@
             clear: both;
         }
 
-        .widths, .heights, .positions
-        {
+        .widths, .heights, .positions {
             width: 100px;
+        }
+
+        button {
+            background-color: #E1E1E2;
+            transition: 0.1s;
+            border: 0px solid transparent;
+            min-width: 150px;
+            height: 30px;
+            text-align: center;
+            border-radius: 3px;
+        }
+        button:hover {
+            background-color: #C9C9CA;
+        }
+        button:active {
+            background-color: #B1B1B2;
+        }
+
+        input[type=url], input[type=number] {
+            border-radius: 3px;
+            border: 1px solid #B5B5B5;
+            font-family: inherit;
+            padding-left: 5px;
+            padding-right: 5px;
+            min-height: 32px;
+            -moz-appearance: textfield;
+        }
+        input[type=url]:hover, input[type=number]:hover {
+            border: 1px solid #858585;
+        }
+        input[type=url]:focus, input[type=number]:focus {
+            box-shadow: 0px 0px 0px 1px #0A84FF, 0px 0px 0px 4px #B1D6FC;
+            border: 1px solid #0A84FF;
         }
     </style>
     <title>Settings</title>
@@ -138,26 +191,28 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1 class="center">Services</h1>
+                    <h1>Services</h1>
                     <h4>
-                        You can hide some services/icons just put a check in the relevant field and then press "Save" at the end of the page.
+                        You can hide some services/icons just put a check in the relevant field.
                         <br>
-                        You can also change width and height of the share window (for every service), so the windows opened when you click on the relevant icon, and the press "Save" at the end of the page.
+                        You can also change width and height of the share window (for every service), so the windows opened when you click on the relevant icon, and you can also change the order of services (edit "Position" field).
+                        <br>
+                        Remember to press the "Save" button at the end of the page.
                     </h4>
                 </div>
             </div>
             <div class="row">
                 <div class="col-3 header-columns-services">
-                    <h4>Name</h4>
+                    <h5>Name</h5>
                 </div>
                 <div class="col-3 header-columns-services">
-                    <h4>Width</h4>
+                    <h5>Width</h5>
                 </div>
                 <div class="col-3 header-columns-services">
-                    <h4>Height</h4>
+                    <h5>Height</h5>
                 </div>
                 <div class="col-3 header-columns-services">
-                    <h4>Position</h4>
+                    <h5>Position</h5>
                 </div>
             </div>
             <div class="row">
@@ -498,7 +553,7 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <h1 class="center">Custom Shares</h1>
+                    <h1>Custom Shares</h1>
                     <h4>Follow the placeholder and change only <i>instance_url</i>.</h4>
                     <label>Shaarli: https://instance_url?post&title<br> <input type="url" id="shaarli" style="width:400px" placeholder="https://instance_url?post&title"></label><br>
                     <label>Mastodon: https://instance_url/share?text<br> <input type="url" id="mastodon" style="width:400px" placeholder="https://instance_url?post&title"></label>
@@ -506,7 +561,7 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <h1 class="center">PageAction</h1>
+                    <h1>PageAction</h1>
                     <h4>You can hide the <i>PageAction</i> icon (so the shortcut shown in the address bar) - just put a check in the following field, and the press "Save"</h4>
                     <label><input type="checkbox" id="pageaction">Disable</label>
                 </div>
