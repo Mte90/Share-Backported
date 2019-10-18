@@ -6,7 +6,7 @@ Firefox Nightly 57 [removed](https://bugzilla.mozilla.org/show_bug.cgi?id=138890
 
 This extension reimplement the feature with the same previous icon with the support for Facebook, Twitter, LinkedIn, Reddit, Tumblr, GMail, Diaspora, Telegram, VKontakte, Outlook, Pinboard, Yahoo! Mail, Weibo, Shaarli, Mastodon, MeWe, Skype, WhatsApp, Pinterest, Instapaper, Evernote, Scoop.it, Google Translate (Auto>EN), Internet Wayback Machine social networks.
 
-<img src="screenshot.png" style="zoom:50%;" />
+<img src="screenshot.png" style="zoom:50%;" alt="Screenshot of Share Backported in action" />
 
 ### Options
 
@@ -27,6 +27,7 @@ You can hide the <i>PageAction</i> icon (so the shortcut shown in the address ba
 * [Sergey Ivanov](https://github.com/ufocoder) - Contributor
 * [Arrizal Amin](https://github.com/arrizalamin) - Contributor
 * [Saverio Morelli](https://github.com/Sav22999) - Contributor
+* [André Jaenisch](https://github.com/Ryuno-Ki) - Contributor
 
 
 ## License
