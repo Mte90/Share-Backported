@@ -23,10 +23,10 @@ function resize_modal() {
 
 /* Open popup with sizes */
 function open_popup(newurl, width, height) {
-  if (isNaN(width)) {
+  if (Number.isNaN(width)) {
     width = 700;
   }
-  if (isNaN(height)) {
+  if (Number.isNaN(height)) {
     height = 340;
   }
   browser.runtime.sendMessage({
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           removeUncheckedButtons(result, key, item);
           button.addEventListener('click', function(event) {
-            onClick(event, item);
+            onClick(event, this);
           }, false);
           resize_modal();
           return button;
@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
               el: null,
               priority: priority
             };
-        });
+          });
       })
     )
 
@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function removeUncheckedButtons(result, key, item) {
-  if (result[key] && document.querySelector('#' + item + ':not(.customurl)') !== null) {
+  if (!result[key] && document.querySelector('#' + item + ':not(.customurl)') !== null) {
     document.querySelector('#' + item).remove();
     resize_modal();
     return;
@@ -190,7 +190,7 @@ function removeUncheckedButtons(result, key, item) {
 function onClick(event, item) {
   event.preventDefault();
 
-  var urlshare = this.dataset.share;
+  var urlshare = item.dataset.share;
   if (item === 'wayback') {
     urlshare = 'https://web.archive.org/save/';
   }
@@ -252,24 +252,24 @@ function onClick(event, item) {
         checkContainerAssignment(newUrl),
         checkFacebookContainerExtension()
       ])
-      .then(([assignment, facebookCookieStoreId]) => {
-        if (assignment) {
-          const cookieStoreId = 'firefox-container-' + assignment.userContextId;
-          open_container_tab(newUrl, cookieStoreId);
-        } else if (item === 'facebook' && facebookCookieStoreId !== null) {
-          open_container_tab(newUrl, facebookCookieStoreId);
-        } else {
-          browser.storage.local
-            .get([this.id + "-width", this.id + "-height"])
-            .then(function(items) {
-              width = parseInt(items[item + "-width"]);
-              height = parseInt(items[item + "-height"]);
-              open_popup(newUrl, width, height);
-            },
-            function(error) {
-              open_popup(newUrl, width, height);
-            });
-        }
-      });
+        .then(([assignment, facebookCookieStoreId]) => {
+          if (assignment) {
+            const cookieStoreId = 'firefox-container-' + assignment.userContextId;
+            open_container_tab(newUrl, cookieStoreId);
+          } else if (item.id === 'facebook' && facebookCookieStoreId !== null) {
+            open_container_tab(newUrl, facebookCookieStoreId);
+          } else {
+            browser.storage.local
+              .get([item.id + "-width", item.id + "-height"])
+              .then(function(items) {
+                width = parseInt(items[item.id + "-width"]);
+                height = parseInt(items[item.id + "-height"]);
+                open_popup(newUrl, width, height);
+              },
+                function(error) {
+                  open_popup(newUrl, width, height);
+                });
+          }
+        });
     });
 }
