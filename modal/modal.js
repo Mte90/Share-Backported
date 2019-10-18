@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function removeUncheckedButtons(result, key, item) {
-  if (!result[key] && document.querySelector('#' + item + ':not(.customurl)') !== null) {
+  if (result[key] && document.querySelector('#' + item + ':not(.customurl)') !== null) {
     document.querySelector('#' + item).remove();
     resize_modal();
     return;
