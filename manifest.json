@@ -5,33 +5,33 @@
     "name": "Share Backported",
     "version": "2.0.1",
     "icons": {
-        "16": "icon.svg",
-        "24": "icon.svg",
-        "48": "icon.svg",
-        "96": "icon.svg"
+        "16": "icon-dark.svg",
+        "24": "icon-dark.svg",
+        "48": "icon-dark.svg",
+        "96": "icon-dark.svg"
     },
     "browser_action": {
         "browser_style": true,
         "default_icon": {
-            "16": "icon.svg",
-            "24": "icon.svg",
-            "48": "icon.svg",
-            "96": "icon.svg"
+            "16": "icon-dark.svg",
+            "24": "icon-dark.svg",
+            "48": "icon-dark.svg",
+            "96": "icon-dark.svg"
         },
         "theme_icons": [{
-            "dark": "icon.svg",
-            "light": "z.svg",
+            "dark": "icon-dark.svg",
+            "light": "icon-light.svg",
             "size": 16
         },{
-            "dark": "icon.svg",
+            "dark": "icon-dark.svg",
             "light": "icon-light.svg",
             "size": 24
         },{
-            "dark": "icon.svg",
+            "dark": "icon-dark.svg",
             "light": "icon-light.svg",
             "size": 48
         },{
-            "dark": "icon.svg",
+            "dark": "icon-dark.svg",
             "light": "icon-light.svg",
             "size": 96
         }],
@@ -39,7 +39,7 @@
         "default_popup": "modal/modal.html"
     },
     "page_action": {
-        "default_icon": "icon.svg",
+        "default_icon": "icon-dark.svg",
         "browser_style": true
     },
     "background": {

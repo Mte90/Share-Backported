@@ -23,13 +23,13 @@ function restoreOptions() {
   document.querySelectorAll('button[id]').forEach(function(item) {
     if (item.id.endsWith("move-up")) {
       document.getElementById(item.id).addEventListener('click', function () {
-        moveUp(item.id);
+        moveUpDown(item.id, "up");
       });
       document.getElementById(item.id).innerHTML="▲";
     }
     else if(item.id.endsWith("move-down")) {
       document.getElementById(item.id).addEventListener('click', function () {
-        moveDown(item.id);
+        moveUpDown(item.id, "down");
       });
       document.getElementById(item.id).innerHTML="▼";
     }
@@ -161,44 +161,31 @@ function updateState() {
   });
 }
 
-function moveUp(id) {
-  // move the element up
-  var id_temp = (id.toString()).replace("-move-up","");
-  document.getElementById(id_temp+"-priority").value = parseInt(document.getElementById(id_temp+"-priority").value)-1;
+function moveUpDown(id, way) {
+  // move the element up/down -> base on "way" variable
+  var id_temp = (id.toString()).replace("-move-"+way,"");
+  var priority = document.getElementById(id_temp+"-priority");
+  way == "up" ? priority.value = parseInt(priority.value)-1 : priority.value = parseInt(priority.value)+1;
   // call "onchange" event (forced)
   if ("createEvent" in document) {
     var evt = document.createEvent("HTMLEvents");
     evt.initEvent("change", false, true);
-    document.getElementById(id_temp+"-priority").dispatchEvent(evt);
+    priority.dispatchEvent(evt);
   }
-  else
-    document.getElementById(id_temp+"-priority").fireEvent("onchange");
-  setFocusRowTemp(parseInt(document.getElementById(id_temp+"-priority").value)-1);
-  document.getElementById(id_temp+"-priority").focus();
-}
-
-function moveDown(id) {
-  // move the element down
-  var id_temp = (id.toString()).replace("-move-down","");
-  document.getElementById(id_temp+"-priority").value = parseInt(document.getElementById(id_temp+"-priority").value)+1;
-  // call "onchange" event (forced)
-  if ("createEvent" in document) {
-    var evt = document.createEvent("HTMLEvents");
-    evt.initEvent("change", false, true);
-    document.getElementById(id_temp+"-priority").dispatchEvent(evt);
+  else {
+    priority.fireEvent("onchange");
   }
-  else
-    document.getElementById(id_temp+"-priority").fireEvent("onchange");
-  setFocusRowTemp(parseInt(document.getElementById(id_temp+"-priority").value)-1);
-  document.getElementById(id_temp+"-priority").focus();
+  setFocusRowTemp(parseInt(priority.value)-1);
+  priority.focus();
 }
 
 function setFocusRowTemp(index) {
   // set "focus" on row modified, before clear eventually wrong "class"
   clearFocusRowTemp();
-  document.getElementsByClassName("service")[index].classList.add('row_focus');
+  service = document.getElementsByClassName("service")[index];
+  service.classList.add('row_focus');
   setTimeout(function() {
-    document.getElementsByClassName("service")[index].classList.remove('row_focus')
+    service.classList.remove('row_focus')
   }, 1000);
 }
 

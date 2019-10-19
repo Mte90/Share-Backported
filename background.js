@@ -1,5 +1,8 @@
 /* global browser, console */
 
+// call function which get the address bar color (toolbar_field)
+getIconColour();
+
 var sbId, sbPrevUrl;
 // Create the window and save the tab id
 browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
@@ -37,28 +40,56 @@ browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
   }
 });
 // Add pageaction
-browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-  var getting = browser.storage.local.get('pageaction');
-  getting.then(function(result) {
-    var pageaction = result.pageaction;
-    if (!pageaction) {
-      if (tab.url.indexOf('about:') !== 0 && tab.url.indexOf('moz-extension:') !== 0) {
-        browser.pageAction.setIcon({
-          tabId: tab.id,
-          path: 'icon.svg'
-        });
-        browser.pageAction.setTitle({
-          tabId: tab.id,
-          title: 'Share'
-        });
-        browser.pageAction.show(tab.id);
-        browser.pageAction.setPopup({
-          tabId,
-          popup: '/modal/modal.html'
-        });
-      }
+setPageActionIcon("light")
+
+function getStyle(themeInfo)
+{
+  var rgb_list = ["rgb(71, 71, 73)", "rgb(50, 50, 52)"]; // list of RGB where icon_theme should be light
+  if (themeInfo.colors)
+  {
+    var colour = "" + themeInfo.colors.toolbar_field;
+    if (colour!="light")
+    {
+      if (!rgb_list.includes(colour))
+        colour = "dark";
+      else
+        colour = "light";
     }
-  }, function(error) {
-    console.log(`Error: ${error}`);
+    setPageActionIcon(colour);
+  }
+}
+
+async function getIconColour()
+{
+  var themeInfo = await browser.theme.getCurrent();
+  getStyle(themeInfo);
+}
+
+function setPageActionIcon(colour) {
+  var theme_colour_temp = "icon-" + colour + ".svg";
+  browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+    var getting = browser.storage.local.get('pageaction');
+    getting.then(function (result) {
+      var pageaction = result.pageaction;
+      if (!pageaction) {
+        if (tab.url.indexOf('about:') !== 0 && tab.url.indexOf('moz-extension:') !== 0) {
+          browser.pageAction.setIcon({
+            tabId: tab.id,
+            path: theme_colour_temp
+          });
+          browser.pageAction.setTitle({
+            tabId: tab.id,
+            title: 'Share'
+          });
+          browser.pageAction.show(tab.id);
+          browser.pageAction.setPopup({
+            tabId,
+            popup: '/modal/modal.html'
+          });
+        }
+      }
+    }, function (error) {
+      console.log(`Error: ${error}`);
+    });
   });
-});
+}
