@@ -19,7 +19,7 @@ function restoreOptions() {
   var value = '';
   var getting = '';
 
-  // set event click for "move-up" and "move-down" and set the text of those buttons
+  // set event click for "move-up" and "move-down"
   document.querySelectorAll('button[id]').forEach(function(item) {
     document.getElementById(item.id).addEventListener('click', function () {
       if (item.id.endsWith("move-up")) {
@@ -158,9 +158,9 @@ function updateState() {
 
 function moveUpDown(id, way) {
   // move the element up/down -> base on "way" variable
-  var id_temp = (id.toString()).replace("-move-"+way,"");
-  var priority = document.getElementById(id_temp+"-priority");
-  way == "up" ? priority.value = parseInt(priority.value)-1 : priority.value = parseInt(priority.value)+1;
+  var id_temp = (id.toString()).replace("-move-" + way,"");
+  var priority = document.getElementById(id_temp + "-priority");
+  way == "up" ? priority.value = parseInt(priority.value) - 1 : priority.value = parseInt(priority.value) + 1;
   // call "onchange" event (forced)
   if ("createEvent" in document) {
     var evt = document.createEvent("HTMLEvents");
@@ -170,7 +170,7 @@ function moveUpDown(id, way) {
   else {
     priority.fireEvent("onchange");
   }
-  setFocusRowTemp(parseInt(priority.value)-1);
+  setFocusRowTemp(parseInt(priority.value) - 1);
   priority.focus();
 }
 
