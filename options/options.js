@@ -21,18 +21,13 @@ function restoreOptions() {
 
   // set event click for "move-up" and "move-down" and set the text of those buttons
   document.querySelectorAll('button[id]').forEach(function(item) {
-    if (item.id.endsWith("move-up")) {
-      document.getElementById(item.id).addEventListener('click', function () {
+    document.getElementById(item.id).addEventListener('click', function () {
+      if (item.id.endsWith("move-up")) {
         moveUpDown(item.id, "up");
-      });
-      document.getElementById(item.id).innerHTML="▲";
-    }
-    else if(item.id.endsWith("move-down")) {
-      document.getElementById(item.id).addEventListener('click', function () {
-        moveUpDown(item.id, "down");
-      });
-      document.getElementById(item.id).innerHTML="▼";
-    }
+        return;
+      }
+      moveUpDown(item.id, "down");
+    });
   });
 
   var elements = Promise.all(
@@ -189,9 +184,8 @@ function setFocusRowTemp(index) {
   }, 1000);
 }
 
-function clearFocusRowTemp()
-{
-  document.querySelectorAll('div').forEach(function(item) {
+function clearFocusRowTemp() {
+  document.querySelectorAll('div').forEach(function (item) {
     if (item.classList.contains("service")) {
       item.classList.remove('row_focus');
     }

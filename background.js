@@ -40,16 +40,13 @@ browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
   }
 });
 // Add pageaction
-setPageActionIcon("light")
+setPageActionIcon("light");
 
-function getStyle(themeInfo)
-{
+function getStyle(themeInfo) {
   var rgb_list = ["rgb(71, 71, 73)", "rgb(50, 50, 52)"]; // list of RGB where icon_theme should be light
-  if (themeInfo.colors)
-  {
+  if (themeInfo.colors) {
     var colour = "" + themeInfo.colors.toolbar_field;
-    if (colour!="light")
-    {
+    if (colour != "light") {
       if (!rgb_list.includes(colour))
         colour = "dark";
       else
@@ -59,8 +56,7 @@ function getStyle(themeInfo)
   }
 }
 
-async function getIconColour()
-{
+async function getIconColour() {
   var themeInfo = await browser.theme.getCurrent();
   getStyle(themeInfo);
 }

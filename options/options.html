@@ -184,6 +184,12 @@
             display: inline-block;
             margin-left: 3px;
         }
+        .move-up::before{
+            content: "▲";
+        }
+        .move-down::before {
+            content: "▼";
+        }
 
         input[type=url], input[type=number] {
             border-radius: 3px;
@@ -202,14 +208,12 @@
             border: 1px solid #0A84FF;
         }
 
-        .row_focus
-        {
+        .row_focus {
             box-shadow: 0px 0px 0px 1px #0A84FF, 0px 0px 0px 4px #B1D6FC;
             border: 1px solid #0A84FF;
         }
 
-        .hr
-        {
+        .hr {
             margin-top: 16px;
             padding-top: 16px;
             border-top: 1px solid #D7D7DB;
@@ -377,10 +381,10 @@
                     <label class="browser-style"><input type="checkbox" id="yahoo">Yahoo! Mail</label>
                 </div>
                 <div class="col-3">
-                    <label><input type="number" id="yahoo-width" value="700" class="widths"></label>
+                    <label><input type="number" id="yahoo-width" value="1050" class="widths"></label>
                 </div>
                 <div class="col-3">
-                    <label><input type="number" id="yahoo-height" value="340" class="heights"></label>
+                    <label><input type="number" id="yahoo-height" value="500" class="heights"></label>
                 </div>
                 <div class="col-3">
                     <label><input type="number" id="yahoo-priority" value="10" min="1" step="1" class="positions"><button type="button" id="yahoo-move-up" class="move-up"></button><button type="button" id="yahoo-move-down" class="move-down"></button></label>
