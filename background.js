@@ -1,8 +1,5 @@
 /* global browser, console */
 
-// call function which get the address bar color (toolbar_field)
-getIconColour();
-
 var sbId, sbPrevUrl;
 // Create the window and save the tab id
 browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
@@ -39,30 +36,23 @@ browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     });
   }
 });
-// Add pageaction
-setPageActionIcon("light");
+// call function which get the address bar color (toolbar_field)
+setPageActionIcon();
 
-function getStyle(themeInfo) {
+async function setPageActionIcon() {
+  var themeInfo = await browser.theme.getCurrent();
+  color = 'light';
   var rgb_list = ["rgb(71, 71, 73)", "rgb(50, 50, 52)"]; // list of RGB where icon_theme should be light
   if (themeInfo.colors) {
-    var colour = "" + themeInfo.colors.toolbar_field;
-    if (colour != "light") {
-      if (!rgb_list.includes(colour))
-        colour = "dark";
-      else
-        colour = "light";
+    if (!rgb_list.includes(themeInfo.colors.toolbar_field.toString())) {
+        color = "dark";
     }
-    setPageActionIcon(colour);
   }
+  setPageAction(color);
 }
 
-async function getIconColour() {
-  var themeInfo = await browser.theme.getCurrent();
-  getStyle(themeInfo);
-}
-
-function setPageActionIcon(colour) {
-  var theme_colour_temp = "icon-" + colour + ".svg";
+function setPageAction(color) {
+  var ext_icon = "icon-" +  color + ".svg";
   browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     var getting = browser.storage.local.get('pageaction');
     getting.then(function (result) {
@@ -71,7 +61,7 @@ function setPageActionIcon(colour) {
         if (tab.url.indexOf('about:') !== 0 && tab.url.indexOf('moz-extension:') !== 0) {
           browser.pageAction.setIcon({
             tabId: tab.id,
-            path: theme_colour_temp
+            path: ext_icon
           });
           browser.pageAction.setTitle({
             tabId: tab.id,
