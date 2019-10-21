@@ -49,11 +49,10 @@ button {
 button:hover {
 	background-color: #DDDEDF;
 }
-button:active {
+button:active, button:focus {
 	width: 64px;
 	height: 64px;
 	margin: 6px;
-	background-color: #D2D2D3;
 	box-shadow: 0px 0px 0px 2px #0A84FF, 0px 0px 0px 5px #B1D6FC;
 }
 input[type=number] {
@@ -92,8 +91,7 @@ button img {
 	color: blue;
 }
 
-span#error_msg
-{
+span#error_msg {
 	text-align: center;
 	width: 100%;
 	font-size: 14px;

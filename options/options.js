@@ -19,6 +19,17 @@ function restoreOptions() {
   var value = '';
   var getting = '';
 
+  // set event click for "move-up" and "move-down" and set the text of those buttons
+  document.querySelectorAll('button[id]').forEach(function(item) {
+    document.getElementById(item.id).addEventListener('click', function () {
+      if (item.id.endsWith("move-up")) {
+        moveUpDown(item.id, "up");
+        return;
+      }
+      moveUpDown(item.id, "down");
+    });
+  });
+
   var elements = Promise.all(
     [].slice.call(document.querySelectorAll('input[id]')).map(function(el) {
       var item = el.id;
@@ -35,12 +46,12 @@ function restoreOptions() {
         if (isInt || isUrl) {
           if(value !== undefined) {
             el.value = value;
-	    el.setAttribute('value', value);
+            el.setAttribute('value', value);
           }
         } else {
           el.checked = value;
         }
-	return Promise.resolve(el);
+        return Promise.resolve(el);
       }, function(error) {
         console.log(`Error: ${error}`);
       });
@@ -142,5 +153,41 @@ function updateState() {
     var newValue = index + 1;  // Arrays start with 0
     option.setAttribute('value', newValue);
     option.value = newValue;
+  });
+}
+
+function moveUpDown(id, way) {
+  // move the element up/down -> base on "way" variable
+  var id_temp = (id.toString()).replace("-move-"+way,"");
+  var priority = document.getElementById(id_temp+"-priority");
+  way == "up" ? priority.value = parseInt(priority.value)-1 : priority.value = parseInt(priority.value)+1;
+  // call "onchange" event (forced)
+  if ("createEvent" in document) {
+    var evt = document.createEvent("HTMLEvents");
+    evt.initEvent("change", false, true);
+    priority.dispatchEvent(evt);
+  }
+  else {
+    priority.fireEvent("onchange");
+  }
+  setFocusRowTemp(parseInt(priority.value)-1);
+  priority.focus();
+}
+
+function setFocusRowTemp(index) {
+  // set "focus" on row modified, before clear eventually wrong "class"
+  clearFocusRowTemp();
+  service = document.getElementsByClassName("service")[index];
+  service.classList.add('row_focus');
+  setTimeout(function() {
+    service.classList.remove('row_focus')
+  }, 1000);
+}
+
+function clearFocusRowTemp() {
+  document.querySelectorAll('div').forEach(function (item) {
+    if (item.classList.contains("service")) {
+      item.classList.remove('row_focus');
+    }
   });
 }
