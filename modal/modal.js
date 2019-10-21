@@ -148,22 +148,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     buttonsWithPriority.then(function(pairs) {
       var grid = document.getElementById('share-directory-grid');
-      pairs
-        .filter(function(pair) {
-          // Filter for null
-          return Boolean(pair.el);
-        })
-        .sort(function(a, b) {
-          // Sort descending
-          var order = b.priority - a.priority;
-          if (order < 0) { return -1; }
-          if (order > 0) { return  1; }
-          return 0;
-        })
-        .reduce(function(before, current) {
-          grid.insertBefore(current.el, before.el);
-          return current;
-        });
+      var pairsWithElements = pairs.filter(function(pair) {
+        // Filter for null
+        return Boolean(pair.el);
+      })
+
+      // Nothing disabled, i.e. no need to touch the DOM.
+      if (pairsWithElements.length === 0) {
+        return;
+      }
+
+      pairsWithElements.sort(function(a, b) {
+        // Sort descending
+        var order = b.priority - a.priority;
+        if (order < 0) { return -1; }
+        if (order > 0) { return  1; }
+        return 0;
+      })
+
+      pairsWithElements.reduce(function(before, current) {
+        grid.insertBefore(current.el, before.el);
+        return current;
+      });
     });
   });
 });
