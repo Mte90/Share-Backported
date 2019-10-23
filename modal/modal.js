@@ -6,19 +6,21 @@ function resize_modal() {
   var row = 0;
   var column = 4; // Set 4 (columns) default
   if (shares < 4) column = shares; // If visible services are smaller than 4
+  var body = document.querySelector("body");
   if(shares == 0) {
     // If all of services are hidden, it shows a message
-    document.getElementsByTagName("body")[0].innerHTML = "<span id='error_msg'>All services are hidden</span>";
+    body.innerHTML = "<span id='error_msg'>All services are hidden</span>";
     column = 3;
   }
   var width_modal = column * 76;
   row = Math.ceil(shares / column);
   var height_modal = row * 76;
   document.getElementsByTagName("html")[0].style.width = width_modal + "px";
-  document.getElementsByTagName("body")[0].style.width = width_modal + "px";
+  body.style.width = width_modal + "px";
   // Set the height of the modal
   document.getElementsByTagName("html")[0].style.height = height_modal + "px";
-  document.getElementsByTagName("body")[0].style.height = height_modal + "px";
+  body.style.height = height_modal + "px";
+  console.log(body)
 }
 
 /* Open popup with sizes */
@@ -104,13 +106,12 @@ document.addEventListener('DOMContentLoaded', () => {
       return getting
         .then(function(result) {
           var key = Object.keys(result)[0];
-          removeUncheckedButtons(result, key, item);
+          removeUncheckedButton(result, key, item);
           
           button.addEventListener('click', function(event) {
             onClick(event, this);
           }, false);
           
-          resize_modal();
           return button;
         }, function(error) {
           console.log(`Error: ${error}`);
@@ -119,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
   )
 
   promisedButtons.then(function(buttons) {
+    resize_modal();
     var buttonsWithPriority = Promise.all(
       buttons.map(function (button) {
         var item = button.getAttribute('id');
@@ -175,10 +177,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-function removeUncheckedButtons(result, key, item) {
+function removeUncheckedButton(result, key, item) {
   if (result[key] && document.querySelector('#' + item + ':not(.customurl)') !== null) {
     document.querySelector('#' + item).remove();
-    resize_modal();
     return;
   }
 
@@ -188,7 +189,6 @@ function removeUncheckedButtons(result, key, item) {
   } else {
     if (document.querySelector('#' + item + '.customurl') !== null) {
       document.querySelector('#' + item + '.customurl').remove();
-      resize_modal();
       return;
     }
   }
