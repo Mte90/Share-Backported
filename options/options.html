@@ -6,7 +6,7 @@
         html,
         body {
             height: 100%;
-            max-height: 1500px;
+            max-height: 1700px;
             width: 100%;
             margin: 0;
             padding: 0;
@@ -222,392 +222,434 @@
     <title>Settings</title>
 </head>
 <body>
-    <form>
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h1>Services</h1>
-                    <h4>
-                        You can hide some services/icons just put a check in the relevant field.
-                        <br>
-                        You can also change width and height of the share window (for every service), so the windows opened when you click on the relevant icon, and you can also change the order of services (edit "Position" field).
-                        <br>
-                        Remember to press the "Save" button at the end of the page.
-                    </h4>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-3 header-columns-services">
-                    <h5>Name</h5>
-                </div>
-                <div class="col-3 header-columns-services">
-                    <h5>Width</h5>
-                </div>
-                <div class="col-3 header-columns-services">
-                    <h5>Height</h5>
-                </div>
-                <div class="col-3 header-columns-services">
-                    <h5>Position</h5>
-                </div>
-            </div>
-            <div class="row service">
-                <div class="col-3">
-                    <label class="browser-style"><input type="checkbox" id="facebook">Facebook</label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="facebook-width" value="575" class="widths"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="facebook-height" value="800" class="heights"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="facebook-priority" value="1" min="1" step="1" class="positions"><button type="button" id="facebook-move-up" class="move-up"></button><button type="button" id="facebook-move-down" class="move-down"></button></label>
-                </div>
-            </div>
-            <div class="row service">
-                <div class="col-3">
-                    <label class="browser-style"><input type="checkbox" id="twitter">Twitter</label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="twitter-width" value="700" class="widths"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="twitter-height" value="300" class="heights"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="twitter-priority" value="2" min="1" step="1" class="positions"><button type="button" id="twitter-move-up" class="move-up"></button><button type="button" id="twitter-move-down" class="move-down"></button></label>
-                </div>
-            </div>
-            <div class="row service">
-                <div class="col-3">
-                    <label class="browser-style"><input type="checkbox" id="linkedin">LinkedIn</label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="linkedin-width" value="700" class="widths"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="linkedin-height" value="500" class="heights"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="linkedin-priority" value="3" min="1" step="1" class="positions"><button type="button" id="linkedin-move-up" class="move-up"></button><button type="button" id="linkedin-move-down" class="move-down"></button></label>
-                </div>
-            </div>
-            <div class="row service">
-                <div class="col-3">
-                    <label class="browser-style"><input type="checkbox" id="tumblr">Tumblr</label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="tumblr-width" value="600" class="widths"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="tumblr-height" value="400" class="heights"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="tumblr-priority" value="4" min="1" step="1" class="positions"><button type="button" id="tumblr-move-up" class="move-up"></button><button type="button" id="tumblr-move-down" class="move-down"></button></label>
-                </div>
-            </div>
-            <div class="row service">
-                <div class="col-3">
-                    <label class="browser-style"><input type="checkbox" id="reddit">Reddit</label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="reddit-width" value="950" class="widths"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="reddit-height" value="915" class="heights"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="reddit-priority" value="5" min="1" step="1" class="positions"><button type="button" id="reddit-move-up" class="move-up"></button><button type="button" id="reddit-move-down" class="move-down"></button></label>
-                </div>
-            </div>
-            <div class="row service">
-                <div class="col-3">
-                    <label class="browser-style"><input type="checkbox" id="telegram">Telegram</label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="telegram-width" value="600" class="widths"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="telegram-height" value="400" class="heights"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="telegram-priority" value="6" min="1" step="1" class="positions"><button type="button" id="telegram-move-up" class="move-up"></button><button type="button" id="telegram-move-down" class="move-down"></button></label>
-                </div>
-            </div>
-            <div class="row service">
-                <div class="col-3">
-                    <label class="browser-style"><input type="checkbox" id="gmail">GMail</label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="gmail-width" value="700" class="widths"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="gmail-height" value="340" class="heights"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="gmail-priority" value="7" min="1" step="1" class="positions"><button type="button" id="gmail-move-up" class="move-up"></button><button type="button" id="gmail-move-down" class="move-down"></button></label>
-                </div>
-            </div>
-            <div class="row service">
-                <div class="col-3">
-                    <label class="browser-style"><input type="checkbox" id="diaspora">Diaspora</label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="diaspora-width" value="700" class="widths"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="diaspora-height" value="340" class="heights"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="diaspora-priority" value="8" min="1" step="1" class="positions"><button type="button" id="diaspora-move-up" class="move-up"></button><button type="button" id="diaspora-move-down" class="move-down"></button></label>
-                </div>
-            </div>
-            <div class="row service">
-                <div class="col-3">
-                    <label class="browser-style"><input type="checkbox" id="vkontakte">VKontakte</label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="vkontakte-width" value="700" class="widths"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="vkontakte-height" value="340" class="heights"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="vkontakte-priority" value="9" min="1" step="1" class="positions"><button type="button" id="vkontakte-move-up" class="move-up"></button><button type="button" id="vkontakte-move-down" class="move-down"></button></label>
-                </div>
-            </div>
-            <div class="row service">
-                <div class="col-3">
-                    <label class="browser-style"><input type="checkbox" id="yahoo">Yahoo! Mail</label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="yahoo-width" value="1050" class="widths"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="yahoo-height" value="500" class="heights"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="yahoo-priority" value="10" min="1" step="1" class="positions"><button type="button" id="yahoo-move-up" class="move-up"></button><button type="button" id="yahoo-move-down" class="move-down"></button></label>
-                </div>
-            </div>
-            <div class="row service">
-                <div class="col-3">
-                    <label class="browser-style"><input type="checkbox" id="pinboard">Pinboard.in</label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="pinboard-width" value="700" class="widths"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="pinboard-height" value="340" class="heights"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="pinboard-priority" value="11" min="1" step="1" class="positions"><button type="button" id="pinboard-move-up" class="move-up"></button><button type="button" id="pinboard-move-down" class="move-down"></button></label>
-                </div>
-            </div>
-            <div class="row service">
-                <div class="col-3">
-                    <label class="browser-style"><input type="checkbox" id="mewe">MeWe</label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="mewe-width" value="700" class="widths"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="mewe-height" value="340" class="heights"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="mewe-priority" value="12" min="1" step="1" class="positions"><button type="button" id="mewe-move-up" class="move-up"></button><button type="button" id="mewe-move-down" class="move-down"></button></label>
-                </div>
-            </div>
-            <div class="row service">
-                <div class="col-3">
-                    <label class="browser-style"><input type="checkbox" id="outlook">Outlook</label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="outlook-width" value="700" class="widths"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="outlook-height" value="340" class="heights"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="outlook-priority" value="13" min="1" step="1" class="positions"><button type="button" id="outlook-move-up" class="move-up"></button><button type="button" id="outlook-move-down" class="move-down"></button></label>
-                </div>
-            </div>
-            <div class="row service">
-                <div class="col-3">
-                    <label class="browser-style"><input type="checkbox" id="weibo">Weibo</label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="weibo-width" value="700" class="widths"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="weibo-height" value="340" class="heights"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="weibo-priority" value="14" min="1" step="1" class="positions"><button type="button" id="weibo-move-up" class="move-up"></button><button type="button" id="weibo-move-down" class="move-down"></button></label>
-                </div>
-            </div>
-            <div class="row service">
-                <div class="col-3">
-                    <label class="browser-style"><input type="checkbox" id="skype">Skype</label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="skype-width" value="700" class="widths"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="skype-height" value="340" class="heights"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="skype-priority" value="15" min="1" step="1" class="positions"><button type="button" id="skype-move-up" class="move-up"></button><button type="button" id="skype-move-down" class="move-down"></button></label>
-                </div>
-            </div>
-            <div class="row service">
-                <div class="col-3">
-                    <label class="browser-style"><input type="checkbox" id="wayback">Wayback</label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="wayback-width" value="700" class="widths"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="wayback-height" value="700" class="heights"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="wayback-priority" value="16" min="1" step="1" class="positions"><button type="button" id="wayback-move-up" class="move-up"></button><button type="button" id="wayback-move-down" class="move-down"></button></label>
-                </div>
-            </div>
-            <div class="row service">
-                <div class="col-3">
-                    <label class="browser-style"><input type="checkbox" id="whatsapp">WhatsApp</label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="whatsapp-width" value="700" class="widths"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="whatsapp-height" value="700" class="heights"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="whatsapp-priority" value="17" min="1" step="1" class="positions"><button type="button" id="whatsapp-move-up" class="move-up"></button><button type="button" id="whatsapp-move-down" class="move-down"></button></label>
-                </div>
-            </div>
-            <div class="row service">
-                <div class="col-3">
-                    <label class="browser-style"><input type="checkbox" id="pinterest">Pinterest</label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="pinterest-width" value="700" class="widths"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="pinterest-height" value="700" class="heights"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="pinterest-priority" value="18" min="1" step="1" class="positions"><button type="button" id="pinterest-move-up" class="move-up"></button><button type="button" id="pinterest-move-down" class="move-down"></button></label>
-                </div>
-            </div>
-            <div class="row service">
-                <div class="col-3">
-                    <label class="browser-style"><input type="checkbox" id="evernote">Evernote</label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="evernote-width" value="700" class="widths"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="evernote-height" value="700" class="heights"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="evernote-priority" value="19" min="1" step="1" class="positions"><button type="button" id="evernote-move-up" class="move-up"></button><button type="button" id="evernote-move-down" class="move-down"></button></label>
-                </div>
-            </div>
-            <div class="row service">
-                <div class="col-3">
-                    <label class="browser-style"><input type="checkbox" id="instapaper">Instapaper</label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="instapaper-width" value="700" class="widths"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="instapaper-height" value="700" class="heights"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="instapaper-priority" value="20" min="1" step="1" class="positions"><button type="button" id="instapaper-move-up" class="move-up"></button><button type="button" id="instapaper-move-down" class="move-down"></button></label>
-                </div>
-            </div>
-            <div class="row service">
-                <div class="col-3">
-                    <label class="browser-style"><input type="checkbox" id="scoopit">Scoop.it</label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="scoopit-width" value="700" class="widths"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="scoopit-height" value="700" class="heights"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="scoopit-priority" value="21" min="1" step="1" class="positions"><button type="button" id="scoopit-move-up" class="move-up"></button><button type="button" id="scoopit-move-down" class="move-down"></button></label>
-                </div>
-            </div>
-            <div class="row service">
-                <div class="col-3">
-                    <label class="browser-style"><input type="checkbox" id="googletranslate">Google Translate</label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="googletranslate-width" value="700" class="widths"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="googletranslate-height" value="700" class="heights"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="googletranslate-priority" value="22" min="1" step="1" class="positions"><button type="button" id="googletranslate-move-up" class="move-up"></button><button type="button" id="googletranslate-move-down" class="move-down"></button></label>
-                </div>
-            </div>
-            <div class="row service">
-                <div class="col-3">
-                    <label>Shaarli</label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="shaarli-width" value="700" class="widths"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="shaarli-height" value="340" class="heights"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="shaarli-priority" value="23" min="1" step="1" class="positions"><button type="button" id="shaarli-move-up" class="move-up"></button><button type="button" id="shaarli-move-down" class="move-down"></button></label>
-                </div>
-            </div>
-            <div class="row service">
-                <div class="col-3">
-                    <label>Mastodon</label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="mastodon-width" value="700" class="widths"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="mastodon-height" value="340" class="heights"></label>
-                </div>
-                <div class="col-3">
-                    <label><input type="number" id="mastodon-priority" value="24" min="1" step="1" class="positions"><button type="button" id="mastodon-move-up" class="move-up"></button><button type="button" id="mastodon-move-down" class="move-down"></button></label>
-                </div>
-            </div>
-            <div class="row hr">
-                <div class="col-12">
-                    <h1>Custom Shares</h1>
-                    <h4>Follow the placeholder and change only <i>instance_url</i>.</h4>
-                    <label>Shaarli: https://instance_url?post&title<br> <input type="url" id="shaarli" style="width:400px" placeholder="https://instance_url?post&title"></label><br>
-                    <label>Mastodon: https://instance_url/share?text<br> <input type="url" id="mastodon" style="width:400px" placeholder="https://instance_url?post&title"></label>
-                </div>
-            </div>
-            <div class="row hr">
-                <div class="col-12">
-                    <h1>PageAction</h1>
-                    <h4>You can hide the <i>PageAction</i> icon (so the shortcut shown in the address bar) - just put a check in the following field, and the press "Save"</h4>
-                    <label class="browser-style"><input type="checkbox" id="pageaction">Disable</label>
-                </div>
-            </div>
-            <div class="row hr">
-                <div class="col-12">
-                    <button type="submit">Save</button>
-                </div>
+<form>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>Services</h1>
+                <h4>
+                    You can hide some services/icons just put a check in the relevant field.
+                    <br>
+                    You can also change width and height of the share window (for every service), so the windows opened when you click on the relevant icon, and you can also change the order of services (edit "Position" field).
+                    <br>
+                    Remember to press the "Save" button at the end of the page.
+                </h4>
             </div>
         </div>
-    </form>
-    <script src="options.js"></script>
+        <div class="row">
+            <div class="col-3 header-columns-services">
+                <h5>Name</h5>
+            </div>
+            <div class="col-3 header-columns-services">
+                <h5>Width</h5>
+            </div>
+            <div class="col-3 header-columns-services">
+                <h5>Height</h5>
+            </div>
+            <div class="col-3 header-columns-services">
+                <h5>Position</h5>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="facebook">Facebook</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="facebook-width" value="575" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="facebook-height" value="800" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="facebook-priority" value="1" min="1" step="1" class="positions"><button type="button" id="facebook-move-up" class="move-up"></button><button type="button" id="facebook-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="twitter">Twitter</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="twitter-width" value="700" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="twitter-height" value="300" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="twitter-priority" value="2" min="1" step="1" class="positions"><button type="button" id="twitter-move-up" class="move-up"></button><button type="button" id="twitter-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="linkedin">LinkedIn</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="linkedin-width" value="700" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="linkedin-height" value="500" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="linkedin-priority" value="3" min="1" step="1" class="positions"><button type="button" id="linkedin-move-up" class="move-up"></button><button type="button" id="linkedin-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="tumblr">Tumblr</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="tumblr-width" value="600" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="tumblr-height" value="400" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="tumblr-priority" value="4" min="1" step="1" class="positions"><button type="button" id="tumblr-move-up" class="move-up"></button><button type="button" id="tumblr-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="reddit">Reddit</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="reddit-width" value="950" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="reddit-height" value="915" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="reddit-priority" value="5" min="1" step="1" class="positions"><button type="button" id="reddit-move-up" class="move-up"></button><button type="button" id="reddit-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="telegram">Telegram</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="telegram-width" value="600" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="telegram-height" value="400" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="telegram-priority" value="6" min="1" step="1" class="positions"><button type="button" id="telegram-move-up" class="move-up"></button><button type="button" id="telegram-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="gmail">GMail</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="gmail-width" value="700" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="gmail-height" value="340" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="gmail-priority" value="7" min="1" step="1" class="positions"><button type="button" id="gmail-move-up" class="move-up"></button><button type="button" id="gmail-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="diaspora">Diaspora</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="diaspora-width" value="700" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="diaspora-height" value="340" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="diaspora-priority" value="8" min="1" step="1" class="positions"><button type="button" id="diaspora-move-up" class="move-up"></button><button type="button" id="diaspora-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="vkontakte">VKontakte</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="vkontakte-width" value="700" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="vkontakte-height" value="340" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="vkontakte-priority" value="9" min="1" step="1" class="positions"><button type="button" id="vkontakte-move-up" class="move-up"></button><button type="button" id="vkontakte-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="yahoo">Yahoo! Mail</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="yahoo-width" value="1050" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="yahoo-height" value="500" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="yahoo-priority" value="10" min="1" step="1" class="positions"><button type="button" id="yahoo-move-up" class="move-up"></button><button type="button" id="yahoo-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="pinboard">Pinboard.in</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="pinboard-width" value="700" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="pinboard-height" value="340" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="pinboard-priority" value="11" min="1" step="1" class="positions"><button type="button" id="pinboard-move-up" class="move-up"></button><button type="button" id="pinboard-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="mewe">MeWe</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="mewe-width" value="700" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="mewe-height" value="340" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="mewe-priority" value="12" min="1" step="1" class="positions"><button type="button" id="mewe-move-up" class="move-up"></button><button type="button" id="mewe-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="outlook">Outlook</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="outlook-width" value="700" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="outlook-height" value="340" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="outlook-priority" value="13" min="1" step="1" class="positions"><button type="button" id="outlook-move-up" class="move-up"></button><button type="button" id="outlook-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="weibo">Weibo</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="weibo-width" value="700" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="weibo-height" value="340" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="weibo-priority" value="14" min="1" step="1" class="positions"><button type="button" id="weibo-move-up" class="move-up"></button><button type="button" id="weibo-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="skype">Skype</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="skype-width" value="700" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="skype-height" value="340" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="skype-priority" value="15" min="1" step="1" class="positions"><button type="button" id="skype-move-up" class="move-up"></button><button type="button" id="skype-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="wayback">Wayback</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="wayback-width" value="700" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="wayback-height" value="700" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="wayback-priority" value="16" min="1" step="1" class="positions"><button type="button" id="wayback-move-up" class="move-up"></button><button type="button" id="wayback-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="whatsapp">WhatsApp</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="whatsapp-width" value="700" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="whatsapp-height" value="700" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="whatsapp-priority" value="17" min="1" step="1" class="positions"><button type="button" id="whatsapp-move-up" class="move-up"></button><button type="button" id="whatsapp-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="pinterest">Pinterest</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="pinterest-width" value="700" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="pinterest-height" value="700" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="pinterest-priority" value="18" min="1" step="1" class="positions"><button type="button" id="pinterest-move-up" class="move-up"></button><button type="button" id="pinterest-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="evernote">Evernote</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="evernote-width" value="700" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="evernote-height" value="700" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="evernote-priority" value="19" min="1" step="1" class="positions"><button type="button" id="evernote-move-up" class="move-up"></button><button type="button" id="evernote-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="instapaper">Instapaper</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="instapaper-width" value="700" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="instapaper-height" value="700" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="instapaper-priority" value="20" min="1" step="1" class="positions"><button type="button" id="instapaper-move-up" class="move-up"></button><button type="button" id="instapaper-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="scoopit">Scoop.it</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="scoopit-width" value="700" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="scoopit-height" value="700" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="scoopit-priority" value="21" min="1" step="1" class="positions"><button type="button" id="scoopit-move-up" class="move-up"></button><button type="button" id="scoopit-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="googletranslate">Google Translate</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="googletranslate-width" value="700" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="googletranslate-height" value="700" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="googletranslate-priority" value="22" min="1" step="1" class="positions"><button type="button" id="googletranslate-move-up" class="move-up"></button><button type="button" id="googletranslate-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="line">LINE</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="line-width" value="700" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="line-height" value="700" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="line-priority" value="23" min="1" step="1" class="positions"><button type="button" id="line-move-up" class="move-up"></button><button type="button" id="line-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="viber">Viber</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="viber-width" value="700" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="viber-height" value="700" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="viber-priority" value="24" min="1" step="1" class="positions"><button type="button" id="viber-move-up" class="move-up"></button><button type="button" id="viber-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="kakaotalk">Kakao Talk</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="kakaotalk-width" value="700" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="kakaotalk-height" value="700" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="kakaotalk-priority" value="25" min="1" step="1" class="positions"><button type="button" id="kakaotalk-move-up" class="move-up"></button><button type="button" id="kakaotalk-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label>Shaarli</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="shaarli-width" value="700" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="shaarli-height" value="340" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="shaarli-priority" value="26" min="1" step="1" class="positions"><button type="button" id="shaarli-move-up" class="move-up"></button><button type="button" id="shaarli-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label>Mastodon</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="mastodon-width" value="700" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="mastodon-height" value="340" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="mastodon-priority" value="27" min="1" step="1" class="positions"><button type="button" id="mastodon-move-up" class="move-up"></button><button type="button" id="mastodon-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row hr">
+            <div class="col-12">
+                <h1>Custom Shares</h1>
+                <h4>Follow the placeholder and change only <i>instance_url</i>.</h4>
+                <label>Shaarli: https://instance_url?post&title<br> <input type="url" id="shaarli" style="width:400px" placeholder="https://instance_url?post&title"></label><br>
+                <label>Mastodon: https://instance_url/share?text<br> <input type="url" id="mastodon" style="width:400px" placeholder="https://instance_url?post&title"></label>
+            </div>
+        </div>
+        <div class="row hr">
+            <div class="col-12">
+                <h1>PageAction</h1>
+                <h4>You can hide the <i>PageAction</i> icon (so the shortcut shown in the address bar) - just put a check in the following field, and the press "Save"</h4>
+                <label class="browser-style"><input type="checkbox" id="pageaction">Disable</label>
+            </div>
+        </div>
+        <div class="row hr">
+            <div class="col-12">
+                <button type="submit">Save</button>
+            </div>
+        </div>
+    </div>
+</form>
+<script src="options.js"></script>
 </body>
 </html>
