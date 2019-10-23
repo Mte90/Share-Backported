@@ -12,12 +12,13 @@ function resize_modal() {
     column = 3;
   }
   var width_modal = column * 76;
+  row = Math.ceil(shares / column);
+  var height_modal = row * 76;
   document.getElementsByTagName("html")[0].style.width = width_modal + "px";
   document.getElementsByTagName("body")[0].style.width = width_modal + "px";
   // Set the height of the modal
-  row = Math.ceil(shares / column);
-  document.querySelector('html').classList.add('lines-' + row);
-  document.querySelector('body').classList.add('lines-' + row);
+  document.getElementsByTagName("html")[0].style.height = height_modal + "px";
+  document.getElementsByTagName("body")[0].style.height = height_modal + "px";
 }
 
 /* Open popup with sizes */

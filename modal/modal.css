@@ -1,21 +1,6 @@
 html, body {
-	width: 304px;
-	height: 456px;
-}
-.lines-5 {
-	height: 380px;
-}
-.lines-4 {
-	height: 304px;
-}
-.lines-3 {
-	height: 228px;
-}
-.lines-2 {
-	height: 152px;
-}
-.lines-1 {
-	height: 76px;
+	width: 304px; /*76 * 4*/
+	height: 608px; /*76 * 8*/
 }
 * {
 	color: #484848;
