@@ -196,8 +196,9 @@ function removeUncheckedButtons(result, key, item) {
 function onClick(event, item) {
   event.preventDefault();
 
+  var service = item.getAttribute('id');
   var urlshare = item.dataset.share;
-  if (item === 'wayback') {
+  if (service === 'wayback') {
     urlshare = 'https://web.archive.org/save/';
   }
 
@@ -240,18 +241,17 @@ function onClick(event, item) {
 
       newUrl = url.toString();
 
-      if (item === 'diaspora') {
-        newUrl = url.toString();
+      if (service === 'diaspora') {
         newUrl = newUrl.replace(/\+/gi, ' ');
       }
 
-      if (item === 'mastodon' || item === 'whatsapp') {
+      if (service === 'mastodon' || service === 'whatsapp') {
         url.searchParams.set('text', tabTitle + ' - ' + url_encoded);
         newUrl = url.toString();
       }
 
-      if (item === 'wayback') {
-        newUrl = url.toString() + url_encoded;
+      if (service === 'wayback') {
+        newUrl = newUrl + url_encoded;
       }
 
       Promise.all([
