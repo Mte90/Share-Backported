@@ -7,6 +7,7 @@ function resize_modal() {
   var column = 4; // Set 4 (columns) default
   if (shares < 4) column = shares; // If visible services are smaller than 4
   var body = document.querySelector("body");
+  var html = document.querySelector("html");
   if(shares == 0) {
     // If all of services are hidden, it shows a message
     body.innerHTML = "<span id='error_msg'>All services are hidden</span>";
@@ -15,12 +16,11 @@ function resize_modal() {
   var width_modal = column * 76;
   row = Math.ceil(shares / column);
   var height_modal = row * 76;
-  document.getElementsByTagName("html")[0].style.width = width_modal + "px";
+  html.style.width = width_modal + "px";
   body.style.width = width_modal + "px";
   // Set the height of the modal
-  document.getElementsByTagName("html")[0].style.height = height_modal + "px";
+  html.style.height = height_modal + "px";
   body.style.height = height_modal + "px";
-  console.log(body)
 }
 
 /* Open popup with sizes */
