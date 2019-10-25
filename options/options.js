@@ -54,8 +54,7 @@ function restoreOptions() {
           }
         } else if (isCheckbox) {
           el.checked = value;
-        } else {
-          console.log(el, value);
+        } else if (value) {
           el.textContent = value;
         }
         return Promise.resolve(el);

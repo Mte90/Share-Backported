@@ -199,86 +199,98 @@ function removeUncheckedButton(result, key, item) {
 function onClick(event, item) {
   event.preventDefault();
 
-  var service = item.getAttribute('id');
-  var urlshare = item.dataset.share;
-  if (service === 'wayback') {
-    urlshare = 'https://web.archive.org/save/';
-  }
-
-  const url = new URL(urlshare);
-  browser.tabs.query(
-    { active: true, windowId: browser.windows.WINDOW_ID_CURRENT },
-    tabs => {
-      var newUrl;
-      var tab = tabs[0];
-      var tabTitle = tab.title;
-      var url_encoded = encodeURI(tab.url);
-
-      // TODO: Replace with switch-case;
-      if (url.searchParams.has('u')) {
-        url.searchParams.set('u', url_encoded);
-      } else if (url.searchParams.has('url')) {
-        url.searchParams.set('url', url_encoded);
-      } else if (url.searchParams.has('link')) {
-        url.searchParams.set('link', url_encoded);
-      } else if (url.searchParams.has('canonicalUrl')) {
-        url.searchParams.set('canonicalUrl', url_encoded);
-      } else if (url.searchParams.has('body')) {
-        url.searchParams.set('body', url_encoded);
-      } else if (url.searchParams.has('post')) {
-        url.searchParams.set('post', url_encoded);
-      }
-
-      // TODO: Replace with switch-case;
-      if (url.searchParams.has('text')) {
-        url.searchParams.set('text', tabTitle);
-      } else if (url.searchParams.has('title')) {
-        url.searchParams.set('title', tabTitle);
-      } else if (url.searchParams.has('su')) {
-        url.searchParams.set('su', tabTitle);
-      } else if (url.searchParams.has('description')) {
-        url.searchParams.set('description', tabTitle);
-      } else if (url.searchParams.has('subject')) {
-        url.searchParams.set('subject', tabTitle);
-      }
-
-      newUrl = url.toString();
-
-      if (service === 'diaspora') {
-        newUrl = newUrl.replace(/\+/gi, ' ');
-      }
-
-      if (service === 'mastodon' || service === 'whatsapp') {
-        url.searchParams.set('text', tabTitle + ' - ' + url_encoded);
-        newUrl = url.toString();
-      }
-
+  browser.storage.local
+    .get('share-format')
+    .then(function (fetched) {
+      var format = fetched['share-format'];
+      var service = item.getAttribute('id');
+      var urlshare = item.dataset.share;
       if (service === 'wayback') {
-        newUrl = newUrl + url_encoded;
+        urlshare = 'https://web.archive.org/save/';
       }
 
-      Promise.all([
-        checkContainerAssignment(newUrl),
-        checkFacebookContainerExtension()
-      ])
-        .then(([assignment, facebookCookieStoreId]) => {
-          if (assignment) {
-            const cookieStoreId = 'firefox-container-' + assignment.userContextId;
-            open_container_tab(newUrl, cookieStoreId);
-          } else if (item.id === 'facebook' && facebookCookieStoreId !== null) {
-            open_container_tab(newUrl, facebookCookieStoreId);
-          } else {
-            browser.storage.local
-              .get([item.id + "-width", item.id + "-height"])
-              .then(function(items) {
-                width = parseInt(items[item.id + "-width"]);
-                height = parseInt(items[item.id + "-height"]);
-                open_popup(newUrl, width, height);
-              },
-                function(error) {
-                  open_popup(newUrl, width, height);
-                });
+      const url = new URL(urlshare);
+      browser.tabs.query(
+        { active: true, windowId: browser.windows.WINDOW_ID_CURRENT },
+        tabs => {
+          var newUrl;
+          var tab = tabs[0];
+          var tabTitle = tab.title;
+          var url_encoded = encodeURI(tab.url);
+
+          // TODO: Replace with switch-case;
+          if (url.searchParams.has('u')) {
+            url.searchParams.set('u', url_encoded);
+          } else if (url.searchParams.has('url')) {
+            url.searchParams.set('url', url_encoded);
+          } else if (url.searchParams.has('link')) {
+            url.searchParams.set('link', url_encoded);
+          } else if (url.searchParams.has('canonicalUrl')) {
+            url.searchParams.set('canonicalUrl', url_encoded);
+          } else if (url.searchParams.has('body')) {
+            url.searchParams.set('body', url_encoded);
+          } else if (url.searchParams.has('post')) {
+            url.searchParams.set('post', url_encoded);
           }
+
+          // TODO: Replace with switch-case;
+          if (url.searchParams.has('text')) {
+            url.searchParams.set('text', tabTitle);
+          } else if (url.searchParams.has('title')) {
+            url.searchParams.set('title', tabTitle);
+          } else if (url.searchParams.has('su')) {
+            url.searchParams.set('su', tabTitle);
+          } else if (url.searchParams.has('description')) {
+            url.searchParams.set('description', tabTitle);
+          } else if (url.searchParams.has('subject')) {
+            url.searchParams.set('subject', tabTitle);
+          }
+
+          if (service === 'diaspora') {
+            newUrl = url.toString();
+            newUrl = newUrl.replace(/\+/gi, ' ');
+          }
+
+          if (service === 'mastodon' || service === 'whatsapp') {
+            url.searchParams.set('text', tabTitle + ' - ' + url_encoded);
+          }
+
+          if (service === 'wayback') {
+            newUrl = url.toString();
+            newUrl = newUrl + url_encoded;
+          }
+
+          if (format && service === 'twitter') {
+            var newText = format.replace('{title}', tabTitle).replace('{url}', url_encoded);
+            url.searchParams.set('text', newText);
+          }
+
+          newUrl = url.toString();
+
+          Promise
+            .all([
+              checkContainerAssignment(newUrl),
+              checkFacebookContainerExtension()
+            ])
+            .then(([assignment, facebookCookieStoreId]) => {
+              if (assignment) {
+                const cookieStoreId = 'firefox-container-' + assignment.userContextId;
+                open_container_tab(newUrl, cookieStoreId);
+              } else if (item.id === 'facebook' && facebookCookieStoreId !== null) {
+                open_container_tab(newUrl, facebookCookieStoreId);
+              } else {
+                browser.storage.local
+                  .get([item.id + "-width", item.id + "-height"])
+                  .then(function(items) {
+                    width = parseInt(items[item.id + "-width"], 10);
+                    height = parseInt(items[item.id + "-height"], 10);
+                    open_popup(newUrl, width, height);
+                  },
+                    function(error) {
+                      open_popup(newUrl, width, height);
+                    });
+              }
+            });
         });
     });
 }
