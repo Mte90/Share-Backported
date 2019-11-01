@@ -5,11 +5,13 @@ document.querySelector('form').addEventListener('submit', saveOptions);
 function saveOptions(e) {
   e.preventDefault();
   var parameters = {};
-  document.querySelectorAll('input[id]').forEach(function(item) {
+  document.querySelectorAll('input[id],textarea').forEach(function(item) {
     if (item.type === 'checkbox') {
       parameters[item.id] = item.checked;
-    } else {
+    } else if (item.type) {
       parameters[item.id] = item.value;
+    } else {
+      parameters[item.id] = item.textContent;
     }
   });
   browser.storage.local.set(parameters);
@@ -22,16 +24,16 @@ function restoreOptions() {
   // set event click for "move-up" and "move-down"
   document.querySelectorAll('button[id]').forEach(function(item) {
     document.getElementById(item.id).addEventListener('click', function () {
-      if (item.id.endsWith("move-up")) {
-        moveUpDown(item.id, "up");
+      if (item.id.endsWith('move-up')) {
+        moveUpDown(item.id, 'up');
         return;
       }
-      moveUpDown(item.id, "down");
+      moveUpDown(item.id, 'down');
     });
   });
 
   var elements = Promise.all(
-    [].slice.call(document.querySelectorAll('input[id]')).map(function(el) {
+    [].slice.call(document.querySelectorAll('input[id],textarea')).map(function(el) {
       var item = el.id;
 
       if (item.endsWith('priority')) {
@@ -41,15 +43,19 @@ function restoreOptions() {
       getting = browser.storage.local.get(item);
       return getting.then(function(result) {
         value = result[Object.keys(result)[0]];
+        var isCheckbox = el.type === "checkbox";
         var isInt = Number.isInteger(parseInt(value, 10));
         var isUrl = el.type === 'url';
+
         if (isInt || isUrl) {
-          if(value !== undefined) {
+          if (value !== undefined) {
             el.value = value;
             el.setAttribute('value', value);
           }
-        } else {
+        } else if (isCheckbox) {
           el.checked = value;
+        } else if (value) {
+          el.textContent = value;
         }
         return Promise.resolve(el);
       }, function(error) {
@@ -158,17 +164,17 @@ function updateState() {
 
 function moveUpDown(id, way) {
   // move the element up/down -> base on "way" variable
-  var id_temp = (id.toString()).replace("-move-" + way,"");
-  var priority = document.getElementById(id_temp + "-priority");
-  way == "up" ? priority.value = parseInt(priority.value) - 1 : priority.value = parseInt(priority.value) + 1;
+  var id_temp = (id.toString()).replace('-move-' + way, '');
+  var priority = document.getElementById(id_temp + '-priority');
+  way == 'up' ? priority.value = parseInt(priority.value) - 1 : priority.value = parseInt(priority.value) + 1;
   // call "onchange" event (forced)
-  if ("createEvent" in document) {
-    var evt = document.createEvent("HTMLEvents");
-    evt.initEvent("change", false, true);
+  if ('createEvent' in document) {
+    var evt = document.createEvent('HTMLEvents');
+    evt.initEvent('change', false, true);
     priority.dispatchEvent(evt);
   }
   else {
-    priority.fireEvent("onchange");
+    priority.fireEvent('onchange');
   }
   setFocusRowTemp(parseInt(priority.value) - 1);
   priority.focus();
@@ -177,7 +183,7 @@ function moveUpDown(id, way) {
 function setFocusRowTemp(index) {
   // set "focus" on row modified, before clear eventually wrong "class"
   clearFocusRowTemp();
-  service = document.getElementsByClassName("service")[index];
+  service = document.getElementsByClassName('service')[index];
   service.classList.add('row_focus');
   setTimeout(function() {
     service.classList.remove('row_focus')
@@ -186,7 +192,7 @@ function setFocusRowTemp(index) {
 
 function clearFocusRowTemp() {
   document.querySelectorAll('div').forEach(function (item) {
-    if (item.classList.contains("service")) {
+    if (item.classList.contains('service')) {
       item.classList.remove('row_focus');
     }
   });

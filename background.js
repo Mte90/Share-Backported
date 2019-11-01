@@ -2,21 +2,22 @@
 
 var sbId, sbPrevUrl;
 // Create the window and save the tab id
-browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.type === 'share-backid') {
-    browser.windows.create(request.data).then(function(tab) {
+    browser.windows.create(request.data).then(function (tab) {
       sbId = tab.id;
       sbPrevUrl = request.data.url;
       return tab.id;
     });
   } else if (request.type === 'share-backid-container') {
-    browser.tabs.create(request.data).then(function(tab) {
+    browser.tabs.create(request.data).then(function (tab) {
       sbId = tab.id;
       sbPrevUrl = request.data.url;
       return tab.id;
     });
   }
 });
+
 // Autoclose the window when the url change
 browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
   if (sbId === tab.windowId) {
@@ -27,7 +28,8 @@ browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
         });
       }
     }
-    browser.tabs.get(tabId, function(tabinfo) {
+
+    browser.tabs.get(tabId, function (tabinfo) {
       if (sbPrevUrl !== tabinfo.url && tabinfo.url !== 'about:blank') {
         if (tabinfo.url.indexOf('dialog/close_window') > 0 || tabinfo.url.indexOf('latest_status_id=') > 0) {     
           browser.tabs.remove(tabId);
@@ -36,23 +38,24 @@ browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     });
   }
 });
+
 // call function which get the address bar color (toolbar_field)
 setPageActionIcon();
 
-async function setPageActionIcon() {
+async function setPageActionIcon () {
   var themeInfo = await browser.theme.getCurrent();
   color = 'light';
-  var rgb_list = ["rgb(71, 71, 73)", "rgb(50, 50, 52)"]; // list of RGB where icon_theme should be light
+  var rgb_list = ['rgb(71, 71, 73)', 'rgb(50, 50, 52)']; // list of RGB where icon_theme should be light
   if (themeInfo.colors) {
     if (!rgb_list.includes(themeInfo.colors.toolbar_field.toString())) {
-        color = "dark";
+        color = 'dark';
     }
   }
   setPageAction(color);
 }
 
-function setPageAction(color) {
-  var ext_icon = "icon-" +  color + ".svg";
+function setPageAction (color) {
+  var ext_icon = 'icon-' +  color + '.svg';
   browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     var getting = browser.storage.local.get('pageaction');
     getting.then(function (result) {
@@ -63,10 +66,12 @@ function setPageAction(color) {
             tabId: tab.id,
             path: ext_icon
           });
+
           browser.pageAction.setTitle({
             tabId: tab.id,
             title: 'Share'
           });
+
           browser.pageAction.show(tab.id);
           browser.pageAction.setPopup({
             tabId,
