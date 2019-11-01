@@ -218,6 +218,10 @@
             padding-top: 16px;
             border-top: 1px solid #D7D7DB;
         }
+        
+        #share-format {
+            width:100%;
+        }
     </style>
     <title>Settings</title>
 </head>
@@ -646,7 +650,8 @@
         <div class="row hr">
             <div class="col-12">
                 <h1>Share format</h1>
-                <textarea id="share-format">I want to share {title} from {url}</textarea>
+                <h4>The placeholders to use in this textarea are: <code>{title}</code> and <code>{url}</code>.</h4>
+                <textarea id="share-format"></textarea>
             </div>
         </div>
         <div class="row hr">
