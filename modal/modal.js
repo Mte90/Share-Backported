@@ -260,7 +260,7 @@ function onClick(event, item) {
             newUrl = newUrl + url_encoded;
           }
 
-          if (format && service === 'twitter') {
+          if (format) {
             var newText = format.replace('{title}', tabTitle).replace('{url}', url_encoded);
             url.searchParams.set('text', newText);
           }
