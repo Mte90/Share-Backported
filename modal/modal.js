@@ -246,26 +246,29 @@ function onClick(event, item) {
             url.searchParams.set('subject', tabTitle);
           }
 
+          if (format) {
+            var newText = format.replace('{title}', tabTitle).replace('{url}', url_encoded);
+            url.searchParams.set('text', newText);
+          }
+          
+          newUrl = url.toString();
+
           if (service === 'diaspora') {
             newUrl = url.toString();
             newUrl = newUrl.replace(/\+/gi, ' ');
+            newUrl = url.toString();
           }
 
           if (service === 'mastodon' || service === 'whatsapp') {
             url.searchParams.set('text', tabTitle + ' - ' + url_encoded);
+            newUrl = url.toString();
           }
 
           if (service === 'wayback') {
             newUrl = url.toString();
             newUrl = newUrl + url_encoded;
+            newUrl = url.toString();
           }
-
-          if (format) {
-            var newText = format.replace('{title}', tabTitle).replace('{url}', url_encoded);
-            url.searchParams.set('text', newText);
-          }
-
-          newUrl = url.toString();
 
           Promise
             .all([
