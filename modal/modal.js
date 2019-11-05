@@ -256,7 +256,7 @@ function onClick(event, item) {
           if (service === 'diaspora') {
             newUrl = url.toString();
             newUrl = newUrl.replace(/\+/gi, ' ');
-            newUrl = url.toString();
+            newUrl = newUrl.toString();
           }
 
           if (service === 'mastodon' || service === 'whatsapp') {
