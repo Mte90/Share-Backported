@@ -46,7 +46,7 @@ async function setPageActionIcon () {
   var themeInfo = await browser.theme.getCurrent();
   color = 'light';
   var rgb_list = ['rgb(71, 71, 73)', 'rgb(50, 50, 52)']; // list of RGB where icon_theme should be light
-  if (themeInfo.colors) {
+  if (themeInfo.colors && themeInfo.colors.toolbar_field) {
     if (!rgb_list.includes(themeInfo.colors.toolbar_field.toString())) {
         color = 'dark';
     }
