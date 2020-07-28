@@ -620,6 +620,22 @@
         </div>
         <div class="row service">
             <div class="col-3">
+                <label>Friendica</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="friendica-width" value="700" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="friendica-height" value="340" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="friendica-priority" value="26" min="1" step="1"
+                    class="positions"><button type="button" id="friendica-move-up"
+                        class="move-up"></button><button type="button" id="friendica-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
                 <label>Mastodon</label>
             </div>
             <div class="col-3">
@@ -637,6 +653,10 @@
                 <h1>Custom Shares</h1>
                 <h4>Follow the placeholder and change only <i>instance_url</i>.</h4>
                 <label>Shaarli: https://instance_url?post&title<br> <input type="url" id="shaarli" style="width:400px" placeholder="https://instance_url?post&title"></label><br>
+                <label>Friendica: https://instance_url/bookmarklet?url&title&jump-doclose<br> <input type="url"
+                                                                                       id="friendica"
+                                                                       style="width:400px"
+                                                                       placeholder="https://instance_url/bookmarklet?url&title&jump-doclose"></label><br>
                 <label>Mastodon: https://instance_url/share?text<br> <input type="url" id="mastodon" style="width:400px" placeholder="https://instance_url?post&title"></label>
             </div>
         </div>

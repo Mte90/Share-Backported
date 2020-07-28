@@ -1,10 +1,9 @@
 # Share Backported
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMte90%2FShare-Backported.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FMte90%2FShare-Backported?ref=badge_shield)
 
-
 Firefox Nightly 57 [removed](https://bugzilla.mozilla.org/show_bug.cgi?id=1388902) the share feature because it was using a non official API.
 
-This extension reimplement the feature with the same previous icon with the support for Facebook, Twitter, LinkedIn, Reddit, Tumblr, GMail, Diaspora, Telegram, VKontakte, Outlook, Pinboard, Yahoo! Mail, Weibo, Shaarli, Mastodon, MeWe, Skype, WhatsApp, Pinterest, Instapaper, Evernote, Scoop.it, Google Translate (Auto>EN), Viber, Line, KakaoTalk, Internet Wayback Machine social networks.
+This extension reimplement the feature with the same previous icon with the support for Facebook, Twitter, LinkedIn, Reddit, Tumblr, GMail, Diaspora, Telegram, VKontakte, Outlook, Pinboard, Yahoo! Mail, Weibo, Shaarli, Mastodon, MeWe, Skype, WhatsApp, Pinterest, Instapaper, Evernote, Scoop.it, Google Translate (Auto>EN), Viber, Line, KakaoTalk, Internet Wayback Machine, Friendica social networks.
 
 <img src="screenshot.png" alt="Screenshot of Share Backported in action" />
 
