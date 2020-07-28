@@ -606,6 +606,20 @@
         </div>
         <div class="row service">
             <div class="col-3">
+                <label class="browser-style"><input type="checkbox" id="parler">Parler</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="parler-width" value="700" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="parler-height" value="340" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="parler-priority" value="26" min="1" step="1" class="positions"><button type="button" id="parler-move-up" class="move-up"></button><button type="button" id="parler-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
                 <label>Shaarli</label>
             </div>
             <div class="col-3">
@@ -615,23 +629,7 @@
                 <label><input type="number" id="shaarli-height" value="340" class="heights"></label>
             </div>
             <div class="col-3">
-                <label><input type="number" id="shaarli-priority" value="26" min="1" step="1" class="positions"><button type="button" id="shaarli-move-up" class="move-up"></button><button type="button" id="shaarli-move-down" class="move-down"></button></label>
-            </div>
-        </div>
-        <div class="row service">
-            <div class="col-3">
-                <label>Friendica</label>
-            </div>
-            <div class="col-3">
-                <label><input type="number" id="friendica-width" value="700" class="widths"></label>
-            </div>
-            <div class="col-3">
-                <label><input type="number" id="friendica-height" value="340" class="heights"></label>
-            </div>
-            <div class="col-3">
-                <label><input type="number" id="friendica-priority" value="26" min="1" step="1"
-                    class="positions"><button type="button" id="friendica-move-up"
-                        class="move-up"></button><button type="button" id="friendica-move-down" class="move-down"></button></label>
+                <label><input type="number" id="shaarli-priority" value="27" min="1" step="1" class="positions"><button type="button" id="shaarli-move-up" class="move-up"></button><button type="button" id="shaarli-move-down" class="move-down"></button></label>
             </div>
         </div>
         <div class="row service">
@@ -645,7 +643,21 @@
                 <label><input type="number" id="mastodon-height" value="340" class="heights"></label>
             </div>
             <div class="col-3">
-                <label><input type="number" id="mastodon-priority" value="27" min="1" step="1" class="positions"><button type="button" id="mastodon-move-up" class="move-up"></button><button type="button" id="mastodon-move-down" class="move-down"></button></label>
+                <label><input type="number" id="mastodon-priority" value="28" min="1" step="1" class="positions"><button type="button" id="mastodon-move-up" class="move-up"></button><button type="button" id="mastodon-move-down" class="move-down"></button></label>
+            </div>
+        </div>
+        <div class="row service">
+            <div class="col-3">
+                <label>Friendica</label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="friendica-width" value="700" class="widths"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="friendica-height" value="340" class="heights"></label>
+            </div>
+            <div class="col-3">
+                <label><input type="number" id="friendica-priority" value="29" min="1" step="1" class="positions"><button type="button" id="friendica-move-up" class="move-up"></button><button type="button" id="friendica-move-down" class="move-down"></button></label>
             </div>
         </div>
         <div class="row hr">
@@ -653,11 +665,8 @@
                 <h1>Custom Shares</h1>
                 <h4>Follow the placeholder and change only <i>instance_url</i>.</h4>
                 <label>Shaarli: https://instance_url?post&title<br> <input type="url" id="shaarli" style="width:400px" placeholder="https://instance_url?post&title"></label><br>
-                <label>Friendica: https://instance_url/bookmarklet?url&title&jump-doclose<br> <input type="url"
-                                                                                       id="friendica"
-                                                                       style="width:400px"
-                                                                       placeholder="https://instance_url/bookmarklet?url&title&jump-doclose"></label><br>
-                <label>Mastodon: https://instance_url/share?text<br> <input type="url" id="mastodon" style="width:400px" placeholder="https://instance_url?post&title"></label>
+                <label>Friendica: https://instance_url/bookmarklet?url&title&jump-doclose<br> <input type="url" id="friendica" style="width:400px" placeholder="https://instance_url/bookmarklet?url&title&jump-doclose"></label><br>
+                <label>Mastodon: https://instance_url/share?text<br> <input type="url" id="mastodon" style="width:400px" placeholder="https://instance_url?post&title"></label><br>
             </div>
         </div>
         <div class="row hr">
