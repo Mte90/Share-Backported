@@ -291,7 +291,6 @@ function onClick(event, item) {
         if (service === "wayback") {
           newUrl = url.toString();
           newUrl = newUrl + url_encoded;
-          newUrl = url.toString();
         }
 
         Promise.all([
