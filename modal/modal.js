@@ -288,7 +288,7 @@ function onClick(event, item) {
           newUrl = url.toString();
         }
 
-        if (service === "wayback") {
+        if (service === "wayback" || service === "feedly") {
           newUrl = url.toString();
           newUrl = newUrl + url_encoded;
         }
