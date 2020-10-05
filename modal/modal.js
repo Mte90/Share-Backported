@@ -15,6 +15,13 @@ function resize_modal() {
     column = 3;
   }
 
+  var shares = document.querySelectorAll(".share").length;
+  if (shares === 1) {
+    document.getElementsByClassName("share")[0].click(function() {
+      window.close();
+    });
+  }
+
   var width_modal = column * 76;
   row = Math.ceil(shares / column);
   var height_modal = row * 76;
