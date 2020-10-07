@@ -1,13 +1,14 @@
-/* global browser, URL, document, console */
+const defaultWidth = 700;
+var defaultHeight = 340;
 
 /* Autoresize the modal based on rows */
 function resize_modal() {
-  var shares = document.querySelectorAll(".share").length;
+  var shares = document.querySelectorAll('.share').length;
   var row = 0;
   var column = 4; // Set 4 (columns) default
   if (shares < 4) column = shares; // If visible services are smaller than 4
-  var body = document.querySelector("body");
-  var html = document.querySelector("html");
+  var body = document.querySelector('body');
+  var html = document.querySelector('html');
 
   if (shares === 0) {
     // If all of services are hidden, it shows a message
@@ -15,9 +16,8 @@ function resize_modal() {
     column = 3;
   }
 
-  var shares = document.querySelectorAll(".share").length;
   if (shares === 1) {
-    document.getElementsByClassName("share")[0].click(function() {
+    document.getElementsByClassName('share')[0].click(function() {
       window.close();
     });
   }
@@ -26,46 +26,46 @@ function resize_modal() {
   row = Math.ceil(shares / column);
   var height_modal = row * 76;
 
-  html.style.width = width_modal + "px";
-  html.style.height = height_modal + "px";
-  body.style.width = width_modal + "px";
-  body.style.height = height_modal + "px";
+  html.style.width = width_modal + 'px';
+  html.style.height = height_modal + 'px';
+  body.style.width = width_modal + 'px';
+  body.style.height = height_modal + 'px';
 }
 
 /* Open popup with sizes */
 function open_popup(newurl, width, height) {
   if (Number.isNaN(width)) {
-    width = 700;
+    width = defaultWidth;
   }
   if (Number.isNaN(height)) {
-    height = 340;
+    height = defaultHeight;
   }
   browser.runtime.sendMessage({
-    type: "share-backid",
+    type: 'share-backid',
     data: {
       url: newurl,
       width: width,
       height: height,
-      type: "popup",
-    },
+      type: 'popup'
+    }
   });
 }
 
 /* DO you want to open the url in a container? */
 function open_container_tab(newurl, cookieStoreId) {
   browser.runtime.sendMessage({
-    type: "share-backid-container",
+    type: 'share-backid-container',
     data: {
       url: newurl,
-      cookieStoreId,
-    },
+      cookieStoreId
+    }
   });
 }
 
 /* Support for Facebook Container extension */
 function checkFacebookContainerExtension() {
-  const extensionId = "@contain-facebook";
-  const facebookContainerName = "Facebook";
+  const extensionId = '@contain-facebook';
+  const facebookContainerName = 'Facebook';
   return new Promise(function (resolve) {
     browser.management
       .get(extensionId)
@@ -74,7 +74,7 @@ function checkFacebookContainerExtension() {
           resolve(null);
         }
         return browser.contextualIdentities.query({
-          name: facebookContainerName,
+          name: facebookContainerName
         });
       })
       .then((contexts) => {
@@ -92,7 +92,7 @@ function checkFacebookContainerExtension() {
 
 /* Support for Container feature of Firefox */
 function checkContainerAssignment(url) {
-  const extensionId = "@testpilot-containers";
+  const extensionId = '@testpilot-containers';
   return new Promise((resolve) => {
     browser.management
       .get(extensionId)
@@ -101,8 +101,8 @@ function checkContainerAssignment(url) {
           resolve(null);
         }
         return browser.runtime.sendMessage(extensionId, {
-          method: "getAssignment",
-          url,
+          method: 'getAssignment',
+          url
         });
       })
       .then(resolve)
@@ -113,14 +113,12 @@ function checkContainerAssignment(url) {
 }
 
 /* Add events on the share window tothe various button */
-document.addEventListener("DOMContentLoaded", () => {
-  var width = 700;
-  var height = 340;
-  const buttons = Array.from(document.querySelectorAll(".share"));
+document.addEventListener('DOMContentLoaded', () => {
+  const buttons = Array.from(document.querySelectorAll('.share'));
 
   var promisedButtons = Promise.all(
     buttons.map(function (button) {
-      var item = button.getAttribute("id");
+      var item = button.getAttribute('id');
       var getting = browser.storage.local.get(item);
       return getting.then(
         function (result) {
@@ -128,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
           removeUncheckedButton(result, key, item);
 
           button.addEventListener(
-            "click",
+            'click',
             function (event) {
               onClick(event, this);
             },
@@ -148,8 +146,8 @@ document.addEventListener("DOMContentLoaded", () => {
     resize_modal();
     var buttonsWithPriority = Promise.all(
       buttons.map(function (button) {
-        var item = button.getAttribute("id");
-        var priorityKey = item + "-priority";
+        var item = button.getAttribute('id');
+        var priorityKey = item + '-priority';
 
         return browser.storage.local.get(priorityKey).then(function (result) {
           var priority, shareButton;
@@ -160,20 +158,20 @@ document.addEventListener("DOMContentLoaded", () => {
             if (shareButton) {
               return {
                 el: shareButton,
-                priority: priority,
+                priority: priority
               };
             }
           }
           return {
             el: null,
-            priority: priority,
+            priority: priority
           };
         });
       })
     );
 
     buttonsWithPriority.then(function (pairs) {
-      var grid = document.getElementById("share-directory-grid");
+      var grid = document.getElementById('share-directory-grid');
       var pairsWithElements = pairs.filter(function (pair) {
         // Filter for null
         return Boolean(pair.el);
@@ -207,20 +205,19 @@ document.addEventListener("DOMContentLoaded", () => {
 function removeUncheckedButton(result, key, item) {
   if (
     result[key] &&
-    document.querySelector("#" + item + ":not(.customurl)") !== null
+    document.querySelector('#' + item + ':not(.customurl)') !== null
   ) {
-    document.querySelector("#" + item).remove();
+    document.querySelector('#' + item).remove();
     return;
   }
 
   // Simple trick to check custom share that doesn't have a boolean value
-  if (typeof result[key] !== "undefined" && result[key].length > 6) {
-    document.querySelector("#" + item + ".customurl").dataset.share =
+  if (typeof result[key] !== 'undefined' && result[key].length > 6) {
+    document.querySelector('#' + item + '.customurl').dataset.share =
       result[key];
   } else {
-    if (document.querySelector("#" + item + ".customurl") !== null) {
-      document.querySelector("#" + item + ".customurl").remove();
-      return;
+    if (document.querySelector('#' + item + '.customurl') !== null) {
+      document.querySelector('#' + item + '.customurl').remove();
     }
   }
 }
@@ -228,12 +225,12 @@ function removeUncheckedButton(result, key, item) {
 function onClick(event, item) {
   event.preventDefault();
 
-  browser.storage.local.get("share-format").then(function (fetched) {
-    var format = fetched["share-format"];
-    var service = item.getAttribute("id");
+  browser.storage.local.get('share-format').then(function (fetched) {
+    var format = fetched['share-format'];
+    var service = item.getAttribute('id');
     var urlshare = item.dataset.share;
-    if (service === "wayback") {
-      urlshare = "https://web.archive.org/save/";
+    if (service === 'wayback') {
+      urlshare = 'https://web.archive.org/save/';
     }
 
     const url = new URL(urlshare);
@@ -246,81 +243,82 @@ function onClick(event, item) {
         var url_encoded = encodeURI(tab.url);
 
         // TODO: Replace with switch-case;
-        if (url.searchParams.has("u")) {
-          url.searchParams.set("u", url_encoded);
-        } else if (url.searchParams.has("url")) {
-          url.searchParams.set("url", url_encoded);
-        } else if (url.searchParams.has("link")) {
-          url.searchParams.set("link", url_encoded);
-        } else if (url.searchParams.has("canonicalUrl")) {
-          url.searchParams.set("canonicalUrl", url_encoded);
-        } else if (url.searchParams.has("body")) {
-          url.searchParams.set("body", url_encoded);
-        } else if (url.searchParams.has("post")) {
-          url.searchParams.set("post", url_encoded);
+        if (url.searchParams.has('u')) {
+          url.searchParams.set('u', url_encoded);
+        } else if (url.searchParams.has('url')) {
+          url.searchParams.set('url', url_encoded);
+        } else if (url.searchParams.has('link')) {
+          url.searchParams.set('link', url_encoded);
+        } else if (url.searchParams.has('canonicalUrl')) {
+          url.searchParams.set('canonicalUrl', url_encoded);
+        } else if (url.searchParams.has('body')) {
+          url.searchParams.set('body', url_encoded);
+        } else if (url.searchParams.has('post')) {
+          url.searchParams.set('post', url_encoded);
         }
 
         // TODO: Replace with switch-case;
-        if (url.searchParams.has("text")) {
-          url.searchParams.set("text", tabTitle);
-        } else if (url.searchParams.has("title")) {
-          url.searchParams.set("title", tabTitle);
-        } else if (url.searchParams.has("su")) {
-          url.searchParams.set("su", tabTitle);
-        } else if (url.searchParams.has("description")) {
-          url.searchParams.set("description", tabTitle);
-        } else if (url.searchParams.has("subject")) {
-          url.searchParams.set("subject", tabTitle);
-        } else if (url.searchParams.has("message")) {
-          url.searchParams.set("message", tabTitle);
+        if (url.searchParams.has('text')) {
+          url.searchParams.set('text', tabTitle);
+        } else if (url.searchParams.has('title')) {
+          url.searchParams.set('title', tabTitle);
+        } else if (url.searchParams.has('su')) {
+          url.searchParams.set('su', tabTitle);
+        } else if (url.searchParams.has('description')) {
+          url.searchParams.set('description', tabTitle);
+        } else if (url.searchParams.has('subject')) {
+          url.searchParams.set('subject', tabTitle);
+        } else if (url.searchParams.has('message')) {
+          url.searchParams.set('message', tabTitle);
         }
 
         if (format) {
           var newText = format
-            .replace("{title}", tabTitle)
-            .replace("{url}", url_encoded);
-          url.searchParams.set("text", newText);
+            .replace('{title}', tabTitle)
+            .replace('{url}', url_encoded);
+          url.searchParams.set('text', newText);
         }
 
         newUrl = url.toString();
 
-        if (service === "diaspora") {
+        if (service === 'diaspora') {
           newUrl = url.toString();
-          newUrl = newUrl.replace(/\+/gi, " ");
+          newUrl = newUrl.replace(/\+/gi, ' ');
           newUrl = newUrl.toString();
         }
 
-        if (service === "mastodon" || service === "whatsapp") {
-          url.searchParams.set("text", tabTitle + " - " + url_encoded);
+        if (service === 'mastodon' || service === 'whatsapp') {
+          url.searchParams.set('text', tabTitle + ' - ' + url_encoded);
           newUrl = url.toString();
         }
 
-        if (service === "wayback" || service === "feedly") {
+        if (service === 'wayback' || service === 'feedly') {
           newUrl = url.toString();
           newUrl = newUrl + url_encoded;
         }
 
         Promise.all([
           checkContainerAssignment(newUrl),
-          checkFacebookContainerExtension(),
+          checkFacebookContainerExtension()
         ]).then(([assignment, facebookCookieStoreId]) => {
           if (assignment) {
             const cookieStoreId =
-              "firefox-container-" + assignment.userContextId;
+              'firefox-container-' + assignment.userContextId;
             open_container_tab(newUrl, cookieStoreId);
-          } else if (item.id === "facebook" && facebookCookieStoreId !== null) {
+          } else if (item.id === 'facebook' && facebookCookieStoreId !== null) {
             open_container_tab(newUrl, facebookCookieStoreId);
           } else {
             browser.storage.local
-              .get([item.id + "-width", item.id + "-height"])
+              .get([item.id + '-width', item.id + '-height'])
               .then(
                 function (items) {
-                  width = parseInt(items[item.id + "-width"], 10);
-                  height = parseInt(items[item.id + "-height"], 10);
+                  let width = parseInt(items[item.id + '-width'], 10);
+                  let height = parseInt(items[item.id + '-height'], 10);
                   open_popup(newUrl, width, height);
                 },
                 function (error) {
-                  open_popup(newUrl, width, height);
+                  console.error(error);
+                  open_popup(newUrl, defaultWidth, defaultHeight);
                 }
               );
           }

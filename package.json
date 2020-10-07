@@ -1,0 +1,23 @@
+{
+  "name": "share-backported",
+  "version": "2.0.11",
+  "description": "Extension to get back the Firefox Share modal",
+  "main": "background.js",
+  "scripts": {
+    "lint": "eslint -c .eslintrc ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mte90/Share-Backported.git"
+  },
+  "author": "",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/Mte90/Share-Backported/issues"
+  },
+  "homepage": "https://github.com/Mte90/Share-Backported#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "7.10.0"
+  }
+}

@@ -3,9 +3,9 @@
     "browser": true
   },
   "globals": {
-    "chrome":true,
-    "Promise":true,
-    "browser":true
+    "chrome": true,
+    "Promise": true,
+    "browser": true
   },
   "rules": {
     "accessor-pairs": "error",
@@ -141,5 +141,8 @@
     "wrap-iife": ["error", "any", { "functionPrototypeMethods": true }],
     "yield-star-spacing": ["error", "both"],
     "yoda": ["error", "never"]
-}
+  },
+  "parserOptions": {
+    "ecmaVersion": 8
+  }
 }
