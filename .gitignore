@@ -26,3 +26,5 @@ tags
 
 *.xpi
 *.zip
+
+node_modules/

@@ -1,5 +1,3 @@
-/* global browser, console */
-
 var sbId, sbPrevUrl;
 // Create the window and save the tab id
 browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {
@@ -31,7 +29,7 @@ browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 
     browser.tabs.get(tabId, function (tabinfo) {
       if (sbPrevUrl !== tabinfo.url && tabinfo.url !== 'about:blank') {
-        if (tabinfo.url.indexOf('dialog/close_window') > 0 || tabinfo.url.indexOf('latest_status_id=') > 0) {     
+        if (tabinfo.url.indexOf('dialog/close_window') > 0 || tabinfo.url.indexOf('latest_status_id=') > 0) {
           browser.tabs.remove(tabId);
         }
       }
@@ -44,18 +42,18 @@ setPageActionIcon();
 
 async function setPageActionIcon () {
   var themeInfo = await browser.theme.getCurrent();
-  color = 'light';
+  let color = 'light';
   var rgb_list = ['rgb(71, 71, 73)', 'rgb(50, 50, 52)']; // list of RGB where icon_theme should be light
   if (themeInfo.colors && themeInfo.colors.toolbar_field) {
     if (!rgb_list.includes(themeInfo.colors.toolbar_field.toString())) {
-        color = 'dark';
+      color = 'dark';
     }
   }
   setPageAction(color);
 }
 
 function setPageAction (color) {
-  var ext_icon = 'icon-' +  color + '.svg';
+  var ext_icon = 'icon-' + color + '.svg';
   browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     var getting = browser.storage.local.get('pageaction');
     getting.then(function (result) {

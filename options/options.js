@@ -1,4 +1,3 @@
-/* global browser, document, console */
 document.addEventListener('DOMContentLoaded', restoreOptions);
 document.querySelector('form').addEventListener('submit', saveOptions);
 
@@ -43,7 +42,7 @@ function restoreOptions() {
       getting = browser.storage.local.get(item);
       return getting.then(function(result) {
         value = result[Object.keys(result)[0]];
-        var isCheckbox = el.type === "checkbox";
+        var isCheckbox = el.type === 'checkbox';
         var isInt = Number.isInteger(parseInt(value, 10));
         var isUrl = el.type === 'url';
 
@@ -89,7 +88,7 @@ function onLoad(priorities) {
     var order = bPriority - aPriority;
 
     if (order < 0) { return -1; }
-    if (order > 0) { return  1; }
+    if (order > 0) { return 1; }
     return 0;
   })
 
@@ -142,7 +141,7 @@ function move(change) {
     nextSibling = parentNode.querySelector([`[id$="priority"][value="${change.to}"]`]);
     row = nextSibling.parentElement.parentElement.parentElement; // Up to .row, i.e. same level as change.el
 
-    var indexTargetOption  = rows.findIndex(function(el) { return el === row; });
+    var indexTargetOption = rows.findIndex(function(el) { return el === row; });
     var indexChangedOption = rows.findIndex(function(el) { return el === change.el; });
 
     // indexTargetOption > indexChangedOption => downwards
@@ -156,7 +155,7 @@ function move(change) {
 function updateState() {
   var allShareOptions = document.querySelectorAll('[id$="priority"]');
   allShareOptions.forEach(function(option, index) {
-    var newValue = index + 1;  // Arrays start with 0
+    var newValue = index + 1; // Arrays start with 0
     option.setAttribute('value', newValue);
     option.value = newValue;
   });
@@ -166,14 +165,13 @@ function moveUpDown(id, way) {
   // move the element up/down -> base on "way" variable
   var id_temp = (id.toString()).replace('-move-' + way, '');
   var priority = document.getElementById(id_temp + '-priority');
-  way == 'up' ? priority.value = parseInt(priority.value) - 1 : priority.value = parseInt(priority.value) + 1;
+  way === 'up' ? priority.value = parseInt(priority.value) - 1 : priority.value = parseInt(priority.value) + 1;
   // call "onchange" event (forced)
   if ('createEvent' in document) {
     var evt = document.createEvent('HTMLEvents');
     evt.initEvent('change', false, true);
     priority.dispatchEvent(evt);
-  }
-  else {
+  } else {
     priority.fireEvent('onchange');
   }
   setFocusRowTemp(parseInt(priority.value) - 1);
@@ -183,7 +181,7 @@ function moveUpDown(id, way) {
 function setFocusRowTemp(index) {
   // set "focus" on row modified, before clear eventually wrong "class"
   clearFocusRowTemp();
-  service = document.getElementsByClassName('service')[index];
+  const service = document.getElementsByClassName('service')[index];
   service.classList.add('row_focus');
   setTimeout(function() {
     service.classList.remove('row_focus')
