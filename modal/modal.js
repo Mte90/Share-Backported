@@ -255,6 +255,8 @@ function onClick(event, item) {
           url.searchParams.set('body', url_encoded);
         } else if (url.searchParams.has('post')) {
           url.searchParams.set('post', url_encoded);
+        } else if (url.searchParams.has('a')) {
+          url.searchParams.set('a', url_encoded);
         }
 
         // TODO: Replace with switch-case;
