@@ -58,7 +58,6 @@ button {
 	transition: 0s;
 	background: transparent;
 	padding-top:2px;
-	border: 1px solid red;
 }
 button:hover {
 	background-color: #DDDEDF;
