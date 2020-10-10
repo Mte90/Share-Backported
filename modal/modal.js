@@ -114,6 +114,40 @@ function checkContainerAssignment(url) {
 
 /* Add events on the share window tothe various button */
 document.addEventListener('DOMContentLoaded', () => {
+  var blockedUrlsPrefix = [
+    'about:',
+    'chrome:',
+    'moz-extension:',
+  ];
+
+  browser.tabs.query(
+    { active: true, windowId: browser.windows.WINDOW_ID_CURRENT },
+    (tabs) => {
+      var tab = tabs[0];
+      // If Any prefix matches, return true
+      var isBlockedUrl = blockedUrlsPrefix
+        .map(function (prefix) {
+          return tab.url.startsWith(prefix);
+        })
+        .reduce(function (upToNow, current) {
+          return upToNow || current;
+        }, false);
+
+      if (isBlockedUrl) {
+        showErrorMessage();
+      } else {
+        registerShareButtons(tab);
+      }
+    }
+  );
+});
+
+function showErrorMessage() {
+  var body = document.querySelector('body');
+  body.innerHTML = "<span id='error_msg'>You can't share this tab!</span>";
+}
+
+function registerShareButtons(tab) {
   const buttons = Array.from(document.querySelectorAll('.share'));
 
   var promisedButtons = Promise.all(
@@ -128,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
           button.addEventListener(
             'click',
             function (event) {
-              onClick(event, this);
+              onClick(event, this, tab);
             },
             false
           );
@@ -200,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   });
-});
+}
 
 function removeUncheckedButton(result, key, item) {
   if (
@@ -222,7 +256,7 @@ function removeUncheckedButton(result, key, item) {
   }
 }
 
-function onClick(event, item) {
+function onClick(event, item, tab) {
   event.preventDefault();
 
   browser.storage.local.get('share-format').then(function (fetched) {
@@ -234,98 +268,92 @@ function onClick(event, item) {
     }
 
     const url = new URL(urlshare);
-    browser.tabs.query(
-      { active: true, windowId: browser.windows.WINDOW_ID_CURRENT },
-      (tabs) => {
-        var newUrl;
-        var tab = tabs[0];
-        var tabTitle = tab.title;
-        var url_encoded = encodeURI(tab.url);
+    var newUrl;
+    var tabTitle = tab.title;
+    var url_encoded = encodeURI(tab.url);
 
-        // TODO: Replace with switch-case;
-        if (url.searchParams.has('u')) {
-          url.searchParams.set('u', url_encoded);
-        } else if (url.searchParams.has('url')) {
-          url.searchParams.set('url', url_encoded);
-        } else if (url.searchParams.has('link')) {
-          url.searchParams.set('link', url_encoded);
-        } else if (url.searchParams.has('canonicalUrl')) {
-          url.searchParams.set('canonicalUrl', url_encoded);
-        } else if (url.searchParams.has('body')) {
-          url.searchParams.set('body', url_encoded);
-        } else if (url.searchParams.has('post')) {
-          url.searchParams.set('post', url_encoded);
-        } else if (url.searchParams.has('a')) {
-          url.searchParams.set('a', url_encoded);
-        }
+    // TODO: Replace with switch-case;
+    if (url.searchParams.has('u')) {
+      url.searchParams.set('u', url_encoded);
+    } else if (url.searchParams.has('url')) {
+      url.searchParams.set('url', url_encoded);
+    } else if (url.searchParams.has('link')) {
+      url.searchParams.set('link', url_encoded);
+    } else if (url.searchParams.has('canonicalUrl')) {
+      url.searchParams.set('canonicalUrl', url_encoded);
+    } else if (url.searchParams.has('body')) {
+      url.searchParams.set('body', url_encoded);
+    } else if (url.searchParams.has('post')) {
+      url.searchParams.set('post', url_encoded);
+    } else if (url.searchParams.has('a')) {
+      url.searchParams.set('a', url_encoded);
+    }
 
-        // TODO: Replace with switch-case;
-        if (url.searchParams.has('text')) {
-          url.searchParams.set('text', tabTitle);
-        } else if (url.searchParams.has('title')) {
-          url.searchParams.set('title', tabTitle);
-        } else if (url.searchParams.has('su')) {
-          url.searchParams.set('su', tabTitle);
-        } else if (url.searchParams.has('description')) {
-          url.searchParams.set('description', tabTitle);
-        } else if (url.searchParams.has('subject')) {
-          url.searchParams.set('subject', tabTitle);
-        } else if (url.searchParams.has('message')) {
-          url.searchParams.set('message', tabTitle);
-        }
+    // TODO: Replace with switch-case;
+    if (url.searchParams.has('text')) {
+      url.searchParams.set('text', tabTitle);
+    } else if (url.searchParams.has('title')) {
+      url.searchParams.set('title', tabTitle);
+    } else if (url.searchParams.has('su')) {
+      url.searchParams.set('su', tabTitle);
+    } else if (url.searchParams.has('description')) {
+      url.searchParams.set('description', tabTitle);
+    } else if (url.searchParams.has('subject')) {
+      url.searchParams.set('subject', tabTitle);
+    } else if (url.searchParams.has('message')) {
+      url.searchParams.set('message', tabTitle);
+    }
 
-        if (format) {
-          var newText = format
-            .replace('{title}', tabTitle)
-            .replace('{url}', url_encoded);
-          url.searchParams.set('text', newText);
-        }
+    if (format) {
+      var newText = format
+        .replace('{title}', tabTitle)
+        .replace('{url}', url_encoded);
+      url.searchParams.set('text', newText);
+    }
 
-        newUrl = url.toString();
+    newUrl = url.toString();
 
-        if (service === 'diaspora') {
-          newUrl = url.toString();
-          newUrl = newUrl.replace(/\+/gi, ' ');
-          newUrl = newUrl.toString();
-        }
+    if (service === 'diaspora') {
+      newUrl = url.toString();
+      newUrl = newUrl.replace(/\+/gi, ' ');
+      newUrl = newUrl.toString();
+    }
 
-        if (service === 'mastodon' || service === 'whatsapp') {
-          url.searchParams.set('text', tabTitle + ' - ' + url_encoded);
-          newUrl = url.toString();
-        }
+    if (service === 'mastodon' || service === 'whatsapp') {
+      url.searchParams.set('text', tabTitle + ' - ' + url_encoded);
+      newUrl = url.toString();
+    }
 
-        if (service === 'wayback' || service === 'feedly') {
-          newUrl = url.toString();
-          newUrl = newUrl + url_encoded;
-        }
+    if (service === 'wayback' || service === 'feedly') {
+      newUrl = url.toString();
+      newUrl = newUrl + url_encoded;
+    }
 
-        Promise.all([
-          checkContainerAssignment(newUrl),
-          checkFacebookContainerExtension()
-        ]).then(([assignment, facebookCookieStoreId]) => {
-          if (assignment) {
-            const cookieStoreId =
-              'firefox-container-' + assignment.userContextId;
-            open_container_tab(newUrl, cookieStoreId);
-          } else if (item.id === 'facebook' && facebookCookieStoreId !== null) {
-            open_container_tab(newUrl, facebookCookieStoreId);
-          } else {
-            browser.storage.local
-              .get([item.id + '-width', item.id + '-height'])
-              .then(
-                function (items) {
-                  let width = parseInt(items[item.id + '-width'], 10);
-                  let height = parseInt(items[item.id + '-height'], 10);
-                  open_popup(newUrl, width, height);
-                },
-                function (error) {
-                  console.error(error);
-                  open_popup(newUrl, defaultWidth, defaultHeight);
-                }
-              );
-          }
-        });
+    Promise.all([
+      checkContainerAssignment(newUrl),
+      checkFacebookContainerExtension()
+    ]).then(([assignment, facebookCookieStoreId]) => {
+      if (assignment) {
+        const cookieStoreId =
+          'firefox-container-' + assignment.userContextId;
+        open_container_tab(newUrl, cookieStoreId);
+      } else if (item.id === 'facebook' && facebookCookieStoreId !== null) {
+        open_container_tab(newUrl, facebookCookieStoreId);
+      } else {
+        browser.storage.local
+          .get([item.id + '-width', item.id + '-height'])
+          .then(
+            function (items) {
+              let width = parseInt(items[item.id + '-width'], 10);
+              let height = parseInt(items[item.id + '-height'], 10);
+              open_popup(newUrl, width, height);
+            },
+            function (error) {
+              console.error(error);
+              open_popup(newUrl, defaultWidth, defaultHeight);
+            }
+          );
       }
-    );
+    });
   });
 }
