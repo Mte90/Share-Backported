@@ -4,6 +4,7 @@ html, body {
 }
 * {
 	color: #484848;
+	background-color: #EFEFEF;
 }
 body {
 	padding: 0;
@@ -12,6 +13,18 @@ body {
 	border: none;
 	overflow: hidden;
 	text-align: center;
+}
+@media (prefers-color-scheme: light) {
+	* {
+		color: #484848;
+		background-color: #EFEFEF;
+	}
+}
+@media (prefers-color-scheme: dark) {
+	* {
+		color: #EFEFEF;
+		background-color: #484848;
+	}
 }
 #share-directory {
 	width: auto;
