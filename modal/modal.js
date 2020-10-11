@@ -1,5 +1,5 @@
 const defaultWidth = 700;
-var defaultHeight = 340;
+const defaultHeight = 340;
 
 /* Autoresize the modal based on rows */
 function resize_modal() {
@@ -17,7 +17,7 @@ function resize_modal() {
   }
 
   if (shares === 1) {
-    document.getElementsByClassName('share')[0].click(function() {
+    document.getElementsByClassName('share')[0].click(function () {
       window.close();
     });
   }
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
   var blockedUrlsPrefix = [
     'about:',
     'chrome:',
-    'moz-extension:',
+    'moz-extension:'
   ];
 
   browser.tabs.query(
@@ -268,40 +268,53 @@ function onClick(event, item, tab) {
     }
 
     const url = new URL(urlshare);
-    var newUrl;
+    let newUrl;
     var tabTitle = tab.title;
     var url_encoded = encodeURI(tab.url);
 
-    // TODO: Replace with switch-case;
-    if (url.searchParams.has('u')) {
-      url.searchParams.set('u', url_encoded);
-    } else if (url.searchParams.has('url')) {
-      url.searchParams.set('url', url_encoded);
-    } else if (url.searchParams.has('link')) {
-      url.searchParams.set('link', url_encoded);
-    } else if (url.searchParams.has('canonicalUrl')) {
-      url.searchParams.set('canonicalUrl', url_encoded);
-    } else if (url.searchParams.has('body')) {
-      url.searchParams.set('body', url_encoded);
-    } else if (url.searchParams.has('post')) {
-      url.searchParams.set('post', url_encoded);
-    } else if (url.searchParams.has('a')) {
-      url.searchParams.set('a', url_encoded);
+    switch (true) {
+      case url.searchParams.has('u'):
+        url.searchParams.set('u', url_encoded);
+        break;
+      case url.searchParams.has('url'):
+        url.searchParams.set('url', url_encoded);
+        break;
+      case url.searchParams.has('link'):
+        url.searchParams.set('link', url_encoded);
+        break;
+      case url.searchParams.has('canonicalUrl'):
+        url.searchParams.set('canonicalUrl', url_encoded);
+        break;
+      case url.searchParams.has('body'):
+        url.searchParams.set('body', url_encoded);
+        break;
+      case url.searchParams.has('post'):
+        url.searchParams.set('post', url_encoded);
+        break;
+      case url.searchParams.has('a'):
+        url.searchParams.set('a', url_encoded);
+        break;
     }
 
-    // TODO: Replace with switch-case;
-    if (url.searchParams.has('text')) {
-      url.searchParams.set('text', tabTitle);
-    } else if (url.searchParams.has('title')) {
-      url.searchParams.set('title', tabTitle);
-    } else if (url.searchParams.has('su')) {
-      url.searchParams.set('su', tabTitle);
-    } else if (url.searchParams.has('description')) {
-      url.searchParams.set('description', tabTitle);
-    } else if (url.searchParams.has('subject')) {
-      url.searchParams.set('subject', tabTitle);
-    } else if (url.searchParams.has('message')) {
-      url.searchParams.set('message', tabTitle);
+    switch (true) {
+      case url.searchParams.has('text'):
+        url.searchParams.set('text', tabTitle);
+        break;
+      case url.searchParams.has('title'):
+        url.searchParams.set('title', tabTitle);
+        break;
+      case url.searchParams.has('su'):
+        url.searchParams.set('su', tabTitle);
+        break;
+      case url.searchParams.has('description'):
+        url.searchParams.set('description', tabTitle);
+        break;
+      case url.searchParams.has('subject'):
+        url.searchParams.set('subject', tabTitle);
+        break;
+      case url.searchParams.has('message'):
+        url.searchParams.set('message', tabTitle);
+        break;
     }
 
     if (format) {
@@ -313,21 +326,21 @@ function onClick(event, item, tab) {
 
     newUrl = url.toString();
 
-    if (service === 'diaspora') {
-      newUrl = url.toString();
-      newUrl = newUrl.replace(/\+/gi, ' ');
-      newUrl = newUrl.toString();
+    switch (service) {
+      case 'diaspora':
+        newUrl = newUrl.replace(/\+/gi, ' ');
+        break;
+      case 'mastodon':
+      case 'whatsapp':
+        url.searchParams.set('text', tabTitle + ' - ' + url_encoded);
+        break;
+      case 'wayback':
+      case 'feedly':
+        newUrl = newUrl + url_encoded;
+        break;
     }
 
-    if (service === 'mastodon' || service === 'whatsapp') {
-      url.searchParams.set('text', tabTitle + ' - ' + url_encoded);
-      newUrl = url.toString();
-    }
-
-    if (service === 'wayback' || service === 'feedly') {
-      newUrl = url.toString();
-      newUrl = newUrl + url_encoded;
-    }
+    newUrl = url.toString();
 
     Promise.all([
       checkContainerAssignment(newUrl),
