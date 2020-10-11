@@ -12,8 +12,9 @@ function resize_modal() {
 
   if (shares === 0) {
     // If all of services are hidden, it shows a message
-    body.innerHTML = "<span id='error_msg'>All services are hidden</span>";
+    body.innerHTML = "<div id='error_msg'>All services are hidden</div>";
     column = 3;
+    return;
   }
 
   if (shares === 1) {
