@@ -1,5 +1,5 @@
 # Share Backported
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMte90%2FShare-Backported.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FMte90%2FShare-Backported?ref=badge_shield)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMte90%2FShare-Backported.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FMte90%2FShare-Backported?ref=badge_shield)[![Codacy Badge](https://app.codacy.com/project/badge/Grade/e09f8a89a54e42189761908c2a7bad45)](https://www.codacy.com/manual/mte90/Share-Backported/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Mte90/Share-Backported&amp;utm_campaign=Badge_Grade)
 
 Firefox Nightly 57 [removed](https://bugzilla.mozilla.org/show_bug.cgi?id=1388902) the share feature because it was using a non official API.
 
