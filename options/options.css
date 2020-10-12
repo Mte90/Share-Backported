@@ -17,6 +17,10 @@ textarea {
 	color: #484848;
 	background-color: #EFEFEF;
 }
+input[type=checkbox]:checked {
+    color: #EFEFEF;
+    background-color:#484848;
+}
 @media (prefers-color-scheme: light) {
 	body,
 	button,
