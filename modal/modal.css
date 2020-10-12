@@ -93,7 +93,8 @@ button img {
 	font-size: .8em;
 	color: blue;
 }
-span#error_msg {
+
+#error_msg {
 	text-align: center;
 	width: 100%;
 	font-size: 14px;

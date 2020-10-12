@@ -11,13 +11,9 @@ function resize_buttons() {
 
       if (shares === 0) {
         // If all of services are hidden, it shows a message
-        body.innerHTML = "<span id='error_msg'>All services are hidden</span>";
-      }
-
-      if (shares === 1) {
-        document.getElementsByClassName('share')[0].click(function() {
-          window.close();
-        });
+        body.innerHTML = "<div id='error_msg'>All services are hidden</span>";
+        column = 3;
+        return;
       }
 
       body.className = 'buttons-' + styles.buttonsizes;
