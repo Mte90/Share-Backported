@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function showErrorMessage() {
   var body = document.querySelector('body');
-  body.innerHTML = "<span id='error_msg'>You can't share this tab!</span>";
+  body.innerHTML = "<span id='error_msg'>You can't share this link!</span>";
 }
 
 function registerShareButtons(tab) {
