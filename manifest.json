@@ -42,6 +42,13 @@
         "default_icon": "icon-dark.svg",
         "browser_style": true
     },
+    "commands": {
+        "_execute_browser_action": {
+            "suggested_key": {
+                "default": "Ctrl+Alt+Y"
+            }
+        }
+    },
     "background": {
         "scripts": [
             "background.js"
