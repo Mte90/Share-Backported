@@ -27,6 +27,7 @@ You can hide the <i>PageAction</i> icon (so the shortcut shown in the address ba
 * [Arrizal Amin](https://github.com/arrizalamin) - Contributor
 * [Saverio Morelli](https://github.com/Sav22999) - Contributor
 * [André Jaenisch](https://github.com/Ryuno-Ki) - Contributor
+* [Lorenzo Millucci](https://github.com/lmillucci) - Contributor
 
 
 ## License
