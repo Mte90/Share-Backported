@@ -21,6 +21,7 @@ function resize_buttons() {
       }
 
       body.className = 'buttons-' + styles.buttonsizes;
+    });
 }
 
 /* Open popup with sizes */
