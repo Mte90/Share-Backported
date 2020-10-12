@@ -1,36 +1,23 @@
 const defaultWidth = 700;
 const defaultHeight = 340;
 
-/* Autoresize the modal based on rows */
-function resize_modal() {
-  var shares = document.querySelectorAll('.share').length;
-  var row = 0;
-  var column = 4; // Set 4 (columns) default
-  if (shares < 4) column = shares; // If visible services are smaller than 4
-  var body = document.querySelector('body');
-  var html = document.querySelector('html');
+/* Autoresize the buttons based on preference */
+function resize_buttons() {
+  browser.storage.local
+    .get('buttonsizes')
+    .then(function (styles) {
+      var shares = document.querySelectorAll('.share').length;
+      var body = document.querySelector('body');
 
-  if (shares === 0) {
-    // If all of services are hidden, it shows a message
-    body.innerHTML = "<div id='error_msg'>All services are hidden</div>";
-    column = 3;
-    return;
-  }
+      if (shares === 0) {
+        // If all of services are hidden, it shows a message
+        body.innerHTML = "<div id='error_msg'>All services are hidden</span>";
+        column = 3;
+        return;
+      }
 
-  if (shares === 1) {
-    document.getElementsByClassName('share')[0].click(function () {
-      window.close();
+      body.className = 'buttons-' + styles.buttonsizes;
     });
-  }
-
-  var width_modal = column * 76;
-  row = Math.ceil(shares / column);
-  var height_modal = row * 76;
-
-  html.style.width = width_modal + 'px';
-  html.style.height = height_modal + 'px';
-  body.style.width = width_modal + 'px';
-  body.style.height = height_modal + 'px';
 }
 
 /* Open popup with sizes */
@@ -113,7 +100,7 @@ function checkContainerAssignment(url) {
   });
 }
 
-/* Add events on the share window tothe various button */
+/* Add events on the share window to the various button */
 document.addEventListener('DOMContentLoaded', () => {
   var blockedUrlsPrefix = [
     'about:',
@@ -150,7 +137,6 @@ function showErrorMessage() {
 
 function registerShareButtons(tab) {
   const buttons = Array.from(document.querySelectorAll('.share'));
-
   var promisedButtons = Promise.all(
     buttons.map(function (button) {
       var item = button.getAttribute('id');
@@ -178,7 +164,7 @@ function registerShareButtons(tab) {
   );
 
   promisedButtons.then(function (buttons) {
-    resize_modal();
+    resize_buttons();
     var buttonsWithPriority = Promise.all(
       buttons.map(function (button) {
         var item = button.getAttribute('id');

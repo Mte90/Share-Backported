@@ -4,11 +4,13 @@ document.querySelector('form').addEventListener('submit', saveOptions);
 function saveOptions(e) {
   e.preventDefault();
   var parameters = {};
-  document.querySelectorAll('input[id],textarea').forEach(function(item) {
+  document.querySelectorAll('input[id],select,textarea').forEach(function(item) {
     if (item.type === 'checkbox') {
       parameters[item.id] = item.checked;
     } else if (item.type) {
       parameters[item.id] = item.value;
+    } else if (item.nodeName.toLowerCase() === 'select') {
+    parameters[item.id] = item.value;
     } else {
       parameters[item.id] = item.textContent;
     }
@@ -32,7 +34,7 @@ function restoreOptions() {
   });
 
   var elements = Promise.all(
-    [].slice.call(document.querySelectorAll('input[id],textarea')).map(function(el) {
+    [].slice.call(document.querySelectorAll('input[id],select,textarea')).map(function(el) {
       var item = el.id;
 
       if (item.endsWith('priority')) {
@@ -43,6 +45,7 @@ function restoreOptions() {
       return getting.then(function(result) {
         value = result[Object.keys(result)[0]];
         var isCheckbox = el.type === 'checkbox';
+        var isSelect = el.nodeName.toLowerCase() === 'select';
         var isInt = Number.isInteger(parseInt(value, 10));
         var isUrl = el.type === 'url';
 
@@ -53,6 +56,8 @@ function restoreOptions() {
           }
         } else if (isCheckbox) {
           el.checked = value;
+        } else if (isSelect) {
+          el.value = value;
         } else if (value) {
           el.textContent = value;
         }
