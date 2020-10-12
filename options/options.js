@@ -10,7 +10,7 @@ function saveOptions(e) {
     } else if (item.type) {
       parameters[item.id] = item.value;
     } else if (item.nodeName.toLowerCase() === 'select') {
-    parameters[item.id] = item.value;
+      parameters[item.id] = item.value;
     } else {
       parameters[item.id] = item.textContent;
     }
