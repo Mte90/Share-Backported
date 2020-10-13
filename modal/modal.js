@@ -199,6 +199,7 @@ function registerShareButtons(tab) {
 
       // Nothing disabled, i.e. no need to touch the DOM.
       if (pairsWithElements.length === 0) {
+        grid.querySelector('button').focus();
         return;
       }
 
@@ -218,6 +219,7 @@ function registerShareButtons(tab) {
         grid.insertBefore(current.el, before.el);
         return current;
       });
+      grid.querySelector('button').focus();
     });
   });
 }
