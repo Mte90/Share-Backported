@@ -38,27 +38,64 @@ browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
       }
     }
 
-    const closeWhen = [
-      'dialog/close_window',
-      'latest_status_id='
-    ];
-
-    browser.tabs.get(tabId, function (tabinfo) {
-      const modalUrl = tabinfo.url;
-
-      if (sbPrevUrl !== modalUrl && modalUrl !== 'about:blank') {
-        // True if any of above parts are part of the modal URL
-        const shallClose = closeWhen.some(function (urlPart) {
-          return modalUrl.includes(urlPart);
-        });
-
-        if (shallClose) {
-          browser.tabs.remove(tabId);
-        }
-      }
-    });
-  }
+    if (shallObserveTitle(sbPrevUrl)) {
+      titleChangeStrategy(tabId);
+    } else {
+      urlChangeStrategy(tabId, sbPrevUrl);
+    }
+ }
 });
+
+function shallObserveTitle (shareUrl) {
+  // TODO: Shared data with modal.html
+  const urls = [
+    'https://reddit.com/submit',
+  ];
+
+  return urls.some((url) => shareUrl.startsWith(url));
+}
+
+function titleChangeStrategy (tabId) {
+  const closeWhen = [
+    // FIXME: Replace with meaningful heuristic!
+    'Log in'
+  ];
+
+  browser.tabs.get(tabId, function (tabinfo) {
+    const modalTitle = tabinfo.title;
+
+    // True if any of above parts are part of the modal URL
+    const shallClose = closeWhen.some(function (titlePart) {
+      return modalTitle.includes(titlePart);
+    });
+
+    if (shallClose) {
+      browser.tabs.remove(tabId);
+    }
+  });
+}
+
+function urlChangeStrategy (tabId, sbPrevUrl) {
+  const closeWhen = [
+    'dialog/close_window',
+    'latest_status_id='
+  ];
+
+  browser.tabs.get(tabId, function (tabinfo) {
+    const modalUrl = tabinfo.url;
+
+    if (sbPrevUrl !== modalUrl && modalUrl !== 'about:blank') {
+      // True if any of above parts are part of the modal URL
+      const shallClose = closeWhen.some(function (urlPart) {
+        return modalUrl.includes(urlPart);
+      });
+
+      if (shallClose) {
+        browser.tabs.remove(tabId);
+      }
+    }
+  });
+}
 
 // call function which get the address bar color (toolbar_field)
 setPageActionIcon();
