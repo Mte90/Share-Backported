@@ -20,7 +20,7 @@ browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
   if (sbId === tab.windowId) {
     if (sbPrevUrl !== undefined) {
-      if (sbPrevUrl.indexOf('https://www.linkedin.com/shareArticle') >= 0 || sbPrevUrl.indexOf('https://reddit.com/') || sbPrevUrl.indexOf('shaarli') >= 0) {
+      if (sbPrevUrl.indexOf('https://www.linkedin.com/shareArticle') >= 0 || sbPrevUrl.indexOf('https://www.reddit.com/') || sbPrevUrl.indexOf('shaarli') >= 0) {
         browser.tabs.insertCSS(tabId, {
           code: 'body { overflow: auto !important; }'
         });
