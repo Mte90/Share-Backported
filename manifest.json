@@ -64,6 +64,6 @@
         "management",
         "contextualIdentities",
         "https://www.linkedin.com/*",
-        "https://reddit.com/*"
+        "https://www.reddit.com/*"
     ]
 }
