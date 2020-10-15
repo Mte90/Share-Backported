@@ -21,7 +21,7 @@ browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
   if (sbId === tab.windowId) {
     const cssInjectionsFor = [
       'https://www.linkedin.com/shareArticle',
-      'https://reddit.com/',
+      'https://www.reddit.com/',
       'shaarli'
     ];
 
@@ -49,7 +49,7 @@ browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 function shallObserveTitle (shareUrl) {
   // TODO: Shared data with modal.html
   const urls = [
-    'https://reddit.com/submit',
+    'https://www.reddit.com/submit',
   ];
 
   return urls.some((url) => shareUrl.startsWith(url));
@@ -78,7 +78,9 @@ function titleChangeStrategy (tabId) {
 function urlChangeStrategy (tabId, sbPrevUrl) {
   const closeWhen = [
     'dialog/close_window',
-    'latest_status_id='
+    'latest_status_id=',
+    'reddit.com/r/',
+    'reddit.com/u/'
   ];
 
   browser.tabs.get(tabId, function (tabinfo) {
