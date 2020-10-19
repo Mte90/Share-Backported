@@ -78,9 +78,7 @@ function titleChangeStrategy (tabId) {
 function urlChangeStrategy (tabId, sbPrevUrl) {
   const closeWhen = [
     'dialog/close_window',
-    'latest_status_id=',
-    'reddit.com/r/',
-    'reddit.com/u/'
+    'latest_status_id='
   ];
 
   browser.tabs.get(tabId, function (tabinfo) {
