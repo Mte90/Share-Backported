@@ -19,23 +19,83 @@ browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 // Autoclose the window when the url change
 browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
   if (sbId === tab.windowId) {
+    const cssInjectionsFor = [
+      'https://www.linkedin.com/shareArticle',
+      'https://www.reddit.com/',
+      'shaarli'
+    ];
+
     if (sbPrevUrl !== undefined) {
-      if (sbPrevUrl.indexOf('https://www.linkedin.com/shareArticle') >= 0 || sbPrevUrl.indexOf('https://www.reddit.com/') || sbPrevUrl.indexOf('shaarli') >= 0) {
+      // True if any of the listed links show up
+      const shallInjectCss = cssInjectionsFor.some(function (urlPart) {
+        return sbPrevUrl.includes(urlPart);
+      });
+
+      if (shallInjectCss) {
         browser.tabs.insertCSS(tabId, {
           code: 'body { overflow: auto !important; }'
         });
       }
     }
 
-    browser.tabs.get(tabId, function (tabinfo) {
-      if (sbPrevUrl !== tabinfo.url && tabinfo.url !== 'about:blank') {
-        if (tabinfo.url.indexOf('dialog/close_window') > 0 || tabinfo.url.indexOf('latest_status_id=') > 0) {
-          browser.tabs.remove(tabId);
-        }
-      }
-    });
-  }
+    if (shallObserveTitle(sbPrevUrl)) {
+      titleChangeStrategy(tabId);
+    } else {
+      urlChangeStrategy(tabId, sbPrevUrl);
+    }
+ }
 });
+
+function shallObserveTitle (shareUrl) {
+  // TODO: Shared data with modal.html
+  const urls = [
+    'https://www.reddit.com/submit',
+  ];
+
+  return urls.some((url) => shareUrl.startsWith(url));
+}
+
+function titleChangeStrategy (tabId) {
+  const closeWhen = [
+    // FIXME: Replace with meaningful heuristic!
+    'Log in'
+  ];
+
+  browser.tabs.get(tabId, function (tabinfo) {
+    const modalTitle = tabinfo.title;
+
+    // True if any of above parts are part of the modal URL
+    const shallClose = closeWhen.some(function (titlePart) {
+      return modalTitle.includes(titlePart);
+    });
+
+    if (shallClose) {
+      browser.tabs.remove(tabId);
+    }
+  });
+}
+
+function urlChangeStrategy (tabId, sbPrevUrl) {
+  const closeWhen = [
+    'dialog/close_window',
+    'latest_status_id='
+  ];
+
+  browser.tabs.get(tabId, function (tabinfo) {
+    const modalUrl = tabinfo.url;
+
+    if (sbPrevUrl !== modalUrl && modalUrl !== 'about:blank') {
+      // True if any of above parts are part of the modal URL
+      const shallClose = closeWhen.some(function (urlPart) {
+        return modalUrl.includes(urlPart);
+      });
+
+      if (shallClose) {
+        browser.tabs.remove(tabId);
+      }
+    }
+  });
+}
 
 // call function which get the address bar color (toolbar_field)
 setPageActionIcon();
