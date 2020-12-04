@@ -328,7 +328,10 @@ function onClick(event, item, tab) {
         break;
     }
 
-    newUrl = url.toString();
+    // https://github.com/Mte90/Share-Backported/issues/117
+    if (service !== 'diaspora') {
+      newUrl = url.toString();
+    }
 
     Promise.all([
       checkContainerAssignment(newUrl),
