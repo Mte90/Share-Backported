@@ -59,7 +59,7 @@ button {
 	background: transparent;
 	padding-top:2px;
 }
-button:hover {
+button:hover, button:hover img {
 	background-color: #DDDEDF;
 }
 button:active, button:focus {
