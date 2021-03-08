@@ -7,6 +7,11 @@ This extension reimplement the feature with the same previous icon with the supp
 
 <img src="screenshot.png" alt="Screenshot of Share Backported in action" />
 
+## About Chrome support
+
+This extension cannot be released on Chrome webstore because of the [Spam Policy](https://developer.chrome.com/docs/webstore/program_policies/#spam).  
+Specifically this rule was mentioned during the review: `Functionality: Do not post an extension with a single purpose of installing or launching another app, theme, webpage, or extension. Extensions with broken functionality—such as dead sites or non-functioning features—are not allowed.`
+
 ### Options
 
 #### Services
