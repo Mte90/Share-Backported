@@ -63,9 +63,6 @@ button:hover, button:hover img {
 	background-color: #DDDEDF;
 }
 button:active, button:focus {
-	width: 96px;
-	height: 96px;
-	margin: 6px;
 	box-shadow:
 		0px 0px 0px 2px #0A84FF,
 		0px 0px 0px 5px #B1D6FC;
