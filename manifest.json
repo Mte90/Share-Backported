@@ -38,10 +38,6 @@
         "default_title": "Share",
         "default_popup": "modal/modal.html"
     },
-    "page_action": {
-        "default_icon": "icon-dark.svg",
-        "browser_style": true
-    },
     "commands": {
         "_execute_browser_action": {
             "suggested_key": {
