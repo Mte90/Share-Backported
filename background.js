@@ -22,7 +22,7 @@ browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     const cssInjectionsFor = [
       'https://www.linkedin.com/shareArticle',
       'https://www.reddit.com/',
-      'shaarli',
+      'shaarli'
     ];
 
     if (sbPrevUrl !== undefined) {
@@ -33,7 +33,7 @@ browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 
       if (shallInjectCss) {
         browser.tabs.insertCSS(tabId, {
-          code: 'body { overflow: auto !important; }',
+          code: 'body { overflow: auto !important; }'
         });
       }
     }
@@ -48,7 +48,7 @@ function urlChangeStrategy(tabId, sbPrevUrl) {
   const closeCarefullyWhen = [
     'reddit\.com\/user\/.+\/comments\/.+\/',
     'reddit\.com\/r\/.+\/comments\/.+\/',
-    'twitter\.com\/home',
+    'twitter\.com\/home'
   ];
 
   browser.tabs.get(tabId, function (tabinfo) {
