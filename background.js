@@ -46,8 +46,9 @@ function urlChangeStrategy(tabId, sbPrevUrl) {
   const closeWhen = ['dialog/close_window', 'latest_status_id='];
 
   const closeCarefullyWhen = [
-    'reddit.com/user/.+/comments/.+/',
-    'reddit.com/r/.+/comments/.+/',
+    'reddit\.com\/user\/.+\/comments\/.+\/',
+    'reddit\.com\/r\/.+\/comments\/.+\/',
+    'twitter\.com\/home',
   ];
 
   browser.tabs.get(tabId, function (tabinfo) {
@@ -59,10 +60,13 @@ function urlChangeStrategy(tabId, sbPrevUrl) {
         return modalUrl.includes(urlPart);
       });
 
-      shallClose = closeCarefullyWhen.some(function (regex) {
-        var testUrl = RegExp(regex);
-        return testUrl.test(modalUrl);
-      });
+      if (!shallClose) {
+        shallClose = closeCarefullyWhen.some(function (regex) {
+          var testUrl = RegExp(regex, 'g');
+
+          return testUrl.test(modalUrl);
+        });
+      }
 
       if (shallClose) {
         browser.tabs.remove(tabId);
