@@ -19,6 +19,9 @@ You can hide some services/icons just put a check in the relevant field in the �
 
 In the same section, you can also change width and height of the share window (for every service), so the windows opened when you click on the relevant icon, and you can change the position/order of services too.
 
+#### PageAction
+You can hide the <i>PageAction</i> icon (so the shortcut shown in the address bar) - just put a check in the field contained in the “PageAction” section.
+
 #### Keyboard shortcut
 The PageAction can be triggered via <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>y</kbd> (resp. <kbd>Cmd</kbd> on macOS) from keyboard.
 Think of the share icon. The modifier keys prevent collisions.
