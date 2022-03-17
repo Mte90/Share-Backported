@@ -61,6 +61,7 @@
         "tabs",
         "storage",
         "cookies",
+        "activeTab",
         "management",
         "contextualIdentities",
         "https://www.linkedin.com/*",
