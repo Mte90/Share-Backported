@@ -246,12 +246,13 @@ function removeUncheckedButton(result, key, item) {
 
 async function onClick(event, item, tab) {
   event.preventDefault();
-  var selectedText = await browser.tabs.executeScript( tab.id, {
-    code: "window.getSelection().toString();"
-  }).then((selection) => selection[0])
-  .then((selection) => {
-    return selection;
-  });
+  var selectedText = await browser.tabs.executeScript(tab.id, {
+    code: 'window.getSelection().toString();'
+  })
+    .then((selection) => selection[0])
+    .then((selection) => {
+      return selection;
+    });
 
   browser.storage.local.get('share-format').then(function (fetched) {
     var format = fetched['share-format'];
@@ -264,7 +265,7 @@ async function onClick(event, item, tab) {
     const url = new URL(urlshare);
     let newUrl;
     var tabTitle = tab.title;
-    if ( selectedText != '' ) {
+    if (selectedText !== '') {
       tabTitle = selectedText;
     }
 
