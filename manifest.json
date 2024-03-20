@@ -64,7 +64,6 @@
         "activeTab",
         "management",
         "contextualIdentities",
-        "https://www.linkedin.com/*",
         "https://www.reddit.com/*"
     ]
 }

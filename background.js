@@ -19,8 +19,8 @@ browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 // Autoclose the window when the url change
 browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   if (sbId === tab.windowId) {
+    console.log(sbPrevUrl)
     const cssInjectionsFor = [
-      'https://www.linkedin.com/shareArticle',
       'https://www.reddit.com/',
       'shaarli'
     ];
@@ -43,7 +43,7 @@ browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 });
 
 function urlChangeStrategy(tabId, sbPrevUrl) {
-  const closeWhen = ['dialog/close_window', 'latest_status_id='];
+  const closeWhen = ['latest_status_id='];
 
   const closeCarefullyWhen = [
     'reddit\.com\/user\/.+\/comments\/.+\/',
@@ -57,6 +57,7 @@ function urlChangeStrategy(tabId, sbPrevUrl) {
 
   browser.tabs.get(tabId, function (tabinfo) {
     const modalUrl = tabinfo.url;
+    console.log(modalUrl)
 
     if (sbPrevUrl !== modalUrl && modalUrl !== 'about:blank') {
       // True if any of above parts are part of the modal URL
