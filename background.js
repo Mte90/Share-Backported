@@ -51,6 +51,10 @@ function urlChangeStrategy(tabId, sbPrevUrl) {
     'twitter\.com\/home'
   ];
 
+  const closeCarefullyOnlyIf = [
+    'https://www.facebook.com/'
+  ];
+
   browser.tabs.get(tabId, function (tabinfo) {
     const modalUrl = tabinfo.url;
 
@@ -66,6 +70,12 @@ function urlChangeStrategy(tabId, sbPrevUrl) {
 
           return testUrl.test(modalUrl);
         });
+
+        if (!shallClose) {
+          shallClose = closeCarefullyOnlyIf.some(function (url) {
+            return url == modalUrl;
+          });
+        }
       }
 
       if (shallClose) {
