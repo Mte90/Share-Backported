@@ -38,7 +38,7 @@ function open_popup(newurl, width, height) {
   });
 }
 
-/* DO you want to open the url in a container? */
+/* Do you want to open the url in a container? */
 function open_container_tab(newurl, cookieStoreId) {
   browser.runtime.sendMessage({
     type: 'share-backid-container',
@@ -163,6 +163,13 @@ function registerShareButtons(tab) {
   );
 
   promisedButtons.then(function (buttons) {
+    var shares = document.querySelectorAll(".share").length;
+    if (shares === 1) {
+      document.getElementsByClassName("share")[0].click(function() {
+        window.close();
+      });
+    }
+
     resize_buttons();
     var buttonsWithPriority = Promise.all(
       buttons.map(function (button) {
