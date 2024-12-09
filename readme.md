@@ -3,7 +3,7 @@
 
 Firefox Nightly 57 [removed](https://bugzilla.mozilla.org/show_bug.cgi?id=1388902) the share feature because it was using a non-official API.
 
-This extension reimplement the feature, basically a modal window (that is opened in your Firefox toolbar) that let you share to Twitter, LinkedIn, Reddit, Tumblr, GMail, Diaspora, Telegram, VKontakte, Outlook, Pinboard, Yahoo! Mail, Weibo, Shaarli, Mastodon, MeWe, Skype, WhatsApp, Pinterest, Instapaper, Evernote, Scoop.it, Google Translate (Auto>EN), Bing Translator, Viber, Line, KakaoTalk, Internet Wayback Machine, Friendica, Feedly, Threads, Parler social networks.
+This extension reimplement the feature, basically a modal window (that is opened in your Firefox toolbar) that let you share to Twitter, LinkedIn, Reddit, Tumblr, GMail, Diaspora, Telegram, VKontakte, Outlook, Pinboard, Yahoo! Mail, Weibo, Shaarli, Mastodon, MeWe, Skype, WhatsApp, Pinterest, Instapaper, Evernote, Scoop.it, Google Translate (Auto>EN), Bing Translator, Viber, Line, KakaoTalk, Internet Wayback Machine, Bluesky, Friendica, Feedly, Threads, Parler social networks.
 
 <img src="screenshot.png" alt="Screenshot of Share Backported in action" />
 

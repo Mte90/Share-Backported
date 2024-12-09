@@ -338,6 +338,7 @@ async function onClick(event, item, tab) {
         break;
       case 'mastodon':
       case 'whatsapp':
+      case 'bluesky':
         url.searchParams.set('text', tabTitle + ' - ' + url_encoded);
         break;
       case 'wayback':
