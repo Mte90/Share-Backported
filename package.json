@@ -1,6 +1,6 @@
 {
   "name": "share-backported",
-  "version": "2.0.11",
+  "version": "2.0.12",
   "description": "Extension to get back the Firefox Share modal",
   "main": "background.js",
   "scripts": {

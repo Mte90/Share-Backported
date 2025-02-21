@@ -48,7 +48,7 @@ function urlChangeStrategy(tabId, sbPrevUrl) {
   const closeCarefullyWhen = [
     'reddit\.com\/user\/.+\/comments\/.+\/',
     'reddit\.com\/r\/.+\/comments\/.+\/',
-    'twitter\.com\/home'
+    'x\.com\/home'
   ];
 
   const closeCarefullyOnlyIf = [
