@@ -22,12 +22,6 @@ body {
 		background-color: #EFEFEF;
 	}
 }
-@media (prefers-color-scheme: dark) {
-	* {
-		color: #EFEFEF;
-		background-color: #484848;
-	}
-}
 #share-directory {
 	width: auto;
 }
