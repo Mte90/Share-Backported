@@ -47,13 +47,13 @@ function urlChangeStrategy(tabId, sbPrevUrl) {
 
   const closeCarefullyWhen = [
     'reddit\.com\/user\/.+\/comments\/.+\/',
-    'reddit\.com\/r\/.+\/comments\/.+\/',
-    'x\.com\/home'
+    'reddit\.com\/r\/.+\/comments\/.+\/'
   ];
 
   const closeCarefullyOnlyIf = [
     'https://www.facebook.com/',
-    'https://www.linkedin.com/feed/'
+    'https://www.linkedin.com/feed/',
+    'https://x.com/home'
   ];
 
   browser.tabs.get(tabId, function (tabinfo) {
