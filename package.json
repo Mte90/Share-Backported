@@ -18,6 +18,6 @@
   "homepage": "https://github.com/Mte90/Share-Backported#readme",
   "dependencies": {},
   "devDependencies": {
-    "eslint": "7.10.0"
+    "eslint": "9.39.1"
   }
 }
