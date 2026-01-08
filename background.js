@@ -97,8 +97,9 @@ function urlChangeStrategy(tabId, sbPrevUrl) {
                   /\/@[\w]+\/\d+/.test(currentUrl.pathname)) {
                 browser.tabs.remove(tabId);
               }
-            } catch (e) {
+            } catch (error) {
               // URL parsing failed, ignore
+              console.log('Error parsing Mastodon URLs:', error);
             }
           }
         });
