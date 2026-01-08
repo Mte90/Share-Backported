@@ -42,72 +42,82 @@ browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   }
 });
 
+// Constants for URL close conditions
+const closeWhen = ['latest_status_id='];
+
+const closeCarefullyWhen = [
+  'reddit\.com\/user\/.+\/comments\/.+\/',
+  'reddit\.com\/r\/.+\/comments\/.+\/'
+];
+
+const closeCarefullyOnlyIf = [
+  'https://www.facebook.com/',
+  'https://www.linkedin.com/feed/',
+  'https://x.com/home'
+];
+
 function urlChangeStrategy(tabId, sbPrevUrl) {
-  const closeWhen = ['latest_status_id='];
-
-  const closeCarefullyWhen = [
-    'reddit\.com\/user\/.+\/comments\/.+\/',
-    'reddit\.com\/r\/.+\/comments\/.+\/'
-  ];
-
-  const closeCarefullyOnlyIf = [
-    'https://www.facebook.com/',
-    'https://www.linkedin.com/feed/',
-    'https://x.com/home'
-  ];
-
   browser.tabs.get(tabId, function (tabinfo) {
     const modalUrl = tabinfo.url;
     console.log(modalUrl)
 
     if (sbPrevUrl !== modalUrl && modalUrl !== 'about:blank') {
-      // True if any of above parts are part of the modal URL
-      var shallClose = closeWhen.some(function (urlPart) {
-        return modalUrl.includes(urlPart);
-      });
+      checkAndCloseTab(tabId, sbPrevUrl, modalUrl);
+    }
+  });
+}
 
-      if (!shallClose) {
-        shallClose = closeCarefullyWhen.some(function (regex) {
-          var testUrl = RegExp(regex, 'g');
+function checkAndCloseTab(tabId, sbPrevUrl, modalUrl) {
+  // Check synchronous close conditions first
+  var shallClose = closeWhen.some(function (urlPart) {
+    return modalUrl.includes(urlPart);
+  });
 
-          return testUrl.test(modalUrl);
-        });
+  if (!shallClose) {
+    shallClose = closeCarefullyWhen.some(function (regex) {
+      var testUrl = RegExp(regex, 'g');
+      return testUrl.test(modalUrl);
+    });
+  }
 
-        if (!shallClose) {
-          shallClose = closeCarefullyOnlyIf.some(function (url) {
-            return url == modalUrl;
-          });
+  if (!shallClose) {
+    shallClose = closeCarefullyOnlyIf.some(function (url) {
+      return url == modalUrl;
+    });
+  }
+
+  // If synchronous checks passed, close immediately
+  if (shallClose) {
+    browser.tabs.remove(tabId);
+    return;
+  }
+
+  // Otherwise, check async Mastodon condition
+  browser.storage.local.get('mastodon').then(function (result) {
+    var shouldCloseMastodon = false;
+
+    if (result.mastodon && result.mastodon.length > 6) {
+      try {
+        const mastodonInstanceUrl = new URL(result.mastodon);
+        const prevUrl = new URL(sbPrevUrl);
+        const currentUrl = new URL(modalUrl);
+
+        // Check if previous URL was to Mastodon instance's share endpoint
+        // and current URL is a Mastodon post on the same instance
+        if (mastodonInstanceUrl.host === prevUrl.host &&
+            prevUrl.pathname.includes('/share') &&
+            mastodonInstanceUrl.host === currentUrl.host &&
+            /\/@[a-zA-Z0-9._-]+\/\d+/.test(currentUrl.pathname)) {
+          shouldCloseMastodon = true;
         }
+      } catch (error) {
+        // URL parsing failed, ignore
+        console.log('Error parsing Mastodon URLs:', error);
       }
+    }
 
-      // Check for Mastodon post URLs
-      if (!shallClose) {
-        browser.storage.local.get('mastodon').then(function (result) {
-          if (result.mastodon && result.mastodon.length > 6) {
-            try {
-              const mastodonInstanceUrl = new URL(result.mastodon);
-              const prevUrl = new URL(sbPrevUrl);
-              const currentUrl = new URL(modalUrl);
-
-              // Check if previous URL was to Mastodon instance's share endpoint
-              // and current URL is a Mastodon post on the same instance
-              if (mastodonInstanceUrl.host === prevUrl.host &&
-                  prevUrl.pathname.includes('/share') &&
-                  mastodonInstanceUrl.host === currentUrl.host &&
-                  /\/@[a-zA-Z0-9._-]+\/\d+/.test(currentUrl.pathname)) {
-                browser.tabs.remove(tabId);
-              }
-            } catch (error) {
-              // URL parsing failed, ignore
-              console.log('Error parsing Mastodon URLs:', error);
-            }
-          }
-        });
-      }
-
-      if (shallClose) {
-        browser.tabs.remove(tabId);
-      }
+    if (shouldCloseMastodon) {
+      browser.tabs.remove(tabId);
     }
   });
 }
