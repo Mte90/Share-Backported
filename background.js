@@ -94,7 +94,7 @@ function urlChangeStrategy(tabId, sbPrevUrl) {
               if (mastodonInstanceUrl.host === prevUrl.host &&
                   prevUrl.pathname.includes('/share') &&
                   mastodonInstanceUrl.host === currentUrl.host &&
-                  /\/@[\w]+\/\d+/.test(currentUrl.pathname)) {
+                  /\/@[a-zA-Z0-9._-]+\/\d+/.test(currentUrl.pathname)) {
                 browser.tabs.remove(tabId);
               }
             } catch (error) {
