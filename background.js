@@ -42,7 +42,6 @@ browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   }
 });
 
-// Constants for URL close conditions
 const closeWhen = ['latest_status_id='];
 
 const closeCarefullyWhen = [
@@ -68,7 +67,6 @@ function urlChangeStrategy(tabId, sbPrevUrl) {
 }
 
 function checkAndCloseTab(tabId, sbPrevUrl, modalUrl) {
-  // Check synchronous close conditions first
   var shallClose = closeWhen.some(function (urlPart) {
     return modalUrl.includes(urlPart);
   });
@@ -86,13 +84,11 @@ function checkAndCloseTab(tabId, sbPrevUrl, modalUrl) {
     });
   }
 
-  // If synchronous checks passed, close immediately
   if (shallClose) {
     browser.tabs.remove(tabId);
     return;
   }
 
-  // Otherwise, check async Mastodon condition
   browser.storage.local.get('mastodon').then(function (result) {
     var shouldCloseMastodon = false;
 
@@ -102,8 +98,6 @@ function checkAndCloseTab(tabId, sbPrevUrl, modalUrl) {
         const prevUrl = new URL(sbPrevUrl);
         const currentUrl = new URL(modalUrl);
 
-        // Check if previous URL was to Mastodon instance's share endpoint
-        // and current URL is a Mastodon post on the same instance
         if (mastodonInstanceUrl.host === prevUrl.host &&
             prevUrl.pathname.includes('/share') &&
             mastodonInstanceUrl.host === currentUrl.host &&
@@ -111,7 +105,6 @@ function checkAndCloseTab(tabId, sbPrevUrl, modalUrl) {
           shouldCloseMastodon = true;
         }
       } catch (error) {
-        // URL parsing failed, ignore
         console.log('Error parsing Mastodon URLs:', error);
       }
     }
