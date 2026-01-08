@@ -80,6 +80,30 @@ function urlChangeStrategy(tabId, sbPrevUrl) {
         }
       }
 
+      // Check for Mastodon post URLs
+      if (!shallClose) {
+        browser.storage.local.get('mastodon').then(function (result) {
+          if (result.mastodon && result.mastodon.length > 6) {
+            try {
+              const mastodonInstanceUrl = new URL(result.mastodon);
+              const prevUrl = new URL(sbPrevUrl);
+              const currentUrl = new URL(modalUrl);
+
+              // Check if previous URL was to Mastodon instance's share endpoint
+              // and current URL is a Mastodon post on the same instance
+              if (mastodonInstanceUrl.host === prevUrl.host &&
+                  prevUrl.pathname.includes('/share') &&
+                  mastodonInstanceUrl.host === currentUrl.host &&
+                  /\/@[\w]+\/\d+/.test(currentUrl.pathname)) {
+                browser.tabs.remove(tabId);
+              }
+            } catch (e) {
+              // URL parsing failed, ignore
+            }
+          }
+        });
+      }
+
       if (shallClose) {
         browser.tabs.remove(tabId);
       }
